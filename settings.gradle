@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 rootProject.name = "CoopAchievement"
 include ':app'
 include ':777'
+include ':myapplication'
+include ':myapplication2'
