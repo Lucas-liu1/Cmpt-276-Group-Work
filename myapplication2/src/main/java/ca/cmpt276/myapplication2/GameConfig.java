@@ -38,7 +38,6 @@ public class GameConfig extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent jumpToAdd = new Intent(GameConfig.this, ConfigData.class);
-//                jumpToAdd.putExtra("position", -1);
                 startActivity(jumpToAdd);
             }
         });
@@ -62,7 +61,6 @@ public class GameConfig extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent jumpToDelete = new Intent(GameConfig.this, ConfigList.class);
-//                jumpToDelete.putExtra("index", 2);
                 startActivity(jumpToDelete);
             }
         });
