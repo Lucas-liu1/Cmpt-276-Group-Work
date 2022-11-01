@@ -6,6 +6,7 @@ public class ConfigManager {
     private ArrayList<Configuration> configList;// Store all the configurations
 
     private ConfigManager() {
+        configList = new ArrayList<>();
     }
 
     private static ConfigManager instance;
