@@ -8,6 +8,14 @@ public class ConfigList {
     public ConfigList() {
     }
 
+    private static ConfigList instance;
+    public static ConfigList getInstance(){
+        if(instance == null){
+            instance = new ConfigList();
+        }
+        return instance;
+    }
+
     public void addNewConfig(Configuration newConfig){
         configList.add(newConfig);
     }
