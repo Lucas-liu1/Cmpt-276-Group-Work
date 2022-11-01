@@ -2,16 +2,17 @@ package ca.cmpt276.myapplication2.model;
 
 import java.util.ArrayList;
 
-public class ConfigList {
-    ArrayList<Configuration> configList;// Store all the configurations
+public class ConfigManager {
+    private ArrayList<Configuration> configList;// Store all the configurations
 
-    public ConfigList() {
+    private ConfigManager() {
+        configList = new ArrayList<>();
     }
 
-    private static ConfigList instance;
-    public static ConfigList getInstance(){
+    private static ConfigManager instance;
+    public static ConfigManager getInstance(){
         if(instance == null){
-            instance = new ConfigList();
+            instance = new ConfigManager();
         }
         return instance;
     }
