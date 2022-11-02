@@ -30,6 +30,7 @@ public class ConfigData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config_data);
+        setTitle("ConfigData");
     }
 
     @Override

@@ -17,6 +17,7 @@ public class GameConfig extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_config);
+        setTitle("Game Config");
     }
 
     @Override
@@ -30,6 +31,7 @@ public class GameConfig extends AppCompatActivity {
         addClickCallback();
         editClickCallback();
         deleteClickCallback();
+        achievementClickCallback();
     }
 
     private void addClickCallback() {
@@ -65,4 +67,17 @@ public class GameConfig extends AppCompatActivity {
             }
         });
     }
+
+    private void achievementClickCallback() {
+        View = findViewById(R.id.btn_viewAchievement);
+        View.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent jumpToAchievement = new Intent(GameConfig.this, ConfigList.class);
+                jumpToAchievement.putExtra("index", 2);
+                startActivity(jumpToAchievement);
+            }
+        });
+    }
+
 }

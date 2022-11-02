@@ -1,5 +1,6 @@
 package ca.cmpt276.myapplication2;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -25,6 +26,10 @@ public class ConfigList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config_list);
+        setTitle("ConfigList");
+        ActionBar back = getSupportActionBar();
+        assert back != null;
+        back.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -39,8 +44,12 @@ public class ConfigList extends AppCompatActivity {
         index = intent.getIntExtra("index", -1);
         if (index == -1) {// delete
             deleteButtonClickCallback();
-        } else {// Edit
+        }
+        else if (index == 1) {// Edit
             editButtonClickCallback();
+        }
+        else  {
+            achievementButtonClickCallback();
         }
     }
 
@@ -84,6 +93,18 @@ public class ConfigList extends AppCompatActivity {
                 TextView textView = (TextView) viewclick;
                 configManager.deleteConfig(position);
                 finish();
+            }
+        });
+    }
+
+    private void achievementButtonClickCallback() {
+        lv_ConfigList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewclick, int position, long id) {
+                TextView textView = (TextView) viewclick;
+                Intent jumpToAchieve = new Intent(ConfigList.this, ViewAchievement.class);
+                jumpToAchieve.putExtra("position", position);
+                startActivity(jumpToAchieve);
             }
         });
     }
