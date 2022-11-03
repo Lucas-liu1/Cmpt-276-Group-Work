@@ -57,4 +57,8 @@ public class Configuration {
     public ArrayList<Game> getGamesList() {
         return gamesList;
     }
+
+    public int getGamesListSize(){
+        return gamesList.size();
+    }
 }
