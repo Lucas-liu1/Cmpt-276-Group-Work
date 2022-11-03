@@ -69,6 +69,7 @@ public class ConfigData extends AppCompatActivity {
                 int num_PoorScore = Integer.parseInt(string_PoorScore);
                 int num_GreatScore = Integer.parseInt(string_GreatScore);
 
+
                 targetConfig = new Configuration(string_Name, num_PoorScore, num_GreatScore);
                 ConfigManager configList = ConfigManager.getInstance();
                 configList.addConfig(targetConfig);

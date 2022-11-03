@@ -2,24 +2,26 @@ package ca.cmpt276.myapplication2;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import android.widget.TextView;
 
-import ca.cmpt276.myapplication2.model.Achievement;
 import ca.cmpt276.myapplication2.model.AchievementList;
+
 
 public class ViewAchievement extends AppCompatActivity {
 
     Button btn;
     TextView level;
     EditText NumPlayers;
-    EditText editText_PoorScore;
-    EditText editText_GreatScore;
-
+    String name;
+    String score;
+    String[] levelL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,31 +29,41 @@ public class ViewAchievement extends AppCompatActivity {
         setContentView(R.layout.activity_view_achievement);
         setTitle("Achievement Level");
         ActionBar back = getSupportActionBar();
+        assert back != null;
         back.setDisplayHomeAsUpEnabled(true);
 
         setView();
         btn.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
 
-                // Still work in this part!!
-
-/*
-
                 String str = NumPlayers.getText().toString();
-                int playerNum= Integer.parseInt(str);
-                editText_PoorScore = findViewById(R.id.pt_poorScore);
-                editText_GreatScore = findViewById(R.id.pt_greatScore);
-                String string_PoorScore = editText_PoorScore.getText().toString().trim();
-                String string_GreatScore = editText_GreatScore.getText().toString().trim();
-                int num_PoorScore = Integer.parseInt(string_PoorScore);
-                int num_GreatScore = Integer.parseInt(string_GreatScore);
-                AchievementList levelList = new AchievementList( num_PoorScore, num_GreatScore, playerNum );
+                int playerNum = Integer.parseInt(str);
 
-                //Achievement tempAchievement = achievementsList.get(playerNum);
-                level.setText("Level list:" + );
+                //need reset value with input
+                int poor = 30;
+                int great = 90;
 
- */
+                levelL = new String[8];
+                AchievementList levelList = new AchievementList(poor, great, playerNum);
+                for (int i = 0; i < levelList.achievementsList.size(); i++) {
+                    name = String.valueOf(levelList.achievementsList.get(i).getName());
+                    score = String.valueOf(levelList.achievementsList.get(i).getLowerBound());
+                    levelL[i] = "Level name: " + name + "\nRequire score:  " + score +"\n" ;
+                }
+
+                level.setText(
+                        "Level  List\n"+"\n"
+                        +String.valueOf(levelL[0])+"\n"
+                        +String.valueOf(levelL[1])+"\n"
+                        +String.valueOf(levelL[2])+"\n"
+                        +String.valueOf(levelL[3])+"\n"
+                        +String.valueOf(levelL[4])+"\n"
+                        +String.valueOf(levelL[5])+"\n"
+                        +String.valueOf(levelL[6])+"\n"
+                        +String.valueOf(levelL[7])
+                );
             }
         });
     }

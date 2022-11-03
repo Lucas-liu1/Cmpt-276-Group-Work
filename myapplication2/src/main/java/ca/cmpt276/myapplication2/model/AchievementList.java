@@ -3,8 +3,8 @@ package ca.cmpt276.myapplication2.model;
 import java.util.ArrayList;
 
 public class AchievementList {
-    public Object setText;
-    private ArrayList<Achievement> achievementsList = new ArrayList<>();// Store all the achievements
+
+    public ArrayList<Achievement> achievementsList = new ArrayList<>();// Store all the achievements
 
     public AchievementList(int poor_score, int great_score, int numPlayers) {
 
@@ -41,7 +41,10 @@ public class AchievementList {
         //Grandmaster (For each player: great_score ~ 100)
         Achievement Grandmaster = new Achievement("Grandmaster", great_score*numPlayers, 100*numPlayers, numPlayers);
         achievementsList.add(Grandmaster);
+
+
     }
+
 
     public String findLevel(int score) {
 
@@ -53,6 +56,10 @@ public class AchievementList {
             }
             return null;
     }
+
+
+
+
 
 
 }
