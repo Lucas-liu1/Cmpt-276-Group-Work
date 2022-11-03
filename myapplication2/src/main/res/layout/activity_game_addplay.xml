@@ -3,24 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".GamePlays">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/addGameButton"
+    <TextView
+        android:id="@+id/addGamePlayText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="236dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="528dp"
+        android:layout_marginTop="572dp"
         android:text="@string/add_game_play"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ListView
-        android:id="@+id/listGamesPlayed"
-        android:layout_width="412dp"
-        android:layout_height="642dp"
-        android:layout_marginTop="88dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

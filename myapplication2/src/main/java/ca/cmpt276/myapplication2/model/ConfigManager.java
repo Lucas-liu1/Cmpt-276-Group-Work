@@ -36,4 +36,16 @@ public class ConfigManager {
     public ArrayList<Configuration> getConfigList() {
         return configList;
     }
+
+    public int getNumConfigurations(){
+        return configList.size();
+    }
+
+    public int getNumTotalGames(){
+        int total = 0;
+        for(int i = 0 ;i < configList.size();i++){
+            total += configList.get(i).getGamesListSize();
+        }
+        return total;
+    }
 }

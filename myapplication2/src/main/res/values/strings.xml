@@ -2,5 +2,6 @@
     <string name="app_name">My Application2</string>
     <string name="EnterNumberOfPlayers">   Enter number of players</string >
     <string name="show_level">Show Level</string>
-    <string name="levelList">    Level List  </string>
+    <string name="levelList">             Level Name              Minimum Score  </string>
+    <string name="add_game_play">ADD GAME PLAY</string>
 </resources>

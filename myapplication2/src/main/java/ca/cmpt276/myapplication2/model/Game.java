@@ -35,6 +35,10 @@ public class Game {
         return score;
     }
 
+    public String getRecord(){
+        return String.format("NumPlayers: %d,  CumScore: %d",numPlayers,score);
+    }
+
     public AchievementList getAchievementList() {
         return achievementList;
     }
