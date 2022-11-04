@@ -6,7 +6,7 @@ public class Configuration {
     private String name;
     private int poor_score;
     private int great_score;
-    private ArrayList<Game> gamesList;// Store all the game under the configuration
+    private ArrayList<Game> gamesList = new ArrayList<>(); // Store all the game under the configuration
 
     // All Constructors
     public Configuration() {
@@ -17,7 +17,6 @@ public class Configuration {
         this.poor_score = poor_score;
         this.great_score = great_score;
     }
-
 
     // Add a new game
     public void addGame(Game newGame){

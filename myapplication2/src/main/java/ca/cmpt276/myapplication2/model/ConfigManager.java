@@ -17,10 +17,6 @@ public class ConfigManager {
         return instance;
     }
 
-    public void addNewConfig(Configuration newConfig){
-        configList.add(newConfig);
-    }
-
     public void addConfig(Configuration newConfig){
         configList.add(newConfig);
     }
