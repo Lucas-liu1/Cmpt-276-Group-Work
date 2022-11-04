@@ -33,6 +33,23 @@ public class ConfigManager {
         return configList;
     }
 
+    public String[] getConfigListNames(){
+        String[] configNames = new String[configList.size()];
+        for(int i=0; i<configList.size();i++){
+            configNames[i] = configList.get(i).getName();
+        }
+        return configNames;
+    }
+
+    public String[] getConfigListNamesWithAll(){
+        String[] configNames = new String[configList.size()+1];
+        configNames[0] = "All Games";
+        for(int i=0; i<configList.size();i++){
+            configNames[i+1] = configList.get(i).getName();
+        }
+        return configNames;
+    }
+
     public int getNumConfigurations(){
         return configList.size();
     }
