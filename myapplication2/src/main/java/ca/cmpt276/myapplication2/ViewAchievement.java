@@ -12,16 +12,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import ca.cmpt276.myapplication2.model.AchievementList;
+import ca.cmpt276.myapplication2.model.ConfigManager;
+import ca.cmpt276.myapplication2.model.Configuration;
 
 
 public class ViewAchievement extends AppCompatActivity {
 
-    Button btn;
-    TextView level;
-    EditText NumPlayers;
-    String name;
-    String score;
-    String[] levelL;
+
+    private Button btn;
+    private TextView level;
+    private EditText NumPlayers;
+    private String name;
+    private String score;
+    private String[] levelL;
+    private ConfigManager configManager;
+    private int targetPosition;
+    private Configuration targetConfig;
+    private int poorScore;
+    private int greatScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,27 +50,37 @@ public class ViewAchievement extends AppCompatActivity {
                 int playerNum = Integer.parseInt(str);
 
                 //need reset value with input
-                int poor = 30;
-                int great = 90;
+                configManager = ConfigManager.getInstance();
+                Intent intent = getIntent();
+                targetPosition = intent.getIntExtra("position", -1);
+
+                targetConfig = configManager.getConfigList().get(targetPosition);
+                poorScore = targetConfig.getPoor_score();
+                greatScore = targetConfig.getGreat_score();
+
 
                 levelL = new String[8];
-                AchievementList levelList = new AchievementList(poor, great, playerNum);
-                for (int i = 0; i < levelList.achievementsList.size(); i++) {
+                AchievementList levelList = new AchievementList(poorScore, greatScore, playerNum);
+
+                levelL[0] = "Level name: " + levelList.achievementsList.get(0).getName() + "\nRequire score: less than " + poorScore*playerNum +"\n" ;
+                levelL[7] = "Level name: " + levelList.achievementsList.get(7).getName() + "\nRequire score: greater than " + greatScore*playerNum +"\n" ;
+
+                for (int i = 1; i < levelList.achievementsList.size() - 1; i++) {
                     name = String.valueOf(levelList.achievementsList.get(i).getName());
                     score = String.valueOf(levelList.achievementsList.get(i).getLowerBound());
-                    levelL[i] = "Level name: " + name + "\nRequire score:  " + score +"\n" ;
+                    levelL[i] = "Level name: " + name + "\nRequire score: greater than " + score +"\n" ;
                 }
 
                 level.setText(
                         "Level  List\n"+"\n"
-                        +String.valueOf(levelL[0])+"\n"
-                        +String.valueOf(levelL[1])+"\n"
-                        +String.valueOf(levelL[2])+"\n"
-                        +String.valueOf(levelL[3])+"\n"
-                        +String.valueOf(levelL[4])+"\n"
-                        +String.valueOf(levelL[5])+"\n"
-                        +String.valueOf(levelL[6])+"\n"
-                        +String.valueOf(levelL[7])
+                                +String.valueOf(levelL[0])+"\n"
+                                +String.valueOf(levelL[1])+"\n"
+                                +String.valueOf(levelL[2])+"\n"
+                                +String.valueOf(levelL[3])+"\n"
+                                +String.valueOf(levelL[4])+"\n"
+                                +String.valueOf(levelL[5])+"\n"
+                                +String.valueOf(levelL[6])+"\n"
+                                +String.valueOf(levelL[7])
                 );
             }
         });
