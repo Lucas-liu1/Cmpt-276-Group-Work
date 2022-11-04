@@ -12,7 +12,6 @@ public class Game {
         this.score = score;
     }
 
-
     // All Setters
     public void setNumPlayers(int numPlayers) {
         this.numPlayers = numPlayers;
