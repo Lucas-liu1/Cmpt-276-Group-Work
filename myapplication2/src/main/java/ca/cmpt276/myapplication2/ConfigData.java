@@ -69,6 +69,10 @@ public class ConfigData extends AppCompatActivity {
                 int num_PoorScore = Integer.parseInt(string_PoorScore);
                 int num_GreatScore = Integer.parseInt(string_GreatScore);
 
+                if (num_PoorScore >= num_GreatScore){
+                    Toast.makeText(ConfigData.this, "Great Score must be greater than Poor Score", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 targetConfig = new Configuration(string_Name, num_PoorScore, num_GreatScore);
                 ConfigManager configList = ConfigManager.getInstance();
@@ -104,6 +108,11 @@ public class ConfigData extends AppCompatActivity {
 
                 int num_PoorScore = Integer.parseInt(string_PoorScore);
                 int num_GreatScore = Integer.parseInt(string_GreatScore);
+
+                if (num_PoorScore >= num_GreatScore){
+                    Toast.makeText(ConfigData.this, "Great Score must be greater than Poor Score", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 targetConfig = new Configuration(string_Name, num_PoorScore, num_GreatScore);
                 configManager = ConfigManager.getInstance();

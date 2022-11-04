@@ -11,7 +11,7 @@ public class AchievementList {
         int interval = (great_score - poor_score) / 6;
 
         //Iron (For each player: 0 ~ poor_score)
-        Achievement Iron = new Achievement("Iron", 0, poor_score*numPlayers, numPlayers);
+        Achievement Iron = new Achievement("Iron", Integer.MIN_VALUE, poor_score*numPlayers, numPlayers);
         achievementsList.add(Iron);
 
         //Bronze (For each player: poor_score ~ poor_score + 1*interval)
@@ -39,7 +39,7 @@ public class AchievementList {
         achievementsList.add(Master);
 
         //Grandmaster (For each player: great_score ~ 100)
-        Achievement Grandmaster = new Achievement("Grandmaster", great_score*numPlayers, 100*numPlayers, numPlayers);
+        Achievement Grandmaster = new Achievement("Grandmaster", great_score*numPlayers, Integer.MAX_VALUE, numPlayers);
         achievementsList.add(Grandmaster);
 
 
