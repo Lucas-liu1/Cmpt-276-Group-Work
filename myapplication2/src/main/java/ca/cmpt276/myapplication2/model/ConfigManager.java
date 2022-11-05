@@ -21,6 +21,10 @@ public class ConfigManager {
         configList.add(newConfig);
     }
 
+    public void addGame(int configID, Game game){
+        configList.get(configID).addGame(game);
+    }
+
     public void editConfig(int index, Configuration newConfig){
         configList.set(index, newConfig);
     }
@@ -32,6 +36,7 @@ public class ConfigManager {
     public ArrayList<Configuration> getConfigList() {
         return configList;
     }
+
 
     public String[] getConfigListNames(){
         String[] configNames = new String[configList.size()];

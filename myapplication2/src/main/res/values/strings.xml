@@ -3,5 +3,10 @@
     <string name="EnterNumberOfPlayers">   Enter number of players</string >
     <string name="show_level">Show Level</string>
     <string name="levelList">Level List</string>
-    <string name="add_game_play">ADD GAME PLAY</string>
+    <string name="add_game_play">add game play</string>
+    <string name="create">create</string>
+    <string name="game_played">Game Played</string>
+    <string name="number_of_players">Number of Players</string>
+    <string name="score_of_players">Score of Players</string>
+
 </resources>

@@ -1,7 +1,5 @@
 package ca.cmpt276.myapplication2.model;
 
-import java.util.ArrayList;
-
 public class Game {
     private int numPlayers;
     private int score;
@@ -35,7 +33,10 @@ public class Game {
     }
 
     public String getRecord(){
-        return String.format("NumPlayers: %d,  CumScore: %d",numPlayers,score);
+        return String.format("NumPlayers: %d,  Score: %d, Achievement:%s",
+                numPlayers,
+                score,
+                achievementList.findLevel(score));
     }
 
     public AchievementList getAchievementList() {

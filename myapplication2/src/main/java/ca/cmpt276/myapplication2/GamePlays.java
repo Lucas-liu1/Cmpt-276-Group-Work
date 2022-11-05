@@ -38,6 +38,13 @@ public class GamePlays extends AppCompatActivity {
         populateListView();
     }
 
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        populateListView();
+    }
+
+
     private void setAddGamePlayButton() {
         Button btn = findViewById(R.id.addGameButton);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +55,6 @@ public class GamePlays extends AppCompatActivity {
             }
         });
     }
-
 
     private void setConfigSpinner() {
         Spinner spinner = findViewById(R.id.configurationSpinner);
@@ -63,7 +69,7 @@ public class GamePlays extends AppCompatActivity {
                 if (i == 0){ // when the selected is all
                     populateListView();
                 } else { // when the selected is not all
-                    populateListView(GameConfiguration.getConfigList().get(i));
+                    populateListView(GameConfiguration.getConfigList().get(i-1));
                 }
             }
 
@@ -76,10 +82,17 @@ public class GamePlays extends AppCompatActivity {
         ArrayList<String> listData = new ArrayList<>();
 
         // Create list of items
-        for(int i =0; i< GameConfiguration.getNumConfigurations(); i++) {
+        for(int i =0; i < GameConfiguration.getNumConfigurations(); i++) {
             for (int j = 0; i < GameConfiguration.getConfigList().get(i).getGamesListSize(); j++) {
-                listData.add(
-                        GameConfiguration.getConfigList().get(i).getGamesList().get(j).getRecord());
+//                listData.add(
+//                        String.format("ConfigList: %d",
+//                                GameConfiguration.getConfigList().get(i).
+//                                        getGamesList().get(j).
+//                                        getScore()));
+//                listData.add(String.format("ConfigID: %d and Config: %s and GameID: %d",
+//                        i,
+//                        GameConfiguration.getConfigList().get(i).getName(),j));
+                listData.add("Working");
             }
         }
 
