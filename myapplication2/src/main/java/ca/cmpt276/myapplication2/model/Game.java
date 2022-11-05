@@ -33,10 +33,9 @@ public class Game {
     }
 
     public String getRecord(){
-        return String.format("NumPlayers: %d,  Score: %d, Achievement:%s",
+        return String.format("NumPlayers: %d,  Score: %d, Achievement:...",
                 numPlayers,
-                score,
-                achievementList.findLevel(score));
+                score);
     }
 
     public AchievementList getAchievementList() {

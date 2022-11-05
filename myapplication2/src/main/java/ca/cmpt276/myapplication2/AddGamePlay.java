@@ -112,7 +112,7 @@ public class AddGamePlay extends AppCompatActivity {
             return;
         }
 
-        if (sum_score > GameConfiguration.getConfigList().get(configurationID).getGreat_score() &&
+        if (sum_score > GameConfiguration.getConfigList().get(configurationID).getGreat_score() ||
             sum_score < GameConfiguration.getConfigList().get(configurationID).getPoor_score())
         {
             Toast.makeText(AddGamePlay.this,
@@ -126,6 +126,7 @@ public class AddGamePlay extends AppCompatActivity {
         GameConfiguration.addGame(configurationID, newGame);
 
         // TODO: display an achievement message
+
 
         // return to game plays page
         finish();

@@ -80,22 +80,16 @@ public class GamePlays extends AppCompatActivity {
 
     private void populateListView() {
         ArrayList<String> listData = new ArrayList<>();
+        GameConfiguration = ConfigManager.getInstance();
 
         // Create list of items
         for(int i =0; i < GameConfiguration.getNumConfigurations(); i++) {
-            for (int j = 0; i < GameConfiguration.getConfigList().get(i).getGamesListSize(); j++) {
-//                listData.add(
-//                        String.format("ConfigList: %d",
-//                                GameConfiguration.getConfigList().get(i).
-//                                        getGamesList().get(j).
-//                                        getScore()));
-//                listData.add(String.format("ConfigID: %d and Config: %s and GameID: %d",
-//                        i,
-//                        GameConfiguration.getConfigList().get(i).getName(),j));
-                listData.add("Working");
+            for (int j = 0; j < GameConfiguration.getConfigList().get(i).getGamesListSize(); j++) {
+                listData.add(GameConfiguration.getConfigList().get(i).
+                                        getGamesList().get(j).
+                                        getRecord());
             }
         }
-
 
         // Build Adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
