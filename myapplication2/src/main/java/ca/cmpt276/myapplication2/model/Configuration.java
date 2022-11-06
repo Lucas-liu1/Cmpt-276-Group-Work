@@ -7,7 +7,6 @@ public class Configuration {
     private int poor_score;
     private int great_score;
     private ArrayList<Game> gamesList = new ArrayList<>(); // Store all the game under the configuration
-
     // All Constructors
     public Configuration() {
     }
@@ -60,4 +59,5 @@ public class Configuration {
     public int getGamesListSize(){
         return gamesList.size();
     }
+
 }
