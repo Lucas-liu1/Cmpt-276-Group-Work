@@ -8,8 +8,8 @@
 
     <Button
         android:id="@+id/btn_edit_config"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="186dp"
+        android:layout_height="50dp"
         android:layout_marginTop="64dp"
         android:text="Edit Config"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,8 +18,8 @@
 
     <Button
         android:id="@+id/btn_delete_config"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="186dp"
+        android:layout_height="50dp"
         android:layout_marginTop="64dp"
         android:text="Delete Config"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,8 +28,8 @@
 
     <Button
         android:id="@+id/btn_viewAchievement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="186dp"
+        android:layout_height="50dp"
         android:layout_marginTop="64dp"
         android:text="View Achievement"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,11 +38,12 @@
 
     <Button
         android:id="@+id/btn_add_config"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:text="ADD Config"
+        android:layout_width="186dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="120dp"
+        android:text="ADD new Config"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
