@@ -2,6 +2,7 @@ package ca.cmpt276.myapplication2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -80,9 +81,17 @@ public class AddGamePlay extends AppCompatActivity {
         });
     }
 
+    private void saveFirstpass(){
+        SharedPreferences sharedPref;
+        sharedPref = getSharedPreferences("firstPass", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("firstPass", false);
+        editor.commit();
+    }
 
 
     public void addGamePlay(){
+        saveFirstpass();
         int num_players;
         int sum_score;
 
