@@ -20,6 +20,7 @@ import java.lang.reflect.Type;
 import ca.cmpt276.myapplication2.model.AchievementList;
 import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Configuration;
+import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
 
 
 public class ViewAchievement extends AppCompatActivity {
@@ -61,7 +62,7 @@ public class ViewAchievement extends AppCompatActivity {
                 targetPosition = intent.getIntExtra("position", -1);
 
                 targetConfig = configManager.getConfigList().get(targetPosition);
-                getConfigManagerToSharedPreferences();
+                SharedPreferencesUtils.getConfigManagerToSharedPreferences(ViewAchievement.this);
                 poorScore = targetConfig.getPoor_score();
                 greatScore = targetConfig.getGreat_score();
 
@@ -97,23 +98,5 @@ public class ViewAchievement extends AppCompatActivity {
         NumPlayers =  (EditText) findViewById(R.id.editTextPlayers);
         level = (TextView) findViewById(R.id.levelList);
         btn = (Button) findViewById(R.id.btnShow);
-    }
-
-    private void getConfigManagerToSharedPreferences(){
-        SharedPreferences preferences = getSharedPreferences("ConfigurationsList", MODE_PRIVATE);
-        String json = preferences.getString("ConfigManager", null);
-        if (json != null)
-        {
-            Gson gson = new Gson();
-            Type type = new TypeToken<ConfigManager>(){}.getType();
-
-//            List<Configuration> alterSamples = new ArrayList<Configuration>();
-//            storedManager = gson.fromJson(json,type);
-            ConfigManager.setInstance(gson.fromJson(json,type));
-//            for(int i = 0; i < alterSamples.size(); i++)
-//            {
-//                Log.d(TAG, alterSamples.get(i).getName()+":" + alterSamples.get(i).getX() + "," + alterSamples.get(i).getY());
-//            }
-        }
     }
 }

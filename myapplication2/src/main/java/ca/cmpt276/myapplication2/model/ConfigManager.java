@@ -76,24 +76,4 @@ public class ConfigManager {
     public static void setInstance(ConfigManager instance) {
         ConfigManager.instance = instance;
     }
-
-//    private void getConfigManagerToSharedPreferences(){
-//        SharedPreferences preferences = getSharedPreferences("ConfigurationsList", MODE_PRIVATE);
-//        String json = preferences.getString("ConfigManager", null);
-//        if (json != null)
-//        {
-//            Gson gson = new Gson();
-//            Type type = new TypeToken<ConfigManager>(){}.getType();
-//            ConfigManager.setInstance(gson.fromJson(json,type));
-//        }
-//    }
-//    private void storeConfigManagerToSharedPreferences(){
-//        ConfigManager configManager = ConfigManager.getInstance();
-//        SharedPreferences prefs = getSharedPreferences("ConfigurationsList", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(configManager);
-//        editor.putString("ConfigManager", json);
-//        editor.commit();
-//    }
 }

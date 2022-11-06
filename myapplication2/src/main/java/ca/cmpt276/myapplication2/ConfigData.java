@@ -22,6 +22,7 @@ import java.lang.reflect.Type;
 
 import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Configuration;
+import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
 
 public class ConfigData extends AppCompatActivity {
     private ConfigManager configManager;
@@ -43,7 +44,7 @@ public class ConfigData extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         configManager = ConfigManager.getInstance();
-        getConfigManagerToSharedPreferences();
+        SharedPreferencesUtils.getConfigManagerToSharedPreferences(ConfigData.this);
         btn_Save = findViewById(R.id.btn_save);
         editText_Name = findViewById(R.id.pt_name);
         editText_PoorScore = findViewById(R.id.pt_poorScore);
@@ -84,7 +85,7 @@ public class ConfigData extends AppCompatActivity {
                 targetConfig = new Configuration(string_Name, num_PoorScore, num_GreatScore);
                 ConfigManager configList = ConfigManager.getInstance();
                 configList.addConfig(targetConfig);
-                storeConfigManagerToSharedPreferences();
+                SharedPreferencesUtils.storeConfigManagerToSharedPreferences(ConfigData.this);
                 finish();
             }
         });
@@ -125,38 +126,9 @@ public class ConfigData extends AppCompatActivity {
                 targetConfig = new Configuration(string_Name, num_PoorScore, num_GreatScore);
                 configManager = ConfigManager.getInstance();
                 configManager.editConfig(targetPosition, targetConfig);
-                storeConfigManagerToSharedPreferences();
+                SharedPreferencesUtils.storeConfigManagerToSharedPreferences(ConfigData.this);
                 finish();
             }
         });
-    }
-
-    private void storeConfigManagerToSharedPreferences(){
-        ConfigManager configManager = ConfigManager.getInstance();
-        SharedPreferences prefs = getSharedPreferences("ConfigurationsList", MODE_PRIVATE);
-//        List<Configuration> ConfigList = new ArrayList<Configuration>();
-        SharedPreferences.Editor editor = prefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(configManager);
-        editor.putString("ConfigManager", json);
-        editor.commit();
-    }
-
-    private void getConfigManagerToSharedPreferences(){
-        SharedPreferences preferences = getSharedPreferences("ConfigurationsList", MODE_PRIVATE);
-        String json = preferences.getString("ConfigManager", null);
-        if (json != null)
-        {
-            Gson gson = new Gson();
-            Type type = new TypeToken<ConfigManager>(){}.getType();
-
-//            List<Configuration> alterSamples = new ArrayList<Configuration>();
-//            storedManager = gson.fromJson(json,type);
-            ConfigManager.setInstance(gson.fromJson(json,type));
-//            for(int i = 0; i < alterSamples.size(); i++)
-//            {
-//                Log.d(TAG, alterSamples.get(i).getName()+":" + alterSamples.get(i).getX() + "," + alterSamples.get(i).getY());
-//            }
-        }
     }
 }
