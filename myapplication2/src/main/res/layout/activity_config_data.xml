@@ -34,7 +34,8 @@
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/tv_greatScore"
         app:layout_constraintStart_toEndOf="@+id/tv_greatScore"
-        app:layout_constraintTop_toTopOf="@+id/tv_greatScore" />
+        app:layout_constraintTop_toTopOf="@+id/tv_greatScore"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/tv_greatScore"
