@@ -8,8 +8,8 @@
 
     <ListView
         android:id="@+id/lv_configList_Config"
-        android:layout_width="407dp"
-        android:layout_height="727dp"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="3dp" />
+        android:layout_width="403dp"
+        android:layout_height="723dp"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="5dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

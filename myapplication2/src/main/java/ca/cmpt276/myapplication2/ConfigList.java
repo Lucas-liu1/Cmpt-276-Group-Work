@@ -39,6 +39,7 @@ public class ConfigList extends AppCompatActivity {
         configManager = ConfigManager.getInstance();
 
         populateListView();
+        checkEmpty();
 
         Intent intent = getIntent();
         index = intent.getIntExtra("index", -1);
@@ -50,6 +51,12 @@ public class ConfigList extends AppCompatActivity {
         }
         else  {
             achievementButtonClickCallback();
+        }
+    }
+
+    private void checkEmpty(){
+        if(lv_ConfigList.getAdapter().isEmpty()){
+            Toast.makeText(this, "It's empty now,\n please add a new configuration first.", Toast.LENGTH_SHORT).show();
         }
     }
 
