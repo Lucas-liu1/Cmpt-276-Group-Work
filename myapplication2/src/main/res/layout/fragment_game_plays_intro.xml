@@ -24,7 +24,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/first_game_spinner"
-        android:textSize="12sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,10 +32,22 @@
         android:id="@+id/firstgameHelp"
         android:layout_width="412dp"
         android:layout_height="642dp"
-        android:layout_marginTop="88dp"
-        android:gravity="center"
+        android:layout_marginTop="200dp"
+        android:gravity="top|center_horizontal"
         android:text="@string/first_game_play"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="122dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/helper_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/helper_arrow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
