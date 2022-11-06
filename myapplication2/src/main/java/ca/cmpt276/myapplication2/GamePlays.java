@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,35 +26,68 @@ public class GamePlays extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_plays);
-
+        if(getFirstpass()){
+            setContentView(R.layout.fragment_game_plays_intro);
+        }else{
+            setContentView(R.layout.activity_game_plays);
+        }
         GameConfiguration = ConfigManager.getInstance();
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle("Game plays");
-
-        setAddGamePlayButton();
-        setConfigSpinner();
-        populateListView();
+        if(getFirstpass()){
+            firstsetAddGamePlayButton();
+        }else{
+            setAddGamePlayButton();
+            setConfigSpinner();
+            populateListView();
+        }
     }
 
     @Override
     public void onRestart() {
         super.onRestart();
-        populateListView();
+        if(getFirstpass()){
+            setContentView(R.layout.fragment_game_plays_intro);
+        }else{
+            setContentView(R.layout.activity_game_plays);
+            setAddGamePlayButton();
+            setConfigSpinner();
+            populateListView();
+        }
+    }
+
+    private boolean getFirstpass(){
+        SharedPreferences sharedPref;
+        sharedPref = getSharedPreferences("firstPass", MODE_PRIVATE);
+        boolean firstPass = sharedPref.getBoolean("firstPass", true);
+        return firstPass;
     }
 
 
     private void setAddGamePlayButton() {
         Button btn = findViewById(R.id.addGameButton);
-        btn.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = AddGamePlay.makeIntent(GamePlays.this);
                 startActivity(intent);
             }
-        });
+        };
+        btn.setOnClickListener(listener);
+    }
+
+    private void firstsetAddGamePlayButton() {
+        Button btn = findViewById(R.id.firstgameButton);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = AddGamePlay.makeIntent(GamePlays.this);
+                startActivity(intent);
+            }
+        };
+        btn.setOnClickListener(listener);
     }
 
     private void setConfigSpinner() {

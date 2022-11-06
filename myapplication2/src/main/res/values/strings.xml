@@ -8,5 +8,8 @@
     <string name="game_played">Game Played</string>
     <string name="number_of_players">Number of Players</string>
     <string name="score_of_players">Score of Players</string>
+    <string name="first_game_play">Welcome, this page lists all the games played. Currently
+    there are no games played, please start off with clicking on add game play on the top right.</string>
+    <string name="first_game_spinner">No Games Played</string>
 
 </resources>
