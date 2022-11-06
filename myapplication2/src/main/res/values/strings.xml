@@ -7,7 +7,8 @@
     <string name="create">create</string>
     <string name="game_played">Game Played</string>
     <string name="number_of_players">Number of Players</string>
-<<<<<<<<< Temporary merge branch 1
+    <string name="score_of_all_players">Score of All Players</string>
+    <string name="congratulations">Congratulations!</string>
     <string name="score_of_players">Score of Players</string>
     <string name="first_game_play">\nWelcome, this page lists all the games played.\n\n Currently,
     there are no games played.\n\n

@@ -44,11 +44,8 @@ public class GamePlays extends AppCompatActivity {
             setAddGamePlayButton();
             setConfigSpinner();
             populateListView();
+            registerClickCallback();
         }
-
-        setAddGamePlayButton();
-        setConfigSpinner();
-        populateListView();
     }
 
     @Override
@@ -61,6 +58,8 @@ public class GamePlays extends AppCompatActivity {
             setAddGamePlayButton();
             setConfigSpinner();
             populateListView();
+            registerClickCallback();
+
         }
     }
 
@@ -71,6 +70,7 @@ public class GamePlays extends AppCompatActivity {
         return firstPass;
     }
 
+    
 
     private void setAddGamePlayButton() {
         Button btn = findViewById(R.id.addGameButton);
