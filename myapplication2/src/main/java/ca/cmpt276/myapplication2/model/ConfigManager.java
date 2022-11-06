@@ -1,5 +1,11 @@
 package ca.cmpt276.myapplication2.model;
 
+import android.content.SharedPreferences;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ConfigManager {
@@ -66,4 +72,28 @@ public class ConfigManager {
         }
         return total;
     }
+
+    public static void setInstance(ConfigManager instance) {
+        ConfigManager.instance = instance;
+    }
+
+//    private void getConfigManagerToSharedPreferences(){
+//        SharedPreferences preferences = getSharedPreferences("ConfigurationsList", MODE_PRIVATE);
+//        String json = preferences.getString("ConfigManager", null);
+//        if (json != null)
+//        {
+//            Gson gson = new Gson();
+//            Type type = new TypeToken<ConfigManager>(){}.getType();
+//            ConfigManager.setInstance(gson.fromJson(json,type));
+//        }
+//    }
+//    private void storeConfigManagerToSharedPreferences(){
+//        ConfigManager configManager = ConfigManager.getInstance();
+//        SharedPreferences prefs = getSharedPreferences("ConfigurationsList", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = prefs.edit();
+//        Gson gson = new Gson();
+//        String json = gson.toJson(configManager);
+//        editor.putString("ConfigManager", json);
+//        editor.commit();
+//    }
 }

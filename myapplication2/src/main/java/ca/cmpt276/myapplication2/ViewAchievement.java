@@ -4,12 +4,18 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 
 import ca.cmpt276.myapplication2.model.AchievementList;
 import ca.cmpt276.myapplication2.model.ConfigManager;
@@ -55,6 +61,7 @@ public class ViewAchievement extends AppCompatActivity {
                 targetPosition = intent.getIntExtra("position", -1);
 
                 targetConfig = configManager.getConfigList().get(targetPosition);
+                getConfigManagerToSharedPreferences();
                 poorScore = targetConfig.getPoor_score();
                 greatScore = targetConfig.getGreat_score();
 
@@ -90,5 +97,23 @@ public class ViewAchievement extends AppCompatActivity {
         NumPlayers =  (EditText) findViewById(R.id.editTextPlayers);
         level = (TextView) findViewById(R.id.levelList);
         btn = (Button) findViewById(R.id.btnShow);
+    }
+
+    private void getConfigManagerToSharedPreferences(){
+        SharedPreferences preferences = getSharedPreferences("ConfigurationsList", MODE_PRIVATE);
+        String json = preferences.getString("ConfigManager", null);
+        if (json != null)
+        {
+            Gson gson = new Gson();
+            Type type = new TypeToken<ConfigManager>(){}.getType();
+
+//            List<Configuration> alterSamples = new ArrayList<Configuration>();
+//            storedManager = gson.fromJson(json,type);
+            ConfigManager.setInstance(gson.fromJson(json,type));
+//            for(int i = 0; i < alterSamples.size(); i++)
+//            {
+//                Log.d(TAG, alterSamples.get(i).getName()+":" + alterSamples.get(i).getX() + "," + alterSamples.get(i).getY());
+//            }
+        }
     }
 }

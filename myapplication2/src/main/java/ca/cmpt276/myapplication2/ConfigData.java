@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 
 import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Configuration;
@@ -37,6 +43,7 @@ public class ConfigData extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         configManager = ConfigManager.getInstance();
+        getConfigManagerToSharedPreferences();
         btn_Save = findViewById(R.id.btn_save);
         editText_Name = findViewById(R.id.pt_name);
         editText_PoorScore = findViewById(R.id.pt_poorScore);
@@ -77,6 +84,7 @@ public class ConfigData extends AppCompatActivity {
                 targetConfig = new Configuration(string_Name, num_PoorScore, num_GreatScore);
                 ConfigManager configList = ConfigManager.getInstance();
                 configList.addConfig(targetConfig);
+                storeConfigManagerToSharedPreferences();
                 finish();
             }
         });
@@ -117,8 +125,38 @@ public class ConfigData extends AppCompatActivity {
                 targetConfig = new Configuration(string_Name, num_PoorScore, num_GreatScore);
                 configManager = ConfigManager.getInstance();
                 configManager.editConfig(targetPosition, targetConfig);
+                storeConfigManagerToSharedPreferences();
                 finish();
             }
         });
+    }
+
+    private void storeConfigManagerToSharedPreferences(){
+        ConfigManager configManager = ConfigManager.getInstance();
+        SharedPreferences prefs = getSharedPreferences("ConfigurationsList", MODE_PRIVATE);
+//        List<Configuration> ConfigList = new ArrayList<Configuration>();
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(configManager);
+        editor.putString("ConfigManager", json);
+        editor.commit();
+    }
+
+    private void getConfigManagerToSharedPreferences(){
+        SharedPreferences preferences = getSharedPreferences("ConfigurationsList", MODE_PRIVATE);
+        String json = preferences.getString("ConfigManager", null);
+        if (json != null)
+        {
+            Gson gson = new Gson();
+            Type type = new TypeToken<ConfigManager>(){}.getType();
+
+//            List<Configuration> alterSamples = new ArrayList<Configuration>();
+//            storedManager = gson.fromJson(json,type);
+            ConfigManager.setInstance(gson.fromJson(json,type));
+//            for(int i = 0; i < alterSamples.size(); i++)
+//            {
+//                Log.d(TAG, alterSamples.get(i).getName()+":" + alterSamples.get(i).getX() + "," + alterSamples.get(i).getY());
+//            }
+        }
     }
 }
