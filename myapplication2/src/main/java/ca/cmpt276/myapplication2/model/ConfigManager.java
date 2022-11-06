@@ -1,5 +1,11 @@
 package ca.cmpt276.myapplication2.model;
 
+import android.content.SharedPreferences;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ConfigManager {
@@ -65,5 +71,9 @@ public class ConfigManager {
             total += configList.get(i).getGamesListSize();
         }
         return total;
+    }
+
+    public static void setInstance(ConfigManager instance) {
+        ConfigManager.instance = instance;
     }
 }

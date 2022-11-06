@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,8 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+
 import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Configuration;
+import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
 
 public class ConfigData extends AppCompatActivity {
     private ConfigManager configManager;
@@ -37,6 +44,7 @@ public class ConfigData extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         configManager = ConfigManager.getInstance();
+        SharedPreferencesUtils.getConfigManagerToSharedPreferences(ConfigData.this);
         btn_Save = findViewById(R.id.btn_save);
         editText_Name = findViewById(R.id.pt_name);
         editText_PoorScore = findViewById(R.id.pt_poorScore);
@@ -77,6 +85,7 @@ public class ConfigData extends AppCompatActivity {
                 targetConfig = new Configuration(string_Name, num_PoorScore, num_GreatScore);
                 ConfigManager configList = ConfigManager.getInstance();
                 configList.addConfig(targetConfig);
+                SharedPreferencesUtils.storeConfigManagerToSharedPreferences(ConfigData.this);
                 finish();
             }
         });
@@ -117,6 +126,7 @@ public class ConfigData extends AppCompatActivity {
                 targetConfig = new Configuration(string_Name, num_PoorScore, num_GreatScore);
                 configManager = ConfigManager.getInstance();
                 configManager.editConfig(targetPosition, targetConfig);
+                SharedPreferencesUtils.storeConfigManagerToSharedPreferences(ConfigData.this);
                 finish();
             }
         });

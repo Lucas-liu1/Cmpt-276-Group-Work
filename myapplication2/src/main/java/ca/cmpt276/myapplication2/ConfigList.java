@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,9 +13,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import ca.cmpt276.myapplication2.model.ConfigManager;
+import ca.cmpt276.myapplication2.model.Configuration;
+import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
 
 public class ConfigList extends AppCompatActivity {
     private ConfigManager configManager;
@@ -37,6 +45,7 @@ public class ConfigList extends AppCompatActivity {
         super.onResume();
         lv_ConfigList = findViewById(R.id.lv_configList_Config);
         configManager = ConfigManager.getInstance();
+        SharedPreferencesUtils.getConfigManagerToSharedPreferences(this);
 
         populateListView();
         checkEmpty();
@@ -49,7 +58,7 @@ public class ConfigList extends AppCompatActivity {
         else if (index == 1) {// Edit
             editButtonClickCallback();
         }
-        else  {
+        else {
             achievementButtonClickCallback();
         }
     }
@@ -99,6 +108,7 @@ public class ConfigList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View viewclick, int position, long id) {
                 TextView textView = (TextView) viewclick;
                 configManager.deleteConfig(position);
+                SharedPreferencesUtils.storeConfigManagerToSharedPreferences(ConfigList.this);
                 finish();
             }
         });
