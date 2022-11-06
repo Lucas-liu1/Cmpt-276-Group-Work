@@ -2,8 +2,10 @@ package ca.cmpt276.myapplication2;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,17 +23,28 @@ import ca.cmpt276.myapplication2.model.Game;
 
 public class GamePlays extends AppCompatActivity {
     private ConfigManager GameConfiguration;
+    private int gameConfig = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_plays);
-
+        if(getFirstpass()){
+            setContentView(R.layout.fragment_game_plays_intro);
+        }else{
+            setContentView(R.layout.activity_game_plays);
+        }
         GameConfiguration = ConfigManager.getInstance();
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle("Game plays");
+        if(getFirstpass()){
+            firstsetAddGamePlayButton();
+        }else{
+            setAddGamePlayButton();
+            setConfigSpinner();
+            populateListView();
+        }
 
         setAddGamePlayButton();
         setConfigSpinner();
@@ -41,19 +54,46 @@ public class GamePlays extends AppCompatActivity {
     @Override
     public void onRestart() {
         super.onRestart();
-        populateListView();
+        if(getFirstpass()){
+            setContentView(R.layout.fragment_game_plays_intro);
+        }else{
+            setContentView(R.layout.activity_game_plays);
+            setAddGamePlayButton();
+            setConfigSpinner();
+            populateListView();
+        }
+    }
+
+    private boolean getFirstpass(){
+        SharedPreferences sharedPref;
+        sharedPref = getSharedPreferences("firstPass", MODE_PRIVATE);
+        boolean firstPass = sharedPref.getBoolean("firstPass", true);
+        return firstPass;
     }
 
 
     private void setAddGamePlayButton() {
         Button btn = findViewById(R.id.addGameButton);
-        btn.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = AddGamePlay.makeIntent(GamePlays.this);
                 startActivity(intent);
             }
-        });
+        };
+        btn.setOnClickListener(listener);
+    }
+
+    private void firstsetAddGamePlayButton() {
+        Button btn = findViewById(R.id.firstgameButton);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = AddGamePlay.makeIntent(GamePlays.this);
+                startActivity(intent);
+            }
+        };
+        btn.setOnClickListener(listener);
     }
 
     private void setConfigSpinner() {
@@ -66,6 +106,7 @@ public class GamePlays extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                gameConfig=i;
                 if (i == 0){ // when the selected is all
                     populateListView();
                 } else { // when the selected is not all
@@ -123,5 +164,39 @@ public class GamePlays extends AppCompatActivity {
         // Configure the list view
         ListView list = findViewById(R.id.listGamesPlayed);
         list.setAdapter(adapter);
+    }
+
+    private void registerClickCallback() {
+        ListView list = findViewById(R.id.listGamesPlayed);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View viewClicked, int position, long id) {
+                Game myGame = GameConfiguration.getConfigList().get(0).getGamesList().get(0);
+                boolean set = false ;
+                if (gameConfig == 0){
+                    Log.i("MYPOSITION",String.format("%d",position));
+                    int j=0;
+                    for(int i = 0; i < GameConfiguration.getNumConfigurations(); i++) {
+                        for (j = 0; j < GameConfiguration.getConfigList().get(i).getGamesListSize(); j++) {
+                            if (i+j == position){
+                                myGame = GameConfiguration.getConfigList().get(i).getGamesList().get(j);
+                                set = true;
+                                break;
+                            }
+                        }
+                        if(set){
+                            break;
+                        }
+                    }
+                }else{
+                    myGame = GameConfiguration.getConfigList().get(gameConfig-1).getGamesList().get(position);
+                }
+
+                FragmentManager manager = getSupportFragmentManager();
+                CongratulationsFragment dialog = new CongratulationsFragment();
+                dialog.setCurrentGame(myGame);
+                dialog.show(manager,"MessageDialog");
+            }
+        });
     }
 }
