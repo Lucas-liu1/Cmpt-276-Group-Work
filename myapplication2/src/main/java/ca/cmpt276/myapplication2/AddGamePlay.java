@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
+import ca.cmpt276.myapplication2.model.AchievementList;
 import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Game;
 
@@ -112,8 +114,7 @@ public class AddGamePlay extends AppCompatActivity {
             return;
         }
 
-        if (sum_score > GameConfiguration.getConfigList().get(configurationID).getGreat_score() ||
-            sum_score < GameConfiguration.getConfigList().get(configurationID).getPoor_score())
+        if (sum_score < GameConfiguration.getConfigList().get(configurationID).getPoor_score()*num_players)
         {
             Toast.makeText(AddGamePlay.this,
                             String.format("Score out of range for %s",
@@ -123,13 +124,19 @@ public class AddGamePlay extends AppCompatActivity {
         }
 
         Game newGame = new Game(num_players, sum_score);
+        AchievementList achievementList = new AchievementList(
+                GameConfiguration.getConfigList().get(configurationID).getPoor_score(),
+                GameConfiguration.getConfigList().get(configurationID).getGreat_score(),
+                num_players);
+        newGame.setAchievementList(achievementList);
+
         GameConfiguration.addGame(configurationID, newGame);
 
-        // TODO: display an achievement message
+        FragmentManager manager = getSupportFragmentManager();
+        CongratulationsFragment dialog = new CongratulationsFragment();
+        dialog.setCurrentGame(newGame);
+        dialog.show(manager,"MessageDialog");
 
-
-        // return to game plays page
-        finish();
     }
 
 }
