@@ -20,6 +20,10 @@ import java.util.ArrayList;
 import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Configuration;
 import ca.cmpt276.myapplication2.model.Game;
+import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class GamePlays extends AppCompatActivity {
     private ConfigManager GameConfiguration;
@@ -28,19 +32,36 @@ public class GamePlays extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        GameConfiguration = ConfigManager.getInstance();
+        SharedPreferencesUtils.getConfigManagerToSharedPreferences(this);
+
         if(getFirstpass()){
             setContentView(R.layout.fragment_game_plays_intro);
+            firstsetAddGamePlayButton();
         }else{
             setContentView(R.layout.activity_game_plays);
+            setAddGamePlayButton();
+            setConfigSpinner();
+            populateListView();
+            registerClickCallback();
         }
-        GameConfiguration = ConfigManager.getInstance();
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Game plays");
+        ab.setTitle("Game Plays");
+
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        GameConfiguration = ConfigManager.getInstance();
+        SharedPreferencesUtils.getConfigManagerToSharedPreferences(this);
         if(getFirstpass()){
+            setContentView(R.layout.fragment_game_plays_intro);
             firstsetAddGamePlayButton();
         }else{
+            setContentView(R.layout.activity_game_plays);
             setAddGamePlayButton();
             setConfigSpinner();
             populateListView();
@@ -51,15 +72,17 @@ public class GamePlays extends AppCompatActivity {
     @Override
     public void onRestart() {
         super.onRestart();
+        GameConfiguration = ConfigManager.getInstance();
+        SharedPreferencesUtils.getConfigManagerToSharedPreferences(this);
         if(getFirstpass()){
             setContentView(R.layout.fragment_game_plays_intro);
+            firstsetAddGamePlayButton();
         }else{
             setContentView(R.layout.activity_game_plays);
             setAddGamePlayButton();
             setConfigSpinner();
             populateListView();
             registerClickCallback();
-
         }
     }
 
@@ -123,6 +146,7 @@ public class GamePlays extends AppCompatActivity {
         ArrayList<String> listData = new ArrayList<>();
         GameConfiguration = ConfigManager.getInstance();
 
+
         // Create list of items
         for(int i =0; i < GameConfiguration.getNumConfigurations(); i++) {
             for (int j = 0; j < GameConfiguration.getConfigList().get(i).getGamesListSize(); j++) {
@@ -147,6 +171,8 @@ public class GamePlays extends AppCompatActivity {
     // called when the user specifies in the game config spinner
     private void populateListView(Configuration configuration) {
         ArrayList<String> listData = new ArrayList<>();
+        GameConfiguration = ConfigManager.getInstance();
+
 
         // Create list of items
         for (int i = 0; i < configuration.getGamesListSize(); i++) {
@@ -174,8 +200,7 @@ public class GamePlays extends AppCompatActivity {
                 Game myGame = GameConfiguration.getConfigList().get(0).getGamesList().get(0);
                 boolean set = false ;
                 if (gameConfig == 0){
-                    Log.i("MYPOSITION",String.format("%d",position));
-                    int j=0;
+                    int j;
                     for(int i = 0; i < GameConfiguration.getNumConfigurations(); i++) {
                         for (j = 0; j < GameConfiguration.getConfigList().get(i).getGamesListSize(); j++) {
                             if (i+j == position){

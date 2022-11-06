@@ -19,6 +19,10 @@ import androidx.fragment.app.FragmentManager;
 import ca.cmpt276.myapplication2.model.AchievementList;
 import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Game;
+import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class AddGamePlay extends AppCompatActivity {
     private ConfigManager GameConfiguration;
@@ -39,6 +43,7 @@ public class AddGamePlay extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         GameConfiguration = ConfigManager.getInstance();
+        SharedPreferencesUtils.getConfigManagerToSharedPreferences(this);
         populateSpinner();
         setCreateButton();
     }
@@ -139,12 +144,15 @@ public class AddGamePlay extends AppCompatActivity {
                 num_players);
         newGame.setAchievementList(achievementList);
 
+        GameConfiguration = ConfigManager.getInstance();
         GameConfiguration.addGame(configurationID, newGame);
+        SharedPreferencesUtils.storeConfigManagerToSharedPreferences(AddGamePlay.this);
 
         FragmentManager manager = getSupportFragmentManager();
         CongratulationsFragment dialog = new CongratulationsFragment();
         dialog.setCurrentGame(newGame);
         dialog.show(manager,"MessageDialog");
+
 
     }
 

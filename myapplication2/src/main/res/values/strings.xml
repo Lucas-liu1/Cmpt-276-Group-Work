@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">App</string>
+    <string name="app_name">Coop Achievement</string>
     <string name="EnterNumberOfPlayers">   Enter number of players</string >
     <string name="show_level">Show Level</string>
     <string name="levelList">Level List</string>

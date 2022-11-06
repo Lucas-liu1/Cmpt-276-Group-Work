@@ -11,7 +11,6 @@ import java.lang.reflect.Type;
 
 public class SharedPreferencesUtils {
 
-
     public static void storeConfigManagerToSharedPreferences(Context c){
         ConfigManager configManager = ConfigManager.getInstance();
         android.content.SharedPreferences prefs = c.getSharedPreferences("ConfigurationsList", MODE_PRIVATE);
