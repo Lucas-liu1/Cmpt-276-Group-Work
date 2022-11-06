@@ -128,14 +128,6 @@ public class AddGamePlay extends AppCompatActivity {
             return;
         }
 
-        if (sum_score < GameConfiguration.getConfigList().get(configurationID).getPoor_score()*num_players)
-        {
-            Toast.makeText(AddGamePlay.this,
-                            String.format("Score out of range for %s",
-                            GameConfiguration.getConfigList().get(configurationID).getName()),
-                            Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         Game newGame = new Game(num_players, sum_score);
         AchievementList achievementList = new AchievementList(
