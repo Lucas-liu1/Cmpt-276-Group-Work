@@ -55,7 +55,7 @@ public class GamePlays extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle("Game Plays");
-
+ 
     }
 
     @Override
