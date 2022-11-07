@@ -21,7 +21,10 @@ import ca.cmpt276.myapplication2.model.AchievementList;
 import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Configuration;
 import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
-
+/**
+ * this class is about showing the achievement level list
+ * by getting a input number(player number) to calculate the required score of each level.
+ */
 
 public class ViewAchievement extends AppCompatActivity {
 
