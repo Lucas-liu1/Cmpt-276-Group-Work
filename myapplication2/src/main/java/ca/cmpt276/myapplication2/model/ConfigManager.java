@@ -8,6 +8,10 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/**
+ * This class is for store all the configurations.
+ */
+
 public class ConfigManager {
     private ArrayList<Configuration> configList;// Store all the configurations
 

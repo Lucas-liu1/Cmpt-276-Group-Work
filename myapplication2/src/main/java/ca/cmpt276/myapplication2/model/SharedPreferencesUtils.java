@@ -9,8 +9,13 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 
+/**
+ * This class is for save data to the device.
+ */
+
 public class SharedPreferencesUtils {
 
+    //store the data
     public static void storeConfigManagerToSharedPreferences(Context c){
         ConfigManager configManager = ConfigManager.getInstance();
         android.content.SharedPreferences prefs = c.getSharedPreferences("ConfigurationsList", MODE_PRIVATE);
@@ -21,6 +26,7 @@ public class SharedPreferencesUtils {
         editor.commit();
     }
 
+    //get the data
     public static void getConfigManagerToSharedPreferences(Context c){
         android.content.SharedPreferences preferences = c.getSharedPreferences("ConfigurationsList", MODE_PRIVATE);
         String json = preferences.getString("ConfigManager", null);

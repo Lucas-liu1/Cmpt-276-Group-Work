@@ -1,5 +1,9 @@
 package ca.cmpt276.myapplication2.model;
 
+/**
+ * This class is for a single game.
+ */
+
 public class Game {
     private int numPlayers;
     private int score;

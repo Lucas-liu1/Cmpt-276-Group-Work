@@ -2,15 +2,21 @@ package ca.cmpt276.myapplication2.model;
 
 import java.util.ArrayList;
 
+/**
+ * This class is for store all the Achievements
+ */
+
 public class AchievementList {
 
     public ArrayList<Achievement> achievementsList = new ArrayList<>();// Store all the achievements
 
+
+    //We can create a new achievement list by poor score, great score and number of players.
     public AchievementList(int poor_score, int great_score, int numPlayers) {
 
         int interval = (great_score - poor_score) / 6;
 
-        //Iron (For each player: 0 ~ poor_score)
+        //Iron (For each player: negative infinity ~ poor_score)
         Achievement Iron = new Achievement("Iron", Integer.MIN_VALUE, poor_score*numPlayers, numPlayers);
         achievementsList.add(Iron);
 
