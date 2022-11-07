@@ -24,6 +24,10 @@ import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Configuration;
 import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
 
+/**
+ * This activity is for add, edit or delete the configuration.
+ */
+
 public class ConfigList extends AppCompatActivity {
     private ConfigManager configManager;
     private ListView lv_ConfigList;
@@ -63,12 +67,14 @@ public class ConfigList extends AppCompatActivity {
         }
     }
 
+    // Check if the list is empty.
     private void checkEmpty(){
         if(lv_ConfigList.getAdapter().isEmpty()){
             Toast.makeText(this, "It's empty now,\n please add a new configuration first.", Toast.LENGTH_SHORT).show();
         }
     }
 
+    // Populate the list view.
     private void populateListView() {
         configManager = ConfigManager.getInstance();
 
@@ -90,6 +96,7 @@ public class ConfigList extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    // When the user click the EDIT CONFIG button...
     private void editButtonClickCallback() {
         lv_ConfigList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -102,6 +109,7 @@ public class ConfigList extends AppCompatActivity {
         });
     }
 
+    // When the user click the DELETE CONFIG button...
     private void deleteButtonClickCallback() {
         lv_ConfigList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -114,6 +122,7 @@ public class ConfigList extends AppCompatActivity {
         });
     }
 
+    // When the user click the VIEW ACHIEVEMENT button...
     private void achievementButtonClickCallback() {
         lv_ConfigList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
