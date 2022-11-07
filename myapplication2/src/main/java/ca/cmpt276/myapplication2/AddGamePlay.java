@@ -24,6 +24,13 @@ import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Extension of the game plays class
+ * This class provides the functionality of creating a new game play.
+ * Drawing from the models provided able to take in a game config to give out results of
+ * the game played with the inputted scores drawing back to the achievement list manager
+ */
+
 public class AddGamePlay extends AppCompatActivity {
     private ConfigManager GameConfiguration;
     private int configurationID;

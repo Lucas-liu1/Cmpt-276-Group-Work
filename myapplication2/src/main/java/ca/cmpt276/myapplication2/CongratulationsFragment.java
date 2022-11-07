@@ -17,6 +17,12 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Game;
 
+/**
+ * Simple fragment that displays your achievement level based on the score you chose
+ * This builds off of addgameplay and uses the achievement list to properly decide which
+ * achievement level you landed on.
+ * Provides linking to drawable images to showcase the achievement level you got
+ */
 public class CongratulationsFragment extends AppCompatDialogFragment {
     Game currentGame;
 
