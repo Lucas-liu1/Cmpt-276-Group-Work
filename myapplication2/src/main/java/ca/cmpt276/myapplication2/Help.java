@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * this class is about the help screen, player can find useful guideline on the screen.
+ */
 public class Help extends AppCompatActivity {
 
     @Override

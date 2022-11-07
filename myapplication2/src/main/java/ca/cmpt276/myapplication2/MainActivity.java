@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * this class is about the main screen of the app, which contains three button settings.
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
         setPlaysButton();
         setConfigButton();
         setHelpButton();
-
 
     }
 
