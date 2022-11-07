@@ -25,6 +25,12 @@ import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Game plays class, provides the method to initialize a game play and shows all games that have been played
+ * Uses provided models to play the game and SharedPreferencesUtils to store games played
+ * Also utilizes a firstPass boolean to show an help infographic until user creates first game
+ */
+
 public class GamePlays extends AppCompatActivity {
     private ConfigManager GameConfiguration;
     private int gameConfig = 0;
