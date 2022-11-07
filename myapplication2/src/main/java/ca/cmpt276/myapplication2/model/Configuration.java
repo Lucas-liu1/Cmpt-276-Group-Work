@@ -2,6 +2,10 @@ package ca.cmpt276.myapplication2.model;
 
 import java.util.ArrayList;
 
+/**
+ * This class is for a single game configuration.
+ */
+
 public class Configuration {
     private String name;
     private int poor_score;

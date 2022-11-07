@@ -1,5 +1,9 @@
 package ca.cmpt276.myapplication2.model;
 
+/**
+ * This class is for single Achievement.
+ */
+
 public class Achievement {
     private String name;
     private int lowerBound;
