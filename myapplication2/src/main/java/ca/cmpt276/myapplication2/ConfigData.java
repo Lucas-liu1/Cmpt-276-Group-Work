@@ -24,6 +24,10 @@ import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Configuration;
 import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
 
+/**
+ * This activity is for change the data in a single configuration.
+ */
+
 public class ConfigData extends AppCompatActivity {
     private ConfigManager configManager;
     private int targetPosition;
@@ -61,6 +65,7 @@ public class ConfigData extends AppCompatActivity {
         }
     }
 
+    // When the user click the ADD NEW CONFIG button...
     private void addClickCallback() {
         btn_Save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +96,7 @@ public class ConfigData extends AppCompatActivity {
         });
     }
 
+    // Set the value of the Edit Text
     private void displayData(){
         Configuration oldConfig = configManager.getConfigList().get(targetPosition);
         String oldName = oldConfig.getName();
@@ -102,6 +108,7 @@ public class ConfigData extends AppCompatActivity {
         editText_GreatScore.setText(String.valueOf(oldGreatScore));
     }
 
+    // When the user click the EDIT CONFIG button...
     private void editClickCallback() {
         btn_Save.setOnClickListener(new View.OnClickListener() {
             @Override

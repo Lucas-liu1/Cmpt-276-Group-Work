@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * This activity is for change a single configuration's data.
+ */
+
 public class GameConfig extends AppCompatActivity {
     private Button Add;
     private Button Edit;
@@ -34,6 +38,7 @@ public class GameConfig extends AppCompatActivity {
         achievementClickCallback();
     }
 
+    // When the user click the ADD NEW CONFIG button...
     private void addClickCallback() {
         Add = findViewById(R.id.btn_add_config);
         Add.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +50,7 @@ public class GameConfig extends AppCompatActivity {
         });
     }
 
+    // When the user click the EDIT CONFIG button...
     private void editClickCallback() {
         Edit = findViewById(R.id.btn_edit_config);
         Edit.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +63,7 @@ public class GameConfig extends AppCompatActivity {
         });
     }
 
+    // When the user click the DELETE CONFIG button...
     private void deleteClickCallback() {
         Delete = findViewById(R.id.btn_delete_config);
         Delete.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +75,7 @@ public class GameConfig extends AppCompatActivity {
         });
     }
 
+    // When the user click the VIEW ACHIEVEMENT button...
     private void achievementClickCallback() {
         View = findViewById(R.id.btn_viewAchievement);
         View.setOnClickListener(new View.OnClickListener() {
