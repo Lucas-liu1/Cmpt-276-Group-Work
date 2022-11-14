@@ -73,10 +73,11 @@ public class Game {
     }
 
     public String getRecord(){
-        return String.format("NumPlayers: %d,  Score: %d, Achievement: %s",
+        return String.format("NumPlayers: %d, Score: %d, Achievement: %s, Difficulty: %s",
                 numPlayers,
                 score,
-                achievementList.findLevel(score));
+                achievementList.findLevel(score),
+                difficulty);
     }
 
     public String getLevel(){
