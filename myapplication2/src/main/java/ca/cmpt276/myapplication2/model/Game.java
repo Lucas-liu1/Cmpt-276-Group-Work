@@ -55,6 +55,14 @@ public class Game {
         this.achievementList = achievementList;
     }
 
+    public void setScoresList(ArrayList<Integer> scoresList) {
+        this.scoresList = scoresList;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
     // All Getters
     public int getNumPlayers() {
         return numPlayers;
@@ -73,5 +81,17 @@ public class Game {
 
     public String getLevel(){
         return achievementList.findLevel(score);
+    }
+
+    public AchievementList getAchievementList() {
+        return achievementList;
+    }
+
+    public ArrayList<Integer> getScoresList() {
+        return scoresList;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
     }
 }
