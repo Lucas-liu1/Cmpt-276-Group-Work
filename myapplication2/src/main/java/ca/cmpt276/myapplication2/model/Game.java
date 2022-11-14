@@ -29,17 +29,6 @@ public class Game {
         for(int i=0; i<scoresList.size(); i++){
             score += scoresList.get(i);
         }
-
-        //According to the difficulty, calculate the true score
-        if(difficulty == "normal"){
-            score *= 1;
-        }
-        else if(difficulty == "easy"){
-            score *= 0.75;
-        }
-        else if(difficulty == "hard"){
-            score *= 1.25;
-        }
     }
 
     // All Setters
