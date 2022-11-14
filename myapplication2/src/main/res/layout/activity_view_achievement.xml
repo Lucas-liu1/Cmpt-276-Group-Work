@@ -17,7 +17,7 @@
         android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintHorizontal_bias="0.934"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
@@ -26,19 +26,19 @@
         android:id="@+id/btnShow"
         android:layout_width="131dp"
         android:layout_height="51dp"
+        android:layout_marginTop="24dp"
         android:text="@string/show_level"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/levelList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/editTextPlayers"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.837" />
 
     <TextView
         android:id="@+id/levelList"
         android:layout_width="390dp"
         android:layout_height="635dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="64dp"
         android:gravity="center_horizontal"
         android:text="@string/levelList"
         android:textColor="#000000"
@@ -49,6 +49,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPlayers"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Spinner
+        android:id="@+id/difficultySpinner"
+        android:layout_width="138dp"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextPlayers"
+        app:layout_constraintEnd_toStartOf="@+id/editTextPlayers"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextPlayers" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
