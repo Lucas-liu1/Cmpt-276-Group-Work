@@ -29,17 +29,6 @@ public class Game {
         for(int i=0; i<scoresList.size(); i++){
             score += scoresList.get(i);
         }
-
-        //According to the difficulty, calculate the true score
-        if(difficulty == "normal"){
-            score *= 1;
-        }
-        else if(difficulty == "easy"){
-            score *= 0.75;
-        }
-        else if(difficulty == "hard"){
-            score *= 1.25;
-        }
     }
 
     // All Setters
@@ -55,6 +44,14 @@ public class Game {
         this.achievementList = achievementList;
     }
 
+    public void setScoresList(ArrayList<Integer> scoresList) {
+        this.scoresList = scoresList;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
     // All Getters
     public int getNumPlayers() {
         return numPlayers;
@@ -65,13 +62,26 @@ public class Game {
     }
 
     public String getRecord(){
-        return String.format("NumPlayers: %d,  Score: %d, Achievement: %s",
+        return String.format("NumPlayers: %d, Score: %d, Achievement: %s, Difficulty: %s",
                 numPlayers,
                 score,
-                achievementList.findLevel(score));
+                achievementList.findLevel(score),
+                difficulty);
     }
 
     public String getLevel(){
         return achievementList.findLevel(score);
+    }
+
+    public AchievementList getAchievementList() {
+        return achievementList;
+    }
+
+    public ArrayList<Integer> getScoresList() {
+        return scoresList;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
     }
 }

@@ -1,21 +1,27 @@
 package ca.cmpt276.myapplication2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import ca.cmpt276.myapplication2.model.AchievementList;
 import ca.cmpt276.myapplication2.model.ConfigManager;
@@ -40,6 +46,7 @@ public class ViewAchievement extends AppCompatActivity {
     private Configuration targetConfig;
     private int poorScore;
     private int greatScore;
+    private String difficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,13 @@ public class ViewAchievement extends AppCompatActivity {
         ActionBar back = getSupportActionBar();
         assert back != null;
         back.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        populateSpinner();
 
         setView();
         btn.setOnClickListener(new View.OnClickListener() {
@@ -71,10 +85,20 @@ public class ViewAchievement extends AppCompatActivity {
 
 
                 levelL = new String[8];
-                AchievementList levelList = new AchievementList(poorScore, greatScore, playerNum);
+                AchievementList levelList = new AchievementList(poorScore, greatScore, playerNum, difficulty);
+                int LowerBound = poorScore*playerNum;
+                int HigherBound = greatScore*playerNum;
+                if(difficulty == "easy"){
+                    LowerBound *= 0.75;
+                    HigherBound *= 0.75;
+                }
+                else if(difficulty == "hard"){
+                    LowerBound *= 1.25;
+                    HigherBound *= 1.25;
+                }
 
-                levelL[0] = "Level name: " + levelList.achievementsList.get(0).getName() + "\nRequire score: less than " + poorScore*playerNum +"\n" ;
-                levelL[7] = "Level name: " + levelList.achievementsList.get(7).getName() + "\nRequire score: greater than " + greatScore*playerNum +"\n" ;
+                levelL[0] = "Level name: " + levelList.achievementsList.get(0).getName() + "\nRequire score: less than " + LowerBound +"\n" ;
+                levelL[7] = "Level name: " + levelList.achievementsList.get(7).getName() + "\nRequire score: greater than " + HigherBound +"\n" ;
 
                 for (int i = 1; i < levelList.achievementsList.size() - 1; i++) {
                     name = String.valueOf(levelList.achievementsList.get(i).getName());
@@ -94,6 +118,26 @@ public class ViewAchievement extends AppCompatActivity {
                                 +String.valueOf(levelL[7])
                 );
             }
+        });
+    }
+
+    public void populateSpinner(){
+        Spinner spinner = findViewById(R.id.difficultySpinner);
+        String[] diffList = {"normal", "easy", "hard"};
+        ArrayAdapter adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item,
+                diffList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                difficulty = diffList[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
         });
     }
 
