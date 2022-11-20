@@ -205,9 +205,9 @@ public class GamePlays extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View viewClicked, int position, long id) {
                 Game myGame = GameConfiguration.getConfigList().get(0).getGamesList().get(0);
                 boolean set = false ;
-                if (gameConfig == 0){
-                    int j;
-                    for(int i = 0; i < GameConfiguration.getNumConfigurations(); i++) {
+                int i=gameConfig-1,j=position;
+                if (gameConfig == 0){ // case for showing all game plays
+                    for(i = 0; i < GameConfiguration.getNumConfigurations(); i++) {
                         for (j = 0; j < GameConfiguration.getConfigList().get(i).getGamesListSize(); j++) {
                             if (i+j == position){
                                 myGame = GameConfiguration.getConfigList().get(i).getGamesList().get(j);
@@ -225,8 +225,9 @@ public class GamePlays extends AppCompatActivity {
 
                 FragmentManager manager = getSupportFragmentManager();
                 CongratulationsFragment dialog = new CongratulationsFragment();
-                dialog.setCurrentGame(myGame);
+                dialog.setCurrentGame(GamePlays.this, myGame,i,j);
                 dialog.show(manager,"MessageDialog");
+
             }
         });
     }

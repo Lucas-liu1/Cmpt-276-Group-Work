@@ -3,7 +3,9 @@ package ca.cmpt276.myapplication2;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -25,10 +27,16 @@ import ca.cmpt276.myapplication2.model.Game;
  * Provides linking to drawable images to showcase the achievement level you got
  */
 public class CongratulationsFragment extends AppCompatDialogFragment {
-    Game currentGame;
+    private Game currentGame;
+    Context passedContext;
+    private int configID;
+    private int gameID;
 
-    public void setCurrentGame(Game newGame){
+    public void setCurrentGame(Context context, Game newGame, int configurationID, int gameid){
+        passedContext=context;
         currentGame= newGame;
+        configID=configurationID;
+        gameID=gameid;
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -52,7 +60,7 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (getActivity() instanceof AddGamePlay) {
+                if (getActivity() instanceof AddGamePlay || getActivity() instanceof EditGamePlay) {
                     getActivity().finish();
                 }
             }
@@ -62,11 +70,22 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
         mediaPlayer.start();
 
 
+        // Create an edit button listener
+        DialogInterface.OnClickListener edit_listener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = EditGamePlay.makeIntent(passedContext, configID,gameID);
+                startActivity(intent);
+            }
+        };
+
+
         // Build the alert dialog
         return new AlertDialog.Builder(getActivity())
                 .setTitle(String.format("Congratulations: %s",currentGame.getLevel()))
                 .setView(v)
                 .setPositiveButton(android.R.string.ok, listener)
+                .setNeutralButton("edit",edit_listener)
                 .create();
     }
 

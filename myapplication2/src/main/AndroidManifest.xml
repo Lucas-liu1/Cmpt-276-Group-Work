@@ -57,6 +57,21 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".EditGamePlay"
+            android:exported="false"
+            android:parentActivityName=".GamePlays" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CalculatePlayerScore"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".GameConfig"
             android:exported="false"
             android:parentActivityName=".MainActivity" >

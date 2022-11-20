@@ -1,6 +1,10 @@
 package ca.cmpt276.myapplication2.model;
 
+import android.widget.Toast;
+
 import java.util.ArrayList;
+
+import ca.cmpt276.myapplication2.EditGamePlay;
 
 /**
  * This class is for a single game configuration.
@@ -43,6 +47,10 @@ public class Configuration {
         this.gamesList = gamesList;
     }
 
+    public void deleteGameById(int index){
+        this.gamesList.remove(index);
+    }
+
     // All Getters
     public String getName() {
         return name;
@@ -58,6 +66,16 @@ public class Configuration {
 
     public ArrayList<Game> getGamesList() {
         return gamesList;
+    }
+
+    public Game getGame(int index){
+        Game gameToReturn;
+        try{
+            gameToReturn = gamesList.get(index);
+        }catch(ArrayIndexOutOfBoundsException outOfBoundsException){
+            return null;
+        }
+        return gameToReturn;
     }
 
     public int getGamesListSize(){

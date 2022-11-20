@@ -34,6 +34,7 @@ import com.google.gson.reflect.TypeToken;
 public class AddGamePlay extends AppCompatActivity {
     private ConfigManager GameConfiguration;
     private int configurationID;
+    private String difficulty;
 
     private String theme;
 
@@ -46,7 +47,6 @@ public class AddGamePlay extends AppCompatActivity {
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle("Add Game Play");
-
     }
 
     @Override
@@ -55,12 +55,15 @@ public class AddGamePlay extends AppCompatActivity {
         GameConfiguration = ConfigManager.getInstance();
         SharedPreferencesUtils.getConfigManagerToSharedPreferences(this);
         populateSpinner();
+        populateDifficultySpinner();
         populateThemeSpinner();
         setCreateButton();
+        setCalculateButton();
     }
 
     private void setCreateButton() {
         Button btn = findViewById(R.id.createButton);
+        btn.setText("Create");
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +76,28 @@ public class AddGamePlay extends AppCompatActivity {
         return new Intent(context, AddGamePlay.class);
     }
 
-    public void populateSpinner(){
+    private void populateDifficultySpinner(){
+        Spinner spinner = findViewById(R.id.difficultyLevelSpinner);
+        ArrayAdapter adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item,
+                GameConfiguration.getDifficultyLevels());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setSelection(1); // medium difficulty
+        difficulty = GameConfiguration.getDifficultyLevels()[1]; // set default to medium
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                difficulty = GameConfiguration.getDifficultyLevels()[i];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+    }
+
+    private void populateSpinner(){
         Spinner spinner = findViewById(R.id.gameConfigSpinner);
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item,
@@ -119,6 +143,23 @@ public class AddGamePlay extends AppCompatActivity {
     }
 
 
+    private void setCalculateButton() {
+        Button btn = findViewById(R.id.calculateScoreBtn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getNumPlayers()>0) {
+                    Intent intent = CalculatePlayerScore.makeIntent(AddGamePlay.this, getNumPlayers());
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(AddGamePlay.this,
+                            "Please Fill in Valid Number of Players",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
     private void saveFirstpass(){
         SharedPreferences sharedPref;
         sharedPref = getSharedPreferences("firstPass", MODE_PRIVATE);
@@ -127,8 +168,36 @@ public class AddGamePlay extends AppCompatActivity {
         editor.apply();
     }
 
+    private int getNumPlayers(){
+        EditText numPlayers = findViewById(R.id.numPlayersTextEdit);
+        String numPlayersStr = numPlayers.getText().toString();
+        int num_players;
+        try {
+            num_players = Integer.parseInt(numPlayersStr);
+        }catch(NumberFormatException except){
+            Toast.makeText(AddGamePlay.this, "Number of Players must be an integer", Toast.LENGTH_SHORT)
+                    .show();
+            return 0;
+        }
+        return num_players;
+    }
 
-    public void addGamePlay(){
+    private int getSumScore(){
+        int sum_score;
+        EditText totalScore = findViewById(R.id.scoreTextEdit);
+        String totalScoreStr = totalScore.getText().toString();
+        try {
+            sum_score = Integer.parseInt(totalScoreStr);
+        }catch(NumberFormatException except){
+            Toast.makeText(AddGamePlay.this, "Score must be an integer", Toast.LENGTH_SHORT)
+                    .show();
+            return 0;
+        }
+        return sum_score;
+    }
+
+
+    private void addGamePlay(){
         saveFirstpass();
         int num_players;
         int sum_score;
@@ -141,33 +210,16 @@ public class AddGamePlay extends AppCompatActivity {
             return;
         }
 
-        EditText numPlayers = findViewById(R.id.numPlayersTextEdit);
-        String numPlayersStr = numPlayers.getText().toString();
-        try {
-            num_players = Integer.parseInt(numPlayersStr);
-        }catch(NumberFormatException except){
-            Toast.makeText(AddGamePlay.this, "Number of Players must be an integer", Toast.LENGTH_SHORT)
-                    .show();
-            return;
-        }
-
-        EditText totalScore = findViewById(R.id.scoreTextEdit);
-        String totalScoreStr = totalScore.getText().toString();
-        try {
-            sum_score = Integer.parseInt(totalScoreStr);
-        }catch(NumberFormatException except){
-            Toast.makeText(AddGamePlay.this, "Score must be an integer", Toast.LENGTH_SHORT)
-                    .show();
-            return;
-        }
-
+        num_players=getNumPlayers();
+        sum_score=getSumScore();
 
         Game newGame = new Game(num_players, sum_score, theme);
+        newGame.setDifficulty(difficulty);
         AchievementList achievementList = new AchievementList(
                 GameConfiguration.getConfigList().get(configurationID).getPoor_score(),
                 GameConfiguration.getConfigList().get(configurationID).getGreat_score(),
                 num_players,
-                //difficulty here
+                difficulty,
                 theme);
         newGame.setAchievementList(achievementList);
 
@@ -178,10 +230,9 @@ public class AddGamePlay extends AppCompatActivity {
 
         FragmentManager manager = getSupportFragmentManager();
         CongratulationsFragment dialog = new CongratulationsFragment();
-        dialog.setCurrentGame(newGame);
+        dialog.setCurrentGame(AddGamePlay.this,newGame,configurationID,
+                GameConfiguration.getConfigList().get(configurationID).getGamesListSize()-1);
         dialog.show(manager,"MessageDialog");
-
-
     }
 
 }

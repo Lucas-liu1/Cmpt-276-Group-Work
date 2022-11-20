@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class ConfigManager {
     private ArrayList<Configuration> configList;// Store all the configurations
+    private String[] difficultyLevels = {"easy", "medium", "hard"};
 
     private ConfigManager() {
         configList = new ArrayList<>();
@@ -63,6 +64,10 @@ public class ConfigManager {
             configNames[i+1] = configList.get(i).getName();
         }
         return configNames;
+    }
+
+    public String[] getDifficultyLevels(){
+        return difficultyLevels;
     }
 
     public int getNumConfigurations(){
