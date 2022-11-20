@@ -147,6 +147,7 @@ public class AddGamePlay extends AppCompatActivity {
         GameConfiguration.addGame(configurationID, newGame);
         SharedPreferencesUtils.storeConfigManagerToSharedPreferences(AddGamePlay.this);
 
+
         FragmentManager manager = getSupportFragmentManager();
         CongratulationsFragment dialog = new CongratulationsFragment();
         dialog.setCurrentGame(newGame);
