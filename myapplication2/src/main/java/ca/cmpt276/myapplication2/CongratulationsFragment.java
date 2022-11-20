@@ -61,8 +61,6 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
         MediaPlayer mediaPlayer = MediaPlayer.create(getActivity(),R.raw.win);
         mediaPlayer.start();
 
-        //add animation
-
 
         // Build the alert dialog
         return new AlertDialog.Builder(getActivity())
@@ -85,6 +83,8 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
                 return R.drawable.gold;
             case "Platinum":
                 return R.drawable.platinum;
+            case "Diamond":
+                return R.drawable.diamond;
             case "Master":
                 return R.drawable.master;
             case "Grandmaster":

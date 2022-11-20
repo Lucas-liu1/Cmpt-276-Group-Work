@@ -38,7 +38,7 @@ public class ViewAchievement extends AppCompatActivity {
     private Button btn;
     private TextView level;
     private EditText NumPlayers;
-    private String name;
+    private String name ;
     private String score;
     private String[] levelL;
     private ConfigManager configManager;
@@ -47,6 +47,7 @@ public class ViewAchievement extends AppCompatActivity {
     private int poorScore;
     private int greatScore;
     private String difficulty;
+    private String theme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,8 @@ public class ViewAchievement extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        populateSpinner();
+        populateDifficultySpinner();
+        populateThemeSpinner();
 
         setView();
         btn.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +87,7 @@ public class ViewAchievement extends AppCompatActivity {
 
 
                 levelL = new String[8];
-                AchievementList levelList = new AchievementList(poorScore, greatScore, playerNum, difficulty);
+                AchievementList levelList = new AchievementList(poorScore, greatScore, playerNum, difficulty, theme);
                 int LowerBound = poorScore*playerNum;
                 int HigherBound = greatScore*playerNum;
                 if(difficulty == "easy"){
@@ -107,7 +109,7 @@ public class ViewAchievement extends AppCompatActivity {
                 }
 
                 level.setText(
-                        "Level  List\n"+"\n"
+                        "Level  List\n"
                                 +String.valueOf(levelL[0])+"\n"
                                 +String.valueOf(levelL[1])+"\n"
                                 +String.valueOf(levelL[2])+"\n"
@@ -121,7 +123,29 @@ public class ViewAchievement extends AppCompatActivity {
         });
     }
 
-    public void populateSpinner(){
+    public void populateThemeSpinner(){
+        Spinner spinner = findViewById(R.id.ThemeSpinner);
+        String[] themeList = {"theme 1", "theme 2", "theme 3" };
+        ArrayAdapter adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item,
+                themeList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                theme = themeList[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
+    public void populateDifficultySpinner(){
         Spinner spinner = findViewById(R.id.difficultySpinner);
         String[] diffList = {"normal", "easy", "hard"};
         ArrayAdapter adapter = new ArrayAdapter(this,
