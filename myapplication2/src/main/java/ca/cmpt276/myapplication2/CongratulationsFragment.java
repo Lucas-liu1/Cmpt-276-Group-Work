@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,12 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
                 }
             }
         };
+        //add sound
+        MediaPlayer mediaPlayer = MediaPlayer.create(getActivity(),R.raw.win);
+        mediaPlayer.start();
+
+        //add animation
+
 
         // Build the alert dialog
         return new AlertDialog.Builder(getActivity())
