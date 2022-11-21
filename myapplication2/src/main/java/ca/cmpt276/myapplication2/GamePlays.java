@@ -63,6 +63,7 @@ public class GamePlays extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
+        ConfigManager.clearBufferScore();
         GameConfiguration = ConfigManager.getInstance();
         SharedPreferencesUtils.getConfigManagerToSharedPreferences(this);
         if(getFirstpass()){

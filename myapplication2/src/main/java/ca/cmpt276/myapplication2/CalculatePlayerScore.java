@@ -113,6 +113,10 @@ public class CalculatePlayerScore extends AppCompatActivity {
                 players);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setSelection(0);
+        EditText et = findViewById(R.id.editScoreTextEdit);
+        et.setText(String.format("%d",PlayerScores.get(0)));
+        currPlayer=0;
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

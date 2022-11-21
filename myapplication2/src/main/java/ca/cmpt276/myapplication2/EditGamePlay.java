@@ -64,7 +64,6 @@ public class EditGamePlay extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle("Edit Game Play");
         GameConfiguration = ConfigManager.getInstance();
-        ConfigManager.clearBufferScore();
         extractIDFromIntent();
         updatedGame = GameConfiguration.getConfigList().get(configurationID).getGame(gameID);
     }

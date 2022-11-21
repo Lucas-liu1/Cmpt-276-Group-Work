@@ -50,7 +50,6 @@ public class AddGamePlay extends AppCompatActivity {
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle("Add Game Play");
-        ConfigManager.clearBufferScore();
     }
 
     @Override
