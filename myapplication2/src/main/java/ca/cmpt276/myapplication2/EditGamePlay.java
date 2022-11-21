@@ -40,9 +40,11 @@ import com.google.gson.reflect.TypeToken;
 public class EditGamePlay extends AppCompatActivity {
     private static final String EXTRA_GAME = "Game";
     private static final String EXTRA_CONFIG = "Configuration";
+    private static final String EXTRA_THEME = "Theme";
     private ConfigManager GameConfiguration;
     private int configurationID; // the game config ID
     private static int gameID; // the game ID
+    private static int themeID; // the game theme index on spinner
     private String difficulty;
     private String theme;
 
@@ -132,8 +134,10 @@ public class EditGamePlay extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Game updatedGame = GameConfiguration.getConfigList().get(configurationID).getGame(gameID);
                 if (getNumPlayers()>0) {
-                    Intent intent = CalculatePlayerScore.makeIntent(EditGamePlay.this, getNumPlayers());
+                    Intent intent = CalculatePlayerScore.makeIntent(EditGamePlay.this,
+                            getNumPlayers(), updatedGame.getScoresList());
                     startActivity(intent);
                 }else{
                     Toast.makeText(EditGamePlay.this,
@@ -176,12 +180,14 @@ public class EditGamePlay extends AppCompatActivity {
         Intent intent = getIntent();
         configurationID = intent.getIntExtra(EXTRA_CONFIG,0);
         gameID = intent.getIntExtra(EXTRA_GAME,0);
+        themeID = intent.getIntExtra(EXTRA_THEME,0);
     }
 
-    public static Intent makeIntent(Context context, int configID,int gameID){
+    public static Intent makeIntent(Context context, int configID,int gameID, int themeID){
         Intent intent = new Intent(context, EditGamePlay.class);
         intent.putExtra(EXTRA_CONFIG, configID);
         intent.putExtra(EXTRA_GAME,gameID);
+        intent.putExtra(EXTRA_THEME,themeID);
         return intent;
     }
 
@@ -230,16 +236,18 @@ public class EditGamePlay extends AppCompatActivity {
 
     public void populateThemeSpinner(){
         Spinner spinner = findViewById(R.id.spinner);
-        String[] themeList = {"theme 1", "theme 2", "theme 3" };
+        String[] themeList = ConfigManager.getThemes();
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item,
                 themeList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setSelection(themeID);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 theme = themeList[position];
+                themeID = position;
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -275,6 +283,7 @@ public class EditGamePlay extends AppCompatActivity {
 
         Game updatedGame = GameConfiguration.getConfigList().get(configurationID).getGame(gameID);
         updatedGame.setDifficulty(difficulty);
+        updatedGame.setTheme(theme);
         updatedGame.setNumPlayers(num_players);
         updatedGame.setScore(sum_score);
         AchievementList achievementList = new AchievementList(
@@ -291,7 +300,7 @@ public class EditGamePlay extends AppCompatActivity {
 
         FragmentManager manager = getSupportFragmentManager();
         CongratulationsFragment dialog = new CongratulationsFragment();
-        dialog.setCurrentGame(EditGamePlay.this, updatedGame, configurationID, gameID);
+        dialog.setCurrentGame(EditGamePlay.this, updatedGame, configurationID, gameID,themeID);
         dialog.show(manager,"MessageDialog");
     }
 

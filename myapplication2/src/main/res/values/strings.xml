@@ -12,6 +12,10 @@
     <string name="score_of_players">Score of Players</string>
     <string name="difficulty">Difficulty</string>
     <string name="delete">Delete</string>
+    <string name="select_player">Select Player</string>
+    <string name="total_score">Total Score</string>
+    <string name="score">Score</string>
+    <string name="save">Save</string>
     <string name="first_game_play">\nWelcome, this page lists all the games played.\n\n Currently,
     there are no games played.\n\n
         To begin, please first click on the\n \"Add game play\" button.</string>

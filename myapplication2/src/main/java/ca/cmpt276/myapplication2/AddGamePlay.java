@@ -36,6 +36,7 @@ import java.util.ArrayList;
 public class AddGamePlay extends AppCompatActivity {
     private ConfigManager GameConfiguration;
     private int configurationID;
+    private int themeID;
     private String difficulty;
     private String theme;
 
@@ -124,7 +125,7 @@ public class AddGamePlay extends AppCompatActivity {
 
     public void populateThemeSpinner(){
         Spinner spinner = findViewById(R.id.spinner);
-        String[] themeList = {"theme 1", "theme 2", "theme 3" };
+        String[] themeList = ConfigManager.getThemes();
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item,
                 themeList);
@@ -134,6 +135,7 @@ public class AddGamePlay extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 theme = themeList[position];
+                themeID = position;
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -142,14 +144,14 @@ public class AddGamePlay extends AppCompatActivity {
         });
     }
 
-
     private void setCalculateButton() {
         Button btn = findViewById(R.id.calculateScoreBtn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (getNumPlayers()>0) {
-                    Intent intent = CalculatePlayerScore.makeIntent(AddGamePlay.this, getNumPlayers());
+                    Intent intent = CalculatePlayerScore.makeIntent(AddGamePlay.this,
+                            getNumPlayers(), new ArrayList<>());
                     startActivity(intent);
                 }else{
                     Toast.makeText(AddGamePlay.this,
@@ -217,6 +219,7 @@ public class AddGamePlay extends AppCompatActivity {
 
         Game newGame = new Game(num_players, temp_score_list, difficulty);
         newGame.setDifficulty(difficulty);
+        newGame.setTheme(theme);
         AchievementList achievementList = new AchievementList(
                 GameConfiguration.getConfigList().get(configurationID).getPoor_score(),
                 GameConfiguration.getConfigList().get(configurationID).getGreat_score(),
@@ -233,7 +236,8 @@ public class AddGamePlay extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         CongratulationsFragment dialog = new CongratulationsFragment();
         dialog.setCurrentGame(AddGamePlay.this,newGame,configurationID,
-                GameConfiguration.getConfigList().get(configurationID).getGamesListSize()-1);
+                GameConfiguration.getConfigList().get(configurationID).getGamesListSize()-1,
+                themeID);
         dialog.show(manager,"MessageDialog");
     }
 

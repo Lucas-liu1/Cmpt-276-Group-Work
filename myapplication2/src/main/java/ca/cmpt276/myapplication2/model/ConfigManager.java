@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * This class is for store all the configurations.
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 public class ConfigManager {
     private ArrayList<Configuration> configList;// Store all the configurations
     private String[] difficultyLevels = {"easy", "medium", "hard"};
+    public static String[] themes = {"theme 1", "theme 2", "theme 3"};
+    public static ArrayList<Integer> bufferScore = new ArrayList<>();
 
     private ConfigManager() {
         configList = new ArrayList<>();
@@ -26,6 +29,19 @@ public class ConfigManager {
             instance = new ConfigManager();
         }
         return instance;
+    }
+
+    public static String[] getThemes(){
+        return themes;
+    }
+
+    public static int getThemeID(String theme){
+       for(int i = 0; i < themes.length;i++){
+           if (Objects.equals(themes[i], theme)){
+               return i;
+           }
+       }
+       return -1;
     }
 
     public void addConfig(Configuration newConfig){
@@ -56,6 +72,7 @@ public class ConfigManager {
         }
         return configNames;
     }
+
 
     public String[] getConfigListNamesWithAll(){
         String[] configNames = new String[configList.size()+1];

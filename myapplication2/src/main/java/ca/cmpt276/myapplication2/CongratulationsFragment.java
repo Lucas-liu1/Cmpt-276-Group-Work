@@ -31,12 +31,14 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
     Context passedContext;
     private int configID;
     private int gameID;
+    private int themeID;
 
-    public void setCurrentGame(Context context, Game newGame, int configurationID, int gameid){
+    public void setCurrentGame(Context context, Game newGame, int configurationID, int gameid,int themeid){
         passedContext=context;
         currentGame= newGame;
         configID=configurationID;
         gameID=gameid;
+        themeID=themeid;
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -74,7 +76,7 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
         DialogInterface.OnClickListener edit_listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = EditGamePlay.makeIntent(passedContext, configID,gameID);
+                Intent intent = EditGamePlay.makeIntent(passedContext, configID,gameID,themeID);
                 startActivity(intent);
             }
         };

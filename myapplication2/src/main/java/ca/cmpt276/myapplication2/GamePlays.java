@@ -1,5 +1,7 @@
 package ca.cmpt276.myapplication2;
 
+import static ca.cmpt276.myapplication2.model.ConfigManager.getThemeID;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -207,7 +209,6 @@ public class GamePlays extends AppCompatActivity {
                 boolean set = false ;
                 int base = 0;
                 int i=gameConfig-1,j=position;
-                Log.i("GAMECONFIG" , String.format("%d",position));
                 if (gameConfig == 0){ // case for showing all game plays
                     for(i = 0; i < GameConfiguration.getNumConfigurations(); i++) {
                         for (j = 0; j < GameConfiguration.getConfigList().get(i).getGamesListSize(); j++) {
@@ -226,10 +227,9 @@ public class GamePlays extends AppCompatActivity {
                     myGame = GameConfiguration.getConfigList().get(gameConfig-1).
                             getGamesList().get(position);
                 }
-
                 FragmentManager manager = getSupportFragmentManager();
                 CongratulationsFragment dialog = new CongratulationsFragment();
-                dialog.setCurrentGame(GamePlays.this, myGame,i,j);
+                dialog.setCurrentGame(GamePlays.this, myGame,i,j,getThemeID(myGame.getTheme()));
                 dialog.show(manager,"MessageDialog");
 
             }

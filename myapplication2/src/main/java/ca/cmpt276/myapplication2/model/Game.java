@@ -65,8 +65,6 @@ public class Game {
         return score;
     }
 
-
-
     public String getRecord(){
         return String.format("NumPlayers: %d, Score: %d, Achievement: %s, Difficulty: %s Theme: %s",
                 numPlayers,
@@ -83,6 +81,11 @@ public class Game {
     public AchievementList getAchievementList() {
         return achievementList;
     }
+
+    public String getTheme() {
+        return theme;
+    }
+
 
     public ArrayList<Integer> getScoresList() {
         return scoresList;
