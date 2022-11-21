@@ -19,13 +19,6 @@ public class Game {
     private String difficulty;
     private String theme ;
 
-    //should be deleted
-    public Game(int numPlayers, int score, String theme) {
-        this.numPlayers = numPlayers;
-        this.score = score;
-        this.theme = theme;
-    }
-
     public Game(int numPlayers, ArrayList<Integer> scoresList, String difficulty) {
         this.numPlayers = numPlayers;
         this.scoresList = scoresList;

@@ -44,6 +44,7 @@ public class EditGamePlay extends AppCompatActivity {
     private int configurationID; // the game config ID
     private static int gameID; // the game ID
     private String difficulty;
+    private String theme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class EditGamePlay extends AppCompatActivity {
         setSaveButton();
         setCalculateButton();
         populateFields();
+        populateThemeSpinner();
     }
 
     @Override
@@ -226,6 +228,26 @@ public class EditGamePlay extends AppCompatActivity {
         });
     }
 
+    public void populateThemeSpinner(){
+        Spinner spinner = findViewById(R.id.spinner);
+        String[] themeList = {"theme 1", "theme 2", "theme 3" };
+        ArrayAdapter adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item,
+                themeList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                theme = themeList[position];
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
     private void populateFields(){
         Game currGame = GameConfiguration.getConfigList().get(configurationID).getGamesList().get(gameID);
 
@@ -259,7 +281,8 @@ public class EditGamePlay extends AppCompatActivity {
                 GameConfiguration.getConfigList().get(configurationID).getPoor_score(),
                 GameConfiguration.getConfigList().get(configurationID).getGreat_score(),
                 num_players,
-                difficulty);
+                difficulty,
+                theme);
         updatedGame.setAchievementList(achievementList);
 
         GameConfiguration = ConfigManager.getInstance();

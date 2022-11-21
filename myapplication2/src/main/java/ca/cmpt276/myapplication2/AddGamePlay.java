@@ -24,6 +24,8 @@ import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
+
 /**
  * Extension of the game plays class
  * This class provides the functionality of creating a new game play.
@@ -35,7 +37,6 @@ public class AddGamePlay extends AppCompatActivity {
     private ConfigManager GameConfiguration;
     private int configurationID;
     private String difficulty;
-
     private String theme;
 
     @Override
@@ -121,7 +122,6 @@ public class AddGamePlay extends AppCompatActivity {
         });
     }
 
-    //
     public void populateThemeSpinner(){
         Spinner spinner = findViewById(R.id.spinner);
         String[] themeList = {"theme 1", "theme 2", "theme 3" };
@@ -212,8 +212,10 @@ public class AddGamePlay extends AppCompatActivity {
 
         num_players=getNumPlayers();
         sum_score=getSumScore();
+        ArrayList<Integer> temp_score_list = new ArrayList<Integer>();
+        temp_score_list.add(sum_score);
 
-        Game newGame = new Game(num_players, sum_score, theme);
+        Game newGame = new Game(num_players, temp_score_list, difficulty);
         newGame.setDifficulty(difficulty);
         AchievementList achievementList = new AchievementList(
                 GameConfiguration.getConfigList().get(configurationID).getPoor_score(),
