@@ -1,6 +1,11 @@
 package ca.cmpt276.myapplication2.model;
 
+import android.content.Intent;
+
 import java.util.ArrayList;
+
+import ca.cmpt276.myapplication2.AddGamePlay;
+import ca.cmpt276.myapplication2.ViewAchievement;
 
 /**
  * This class is for a single game.
@@ -12,11 +17,13 @@ public class Game {
     private AchievementList achievementList; //Single Game's Achievement List
     private ArrayList<Integer> scoresList;
     private String difficulty;
+    private String theme ;
 
     //should be deleted
-    public Game(int numPlayers, int score) {
+    public Game(int numPlayers, int score, String theme) {
         this.numPlayers = numPlayers;
         this.score = score;
+        this.theme = theme;
     }
 
     public Game(int numPlayers, ArrayList<Integer> scoresList, String difficulty) {
@@ -52,6 +59,10 @@ public class Game {
         this.difficulty = difficulty;
     }
 
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
     // All Getters
     public int getNumPlayers() {
         return numPlayers;
@@ -61,12 +72,15 @@ public class Game {
         return score;
     }
 
+
+
     public String getRecord(){
-        return String.format("NumPlayers: %d, Score: %d, Achievement: %s, Difficulty: %s",
+        return String.format("NumPlayers: %d, Score: %d, Achievement: %s, Difficulty: %s Theme: %s",
                 numPlayers,
                 score,
                 achievementList.findLevel(score),
-                difficulty);
+                difficulty,
+                theme);
     }
 
     public String getLevel(){

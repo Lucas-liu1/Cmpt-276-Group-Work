@@ -8,8 +8,8 @@
 
     <EditText
         android:id="@+id/editTextPlayers"
-        android:layout_width="258dp"
-        android:layout_height="51dp"
+        android:layout_width="252dp"
+        android:layout_height="43dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/EnterNumberOfPlayers"
@@ -17,28 +17,27 @@
         android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.934"
+        app:layout_constraintHorizontal_bias="0.075"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintTop_toBottomOf="@+id/difficultySpinner"
+        app:layout_constraintVertical_bias="0.01" />
 
     <Button
         android:id="@+id/btnShow"
-        android:layout_width="131dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="133dp"
+        android:layout_height="50dp"
         android:text="@string/show_level"
-        app:layout_constraintBottom_toTopOf="@+id/levelList"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextPlayers"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.949"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.837" />
+        app:layout_constraintTop_toBottomOf="@+id/ThemeSpinner"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/levelList"
-        android:layout_width="390dp"
-        android:layout_height="635dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="398dp"
+        android:layout_height="626dp"
         android:gravity="center_horizontal"
         android:text="@string/levelList"
         android:textColor="#000000"
@@ -46,18 +45,32 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPlayers"
         app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/difficultySpinner"
-        android:layout_width="138dp"
-        android:layout_height="35dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextPlayers"
-        app:layout_constraintEnd_toStartOf="@+id/editTextPlayers"
+        android:layout_width="120dp"
+        android:layout_height="41dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextPlayers" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.014" />
+
+    <Spinner
+        android:id="@+id/ThemeSpinner"
+        android:layout_width="155dp"
+        android:layout_height="41dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.376"
+        app:layout_constraintStart_toEndOf="@+id/difficultySpinner"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.013" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

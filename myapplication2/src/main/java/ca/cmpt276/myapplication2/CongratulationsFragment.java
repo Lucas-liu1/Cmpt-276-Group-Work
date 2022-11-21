@@ -46,7 +46,7 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
 
         ImageView leftIcon = v.findViewById(R.id.leftIcon);
 
-        leftIcon.setImageDrawable(getResources().getDrawable(getResourceByLevel(),null));
+        leftIcon.setImageDrawable(getResources().getDrawable(getResourceByLevel(),null ));
 
         // Create a button listener
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
@@ -61,8 +61,6 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
         MediaPlayer mediaPlayer = MediaPlayer.create(getActivity(),R.raw.win);
         mediaPlayer.start();
 
-        //add animation
-
 
         // Build the alert dialog
         return new AlertDialog.Builder(getActivity())
@@ -75,6 +73,7 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
 
     private int getResourceByLevel(){
         switch (currentGame.getLevel()){
+            //
             case "Iron":
                 return R.drawable.iron;
             case "Bronze":
@@ -85,10 +84,47 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
                 return R.drawable.gold;
             case "Platinum":
                 return R.drawable.platinum;
+            case "Diamond":
+                return R.drawable.diamond;
             case "Master":
                 return R.drawable.master;
             case "Grandmaster":
                 return R.drawable.grandmaster;
+          //theme 2
+            case "Bike":
+                return R.drawable.bike;
+            case "Motorbike":
+                return R.drawable.motorbike;
+            case "Car":
+                return R.drawable.car;
+            case "Bus":
+                return R.drawable.bus;
+            case "Train":
+                return R.drawable.train;
+            case "Yacht":
+                return R.drawable.yacht;
+            case "Helicopter":
+                return R.drawable.helicopter;
+            case "Plane":
+                return R.drawable.plane;
+            //theme 3
+            case "Bird":
+                return R.drawable.bird;
+            case "Dog":
+                return R.drawable.dog;
+            case "Sheep":
+                return R.drawable.sheep;
+            case "Zebra":
+                return R.drawable.zebra;
+            case "Lion":
+                return R.drawable.lion;
+            case "Tiger":
+                return R.drawable.tiger;
+            case "Bear":
+                return R.drawable.bear;
+            case "Elephant":
+                return R.drawable.elephant;
+
             default:
                 return R.drawable.grandmaster;
         }
