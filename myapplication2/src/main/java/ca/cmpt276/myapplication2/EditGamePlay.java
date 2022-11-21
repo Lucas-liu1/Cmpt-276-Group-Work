@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +33,8 @@ import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
+
 /**
  * Extension of the game plays class
  * This class provides the functionality of editing an existing game play.
@@ -41,6 +46,8 @@ public class EditGamePlay extends AppCompatActivity {
     private static final String EXTRA_GAME = "Game";
     private static final String EXTRA_CONFIG = "Configuration";
     private static final String EXTRA_THEME = "Theme";
+    Game updatedGame;
+    private ArrayList<Integer> scores = ConfigManager.getBufferScore();
     private ConfigManager GameConfiguration;
     private int configurationID; // the game config ID
     private static int gameID; // the game ID
@@ -56,20 +63,27 @@ public class EditGamePlay extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle("Edit Game Play");
+        GameConfiguration = ConfigManager.getInstance();
+        ConfigManager.clearBufferScore();
+        extractIDFromIntent();
+        updatedGame = GameConfiguration.getConfigList().get(configurationID).getGame(gameID);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        GameConfiguration = ConfigManager.getInstance();
+        scores = ConfigManager.getBufferScore();
+        if (scores.size()>0){
+            fillTotalScoreField();
+        }
         SharedPreferencesUtils.getConfigManagerToSharedPreferences(this);
-        extractIDFromIntent();
         populateSpinner();
         populateDifficultySpinner();
         setSaveButton();
         setCalculateButton();
         populateFields();
         populateThemeSpinner();
+        setupNumPlayersOnFill();
     }
 
     @Override
@@ -88,6 +102,21 @@ public class EditGamePlay extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void setupNumPlayersOnFill() {
+        EditText et = findViewById(R.id.numPlayersTextEdit);
+        et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                updatedGame.setNumPlayers(getNumPlayers());
+            }
+        });
     }
 
     private void attemptDelete(){ // popup message to confirm deletion of game
@@ -162,20 +191,6 @@ public class EditGamePlay extends AppCompatActivity {
         return num_players;
     }
 
-    private int getSumScore(){
-        int sum_score;
-        EditText totalScore = findViewById(R.id.scoreTextEdit);
-        String totalScoreStr = totalScore.getText().toString();
-        try {
-            sum_score = Integer.parseInt(totalScoreStr);
-        }catch(NumberFormatException except){
-            Toast.makeText(EditGamePlay.this, "Score must be an integer", Toast.LENGTH_SHORT)
-                    .show();
-            return 0;
-        }
-        return sum_score;
-    }
-
     private void extractIDFromIntent() {
         Intent intent = getIntent();
         configurationID = intent.getIntExtra(EXTRA_CONFIG,0);
@@ -234,6 +249,17 @@ public class EditGamePlay extends AppCompatActivity {
         });
     }
 
+    private void fillTotalScoreField(){
+        int sum = 0;
+        for(int i = 0; i < scores.size(); i++) {
+            sum+=scores.get(i);
+        }
+        EditText et = findViewById(R.id.scoreTextEdit);
+        et.setText(String.format("%d",sum));
+        updatedGame.setScoresList(scores);
+    }
+
+
     public void populateThemeSpinner(){
         Spinner spinner = findViewById(R.id.spinner);
         String[] themeList = ConfigManager.getThemes();
@@ -257,18 +283,15 @@ public class EditGamePlay extends AppCompatActivity {
     }
 
     private void populateFields(){
-        Game currGame = GameConfiguration.getConfigList().get(configurationID).getGamesList().get(gameID);
-
         EditText numPlayers = findViewById(R.id.numPlayersTextEdit);
-        numPlayers.setText(String.format("%d",currGame.getNumPlayers()));
+        numPlayers.setText(String.format("%d",updatedGame.getNumPlayers()));
 
         EditText totalScore = findViewById(R.id.scoreTextEdit);
-        totalScore.setText(String.format("%d",currGame.getScore()));
+        totalScore.setText(String.format("%d",updatedGame.getScore()));
     }
 
     private void updateGamePlay(){
         int num_players;
-        int sum_score;
 
         if(configurationID >= GameConfiguration.getNumConfigurations()
                 || configurationID < 0){
@@ -279,13 +302,11 @@ public class EditGamePlay extends AppCompatActivity {
         }
 
         num_players = getNumPlayers();
-        sum_score = getSumScore();
 
-        Game updatedGame = GameConfiguration.getConfigList().get(configurationID).getGame(gameID);
         updatedGame.setDifficulty(difficulty);
         updatedGame.setTheme(theme);
+        updatedGame.setScoresList(scores);
         updatedGame.setNumPlayers(num_players);
-        updatedGame.setScore(sum_score);
         AchievementList achievementList = new AchievementList(
                 GameConfiguration.getConfigList().get(configurationID).getPoor_score(),
                 GameConfiguration.getConfigList().get(configurationID).getGreat_score(),

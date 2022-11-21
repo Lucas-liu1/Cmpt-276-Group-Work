@@ -46,6 +46,10 @@ public class Game {
 
     public void setScoresList(ArrayList<Integer> scoresList) {
         this.scoresList = scoresList;
+        score = 0;
+        for(int i=0; i<scoresList.size(); i++){
+            score += scoresList.get(i);
+        }
     }
 
     public void setDifficulty(String difficulty) {

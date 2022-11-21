@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -42,6 +43,18 @@ public class ConfigManager {
            }
        }
        return -1;
+    }
+
+    public static void clearBufferScore(){
+        bufferScore=new ArrayList<>();
+    }
+
+    public static void setBufferScore(ArrayList<Integer> array){
+        bufferScore=array;
+    }
+
+    public static ArrayList<Integer> getBufferScore(){
+        return bufferScore;
     }
 
     public void addConfig(Configuration newConfig){

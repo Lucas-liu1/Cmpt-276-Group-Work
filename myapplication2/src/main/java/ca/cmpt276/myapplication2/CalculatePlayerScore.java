@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
 
 public class CalculatePlayerScore extends AppCompatActivity {
@@ -47,16 +48,20 @@ public class CalculatePlayerScore extends AppCompatActivity {
             while (PlayerScores.size() < numPlayers) {
                 PlayerScores.add(0);
             }
+        }else{
+            while(numPlayers<PlayerScores.size()){
+                PlayerScores.remove(-1);
+            }
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferencesUtils.getConfigManagerToSharedPreferences(this);
         setSaveButton();
         populatePlayerSpinner();
         setupScoreCallOnFill();
+        populateFields();
     }
 
     @Override
@@ -67,13 +72,17 @@ public class CalculatePlayerScore extends AppCompatActivity {
         return true;
     }
 
+    private void populateFields(){
+        TextView tv = findViewById(R.id.totalScoreTextValue);
+        tv.setText(String.valueOf(sumPlayerScores()));
+    }
+
     private void setSaveButton() {
         Button btn = findViewById(R.id.submitScoreBtn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // find a way to save the score list back to the object
-
+                ConfigManager.setBufferScore(PlayerScores);
                 finish();
             }
         });

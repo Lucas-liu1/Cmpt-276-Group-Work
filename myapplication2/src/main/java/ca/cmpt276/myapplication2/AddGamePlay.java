@@ -35,6 +35,7 @@ import java.util.ArrayList;
 
 public class AddGamePlay extends AppCompatActivity {
     private ConfigManager GameConfiguration;
+    private ArrayList<Integer> scores = ConfigManager.getBufferScore();
     private int configurationID;
     private int themeID;
     private String difficulty;
@@ -49,6 +50,7 @@ public class AddGamePlay extends AppCompatActivity {
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle("Add Game Play");
+        ConfigManager.clearBufferScore();
     }
 
     @Override
@@ -56,11 +58,13 @@ public class AddGamePlay extends AppCompatActivity {
         super.onResume();
         GameConfiguration = ConfigManager.getInstance();
         SharedPreferencesUtils.getConfigManagerToSharedPreferences(this);
+        scores = ConfigManager.getBufferScore();
         populateSpinner();
         populateDifficultySpinner();
         populateThemeSpinner();
         setCreateButton();
         setCalculateButton();
+        fillTotalScoreField();
     }
 
     private void setCreateButton() {
@@ -76,6 +80,15 @@ public class AddGamePlay extends AppCompatActivity {
 
     public static Intent makeIntent(Context context){
         return new Intent(context, AddGamePlay.class);
+    }
+
+    private void fillTotalScoreField(){
+        int sum = 0;
+        for(int i = 0; i < scores.size(); i++) {
+            sum+=scores.get(i);
+        }
+        EditText et = findViewById(R.id.scoreTextEdit);
+        et.setText(String.format("%d",sum));
     }
 
     private void populateDifficultySpinner(){
@@ -149,6 +162,7 @@ public class AddGamePlay extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ConfigManager.clearBufferScore();
                 if (getNumPlayers()>0) {
                     Intent intent = CalculatePlayerScore.makeIntent(AddGamePlay.this,
                             getNumPlayers(), new ArrayList<>());
@@ -184,25 +198,9 @@ public class AddGamePlay extends AppCompatActivity {
         return num_players;
     }
 
-    private int getSumScore(){
-        int sum_score;
-        EditText totalScore = findViewById(R.id.scoreTextEdit);
-        String totalScoreStr = totalScore.getText().toString();
-        try {
-            sum_score = Integer.parseInt(totalScoreStr);
-        }catch(NumberFormatException except){
-            Toast.makeText(AddGamePlay.this, "Score must be an integer", Toast.LENGTH_SHORT)
-                    .show();
-            return 0;
-        }
-        return sum_score;
-    }
-
-
     private void addGamePlay(){
         saveFirstpass();
         int num_players;
-        int sum_score;
 
         if(configurationID >= GameConfiguration.getNumConfigurations()
                 || configurationID < 0){
@@ -213,12 +211,8 @@ public class AddGamePlay extends AppCompatActivity {
         }
 
         num_players=getNumPlayers();
-        sum_score=getSumScore();
-        ArrayList<Integer> temp_score_list = new ArrayList<Integer>();
-        temp_score_list.add(sum_score);
 
-        Game newGame = new Game(num_players, temp_score_list, difficulty);
-        newGame.setDifficulty(difficulty);
+        Game newGame = new Game(num_players, scores, difficulty);
         newGame.setTheme(theme);
         AchievementList achievementList = new AchievementList(
                 GameConfiguration.getConfigList().get(configurationID).getPoor_score(),
