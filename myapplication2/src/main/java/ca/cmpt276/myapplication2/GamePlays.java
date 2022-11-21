@@ -205,11 +205,13 @@ public class GamePlays extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View viewClicked, int position, long id) {
                 Game myGame = GameConfiguration.getConfigList().get(0).getGamesList().get(0);
                 boolean set = false ;
+                int base = 0;
                 int i=gameConfig-1,j=position;
+                Log.i("GAMECONFIG" , String.format("%d",position));
                 if (gameConfig == 0){ // case for showing all game plays
                     for(i = 0; i < GameConfiguration.getNumConfigurations(); i++) {
                         for (j = 0; j < GameConfiguration.getConfigList().get(i).getGamesListSize(); j++) {
-                            if (i+j == position){
+                            if ((base+j) == position){
                                 myGame = GameConfiguration.getConfigList().get(i).getGamesList().get(j);
                                 set = true;
                                 break;
@@ -218,9 +220,11 @@ public class GamePlays extends AppCompatActivity {
                         if(set){
                             break;
                         }
+                        base+=j;
                     }
                 }else{
-                    myGame = GameConfiguration.getConfigList().get(gameConfig-1).getGamesList().get(position);
+                    myGame = GameConfiguration.getConfigList().get(gameConfig-1).
+                            getGamesList().get(position);
                 }
 
                 FragmentManager manager = getSupportFragmentManager();
