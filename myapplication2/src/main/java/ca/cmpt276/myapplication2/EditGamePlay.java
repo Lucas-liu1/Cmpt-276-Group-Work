@@ -163,7 +163,6 @@ public class EditGamePlay extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Game updatedGame = GameConfiguration.getConfigList().get(configurationID).getGame(gameID);
                 if (getNumPlayers()>0) {
                     Intent intent = CalculatePlayerScore.makeIntent(EditGamePlay.this,
                             getNumPlayers(), updatedGame.getScoresList());
@@ -305,7 +304,6 @@ public class EditGamePlay extends AppCompatActivity {
 
         updatedGame.setDifficulty(difficulty);
         updatedGame.setTheme(theme);
-        updatedGame.setScoresList(scores);
         updatedGame.setNumPlayers(num_players);
         AchievementList achievementList = new AchievementList(
                 GameConfiguration.getConfigList().get(configurationID).getPoor_score(),

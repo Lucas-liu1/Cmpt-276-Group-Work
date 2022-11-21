@@ -162,7 +162,6 @@ public class AddGamePlay extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConfigManager.clearBufferScore();
                 if (getNumPlayers()>0) {
                     Intent intent = CalculatePlayerScore.makeIntent(AddGamePlay.this,
                             getNumPlayers(), new ArrayList<>());
