@@ -130,9 +130,6 @@ public class AchievementList {
         }
     }
 
-    public AchievementList(int poor_score, int great_score, int num_players) {
-
-    }
 
 
     public String findLevel(int score) {
@@ -143,6 +140,7 @@ public class AchievementList {
                     return tempAchievement.getName();
                 }
             }
+
             return null;
     }
 
