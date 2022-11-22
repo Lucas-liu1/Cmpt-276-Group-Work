@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/SinaL/StudioProjects/CoopAchievement/myapplication2/src/main/res/layout/activity_game_addplay.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1887031408308004" />
         <entry key="myapplication2/src/main/res/layout/activity_config_data.xml" value="0.28125" />
         <entry key="myapplication2/src/main/res/layout/activity_config_list.xml" value="0.28125" />

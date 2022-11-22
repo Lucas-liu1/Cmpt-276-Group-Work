@@ -1,6 +1,7 @@
 package ca.cmpt276.myapplication2.model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * This class is for store all the Achievements
@@ -14,12 +15,12 @@ public class AchievementList {
     //We can create a new achievement list by poor score, great score and number of players.
     public AchievementList(int poor_score, int great_score, int numPlayers, String difficulty, String theme) {
 
-        if(difficulty == "easy"){
+        if(Objects.equals(difficulty, "easy")){
             poor_score *= 0.75;
             great_score *= 0.75;
         }
 
-        if(difficulty == "hard"){
+        if(Objects.equals(difficulty, "hard")){
             poor_score *= 1.25;
             great_score *= 1.25;
         }
