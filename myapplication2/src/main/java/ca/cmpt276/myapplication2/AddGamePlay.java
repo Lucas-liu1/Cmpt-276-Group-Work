@@ -50,6 +50,11 @@ public class AddGamePlay extends AppCompatActivity {
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle("Add Game Play");
+        GameConfiguration = ConfigManager.getInstance();
+
+        populateSpinner();
+        populateDifficultySpinner();
+        populateThemeSpinner();
     }
 
     @Override
@@ -58,9 +63,6 @@ public class AddGamePlay extends AppCompatActivity {
         GameConfiguration = ConfigManager.getInstance();
         SharedPreferencesUtils.getConfigManagerToSharedPreferences(this);
         scores = ConfigManager.getBufferScore();
-        populateSpinner();
-        populateDifficultySpinner();
-        populateThemeSpinner();
         setCreateButton();
         setCalculateButton();
         fillTotalScoreField();
@@ -118,12 +120,6 @@ public class AddGamePlay extends AppCompatActivity {
                 GameConfiguration.getConfigListNames());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        if (GameConfiguration.getNumConfigurations()>0){
-            spinner.setSelection(0);
-            configurationID = 0;
-        }else{
-            configurationID = -1;
-        }
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
