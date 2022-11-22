@@ -25,6 +25,13 @@ import java.util.ArrayList;
 import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
 
+/**
+ * Extension of the game plays class
+ * This class provides the functionality of creating a new game play with multiple players.
+ * Automatically calculates the score of each individual player from the inputted score
+ * the user puts in
+ */
+
 public class CalculatePlayerScore extends AppCompatActivity {
     private static int numPlayers;
     private ArrayList<Integer> PlayerScores;
