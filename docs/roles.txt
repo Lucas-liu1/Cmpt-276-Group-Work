@@ -1,1 +1,1 @@
-Scrum Master: 	Raymond CaoProduct Owner: 	Xinyu LiuRepo Manager:	Zekai LiTeam Member:	Sina Haghighi
+Scrum Master:   Zekai LiProduct Owner: 	Sina HaghighiRepo Manager:	Raymond CaoTeam Member:	Xinyu Liu

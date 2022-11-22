@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/calculatorbg">
 
     <TextView
         android:id="@+id/playersText"
@@ -27,8 +28,8 @@
 
     <TextView
         android:id="@+id/totalScoreText"
-        android:layout_width="79dp"
-        android:layout_height="22dp"
+        android:layout_width="86dp"
+        android:layout_height="23dp"
         android:layout_marginStart="76dp"
         android:layout_marginTop="16dp"
         android:text="@string/total_score"

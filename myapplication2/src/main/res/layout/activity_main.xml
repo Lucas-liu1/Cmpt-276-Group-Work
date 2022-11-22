@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@drawable/alliancebg">
-
+    <!-- old color #6100ED -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
         android:text="Let's Game ... Cooperatively"
-        android:textColor="#6100ED"
+        android:textColor="#0044b3"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

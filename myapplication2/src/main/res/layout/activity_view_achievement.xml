@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewAchievement">
+    tools:context=".ViewAchievement"
+    android:background="@color/bluebg">
 
     <EditText
         android:id="@+id/editTextPlayers"
@@ -52,8 +53,8 @@
 
     <Spinner
         android:id="@+id/difficultySpinner"
-        android:layout_width="120dp"
-        android:layout_height="41dp"
+        android:layout_width="142dp"
+        android:layout_height="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.12"

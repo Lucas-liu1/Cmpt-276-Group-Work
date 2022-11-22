@@ -125,7 +125,7 @@ public class ViewAchievement extends AppCompatActivity {
 
     public void populateThemeSpinner(){
         Spinner spinner = findViewById(R.id.ThemeSpinner);
-        String[] themeList = {"theme 1", "theme 2", "theme 3" };
+        String[] themeList = {"Leagues", "Vehicles", "Animals" };
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item,
                 themeList);
@@ -147,7 +147,7 @@ public class ViewAchievement extends AppCompatActivity {
     }
     public void populateDifficultySpinner(){
         Spinner spinner = findViewById(R.id.difficultySpinner);
-        String[] diffList = {"normal", "easy", "hard"};
+        String[] diffList = {"medium", "easy", "hard"};
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item,
                 diffList);
