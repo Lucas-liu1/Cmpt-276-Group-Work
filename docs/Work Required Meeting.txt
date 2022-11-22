@@ -1,0 +1,41 @@
+"Team must estimate the work required for 5-6 user stores"
+Brief description of the user story
+The estimated amount of work
+Included a mention of what your team used as a unit of 1 work
+
+    - Define a unit of work as 1 unit being as difficult as implementing the most basic user story in the project, with the points being multitude harder than the most basic user story
+        ○ The difficulty will be based on how hard it was implementing the help page in iteration 1
+            § This will be the help screen of iteration 1
+
+    - Game play difficulty
+        ○ Description:
+            § Each time I play a game, I want to be able to select a difficulty level for that specific game play.
+        ○ We think that it will be 6-8x as hard as the help screen
+        ○ So 6-8 work units
+
+    - Achievement Celebration
+        ○ Description:
+            § When a game is played and an achievement level is earned, I want an image, some animation effect, and a sound to be played to make it feel like a reward and a celebration.
+        ○ We think implementing an image, animation, and sound for each achievement level will be strenuous
+        ○ So 7 work units
+
+    - Achievement Theme
+        ○ Description:
+            § I want to select a theme for the achievements. I want at least 3 different themes to choose between
+        ○ 20 work units, LOTS of stuff to change and do
+
+    -  Edit game played
+        ○ Description:
+            § When viewing a previous game play, I'd like to be able to edit it to correct any errors, such as changing scores or difficulty so that I can correct any errors from previous game plays.
+        ○ 10 work units, adjusting current code to be able to edit
+
+    - Friendly UI
+        ○ Description:
+            § Make the UI friendly and good looking so that it is more appealing to use. ("Make it look like it's our first app made")
+        ○ Need to update all of the UI, 30 work units
+
+    - Score Calculator
+        ○ Description:
+            § When recording a game play, change the screen to allow the user to enter each player's score individually so that I don't have to add it up in my head when I'm playing with multiple players.
+        ○ Lots of stuff needing to change or adjust to accept multiple players. Need to change model for calculation
+        ○ 25 work units
