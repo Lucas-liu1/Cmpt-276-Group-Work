@@ -105,7 +105,7 @@ public class CalculatePlayerScore extends AppCompatActivity {
     private void populatePlayerSpinner(){
         ArrayList <String> players = new ArrayList<>();
         for(int i = 0 ; i < numPlayers;i++){
-            players.add(String.format("Player %d",i));
+            players.add(String.format("Player %d",i+1));
         }
         Spinner spinner = findViewById(R.id.playerNumberSpinner);
         ArrayAdapter adapter = new ArrayAdapter(this,

@@ -17,7 +17,7 @@ import java.util.Objects;
 public class ConfigManager {
     private ArrayList<Configuration> configList;// Store all the configurations
     private String[] difficultyLevels = {"easy", "medium", "hard"};
-    public static String[] themes = {"theme 1", "theme 2", "theme 3"};
+    public static String[] themes = {"Leagues", "Vehicles", "Animals"};
     public static ArrayList<Integer> bufferScore = new ArrayList<>();
 
     private ConfigManager() {

@@ -26,7 +26,7 @@ public class AchievementList {
 
         int interval = (great_score - poor_score) / 6;
 
-        if(theme == "theme 1") {
+        if(theme == "Leagues") {
             //Iron (For each player: negative infinity ~ poor_score)
             Achievement Iron = new Achievement("Iron", Integer.MIN_VALUE, poor_score * numPlayers, numPlayers);
             achievementsList.add(Iron);
@@ -61,7 +61,7 @@ public class AchievementList {
         }
 
 
-        if(theme == "theme 2") {
+        if(theme == "Vehicles") {
             //Iron (For each player: negative infinity ~ poor_score)
             Achievement Bike = new Achievement("Bike", Integer.MIN_VALUE, poor_score * numPlayers, numPlayers);
             achievementsList.add(Bike);
@@ -95,7 +95,7 @@ public class AchievementList {
             achievementsList.add(Plane);
         }
 
-        if(theme == "theme 3") {
+        if(theme == "Animals") {
             //Iron (For each player: negative infinity ~ poor_score)
             Achievement Bird = new Achievement("Bird", Integer.MIN_VALUE, poor_score * numPlayers, numPlayers);
             achievementsList.add(Bird);
