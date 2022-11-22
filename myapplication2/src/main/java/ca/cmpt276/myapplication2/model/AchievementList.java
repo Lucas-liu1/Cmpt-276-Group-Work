@@ -56,7 +56,7 @@ public class AchievementList {
             Achievement Master = new Achievement("Master", (poor_score + 5 * interval) * numPlayers, great_score * numPlayers, numPlayers);
             achievementsList.add(Master);
 
-            //Grandmaster (For each player: great_score ~ 100)
+            //Grandmaster (For each player: great_score ~ positive infinity)
             Achievement Grandmaster = new Achievement("Grandmaster", great_score * numPlayers, Integer.MAX_VALUE, numPlayers);
             achievementsList.add(Grandmaster);
         }
@@ -91,7 +91,7 @@ public class AchievementList {
             Achievement Helicopter = new Achievement("Helicopter", (poor_score + 5 * interval) * numPlayers, great_score * numPlayers, numPlayers);
             achievementsList.add(Helicopter);
 
-            //Grandmaster (For each player: great_score ~ 100)
+            //Grandmaster (For each player: great_score ~ positive infinity)
             Achievement Plane = new Achievement("Plane", great_score * numPlayers, Integer.MAX_VALUE, numPlayers);
             achievementsList.add(Plane);
         }
@@ -125,7 +125,7 @@ public class AchievementList {
             Achievement Bear = new Achievement("Bear", (poor_score + 5 * interval) * numPlayers, great_score * numPlayers, numPlayers);
             achievementsList.add(Bear);
 
-            //Grandmaster (For each player: great_score ~ 100)
+            //Grandmaster (For each player: great_score ~ positive infinity)
             Achievement Elephant = new Achievement("Elephant", great_score * numPlayers, Integer.MAX_VALUE, numPlayers);
             achievementsList.add(Elephant);
         }
