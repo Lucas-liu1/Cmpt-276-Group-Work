@@ -102,8 +102,6 @@ public class CalculatePlayerScore extends AppCompatActivity {
         try {
             score = Integer.parseInt(ScoreStr);
         }catch(NumberFormatException except){
-            Toast.makeText(CalculatePlayerScore.this, "Score must be an integer", Toast.LENGTH_SHORT)
-                    .show();
             return 0;
         }
         return score;
