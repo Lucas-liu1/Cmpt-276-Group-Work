@@ -100,9 +100,10 @@ public class ViewAchievement extends AppCompatActivity {
                 }
 
                 levelL[0] = "Level name: " + levelList.achievementsList.get(0).getName() + "\nRequire score: less than " + LowerBound +"\n" ;
+                levelL[1] = "Level name: " + levelList.achievementsList.get(1).getName() + "\nRequire score: greater than " + LowerBound +"\n" ;
                 levelL[7] = "Level name: " + levelList.achievementsList.get(7).getName() + "\nRequire score: greater than " + HigherBound +"\n" ;
 
-                for (int i = 1; i < levelList.achievementsList.size() - 1; i++) {
+                for (int i = 2; i < levelList.achievementsList.size() - 1; i++) {
                     name = String.valueOf(levelList.achievementsList.get(i).getName());
                     score = String.valueOf(levelList.achievementsList.get(i).getLowerBound());
                     levelL[i] = "Level name: " + name + "\nRequire score: greater than " + score +"\n" ;
