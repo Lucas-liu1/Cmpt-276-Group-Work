@@ -22,15 +22,15 @@
     <string name="first_game_spinner">No Games Played</string>
     <string name="helper_arrow">Helper directional arrow</string>
     <string name="help">
-1.If there is no configuration or you want to create a new config when you add a new game:\n
+1. If there is no configuration or you want to create a new config when you add a new game:\n
         CONFIGURATION -> ADD NEW CONFIG, then you can enter a proper name and expected scores to add it. \n\n
-2.If you want to edit or delete a configuration:\n
+2. If you want to edit or delete a configuration:\n
         CONFIGURATION -> EDIT CONFIG / DELETE CONFIG, then choose one to edit or delete it.\n\n
-3.If you want to view the achievement level list:\n
+3. If you want to view the achievement level list:\n
         CONFIGURATION -> VIEW ACHIEVEMENT, then you can choose one and enter the player number to view it. \n\n
-4.If you want to add a new game for an existed configuration:\n
+4. If you want to add a new game for an existed configuration:\n
         GAME PLAYS -> ADD GAME PLAY, then choose one, enter player number and total score to create it. \n\n
-5.If you want to see the game history:\n
+5. If you want to see the game history:\n
         GAME PLAYS, then you can see a list of game history.
     </string>
     <string name="add_a_new_configuration_n_when_you_first_play_the_game">Add a new configuration \n when you FIRST time play the game</string>

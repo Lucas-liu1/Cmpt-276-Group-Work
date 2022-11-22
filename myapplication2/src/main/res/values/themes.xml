@@ -12,5 +12,15 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:fontFamily">@font/minecraft</item>
     </style>
+        <!--<item name= "android:textViewStyle" > @style/CustomTextViewStyle </item>
+        <item name= "android:buttonStyle" > @style/CustomButtonStyle </item>
+    </style>
+    <style name= "CustomTextViewStyle" parent= "android:Widget.TextView" >
+        <item name= "android:fontFamily" > monospace </item>
+    </style>
+    <style name= "CustomButtonStyle" parent= "android:Widget.Holo.Button" >
+        <item name= "android:fontFamily" > monospace </item>
+    </style>-->
 </resources>
