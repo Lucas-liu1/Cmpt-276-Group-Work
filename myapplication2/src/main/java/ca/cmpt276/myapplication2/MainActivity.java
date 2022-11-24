@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setPlaysButton();
         setConfigButton();
         setHelpButton();
+        setAboutButton();
 
     }
 
@@ -52,6 +53,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Help.class);
+                startActivity(intent);
+            }
+        });
+    }
+    void setAboutButton(){
+        Button btn = (Button) findViewById(R.id.btnAbout);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, About.class);
                 startActivity(intent);
             }
         });
