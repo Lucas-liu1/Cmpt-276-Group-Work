@@ -4,12 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -34,12 +38,14 @@ import java.util.ArrayList;
  */
 
 public class AddGamePlay extends AppCompatActivity {
+    private final int DEFAULT_NUM_PLAYERS=2;
     private ConfigManager GameConfiguration;
     private ArrayList<Integer> scores = ConfigManager.getBufferScore();
     private int configurationID;
     private int themeID;
     private String difficulty;
     private String theme;
+    private int numPlayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,10 @@ public class AddGamePlay extends AppCompatActivity {
         populateSpinner();
         populateDifficultySpinner();
         populateThemeSpinner();
+        setupNumPlayersOnFill();
+
+        // default to 2 players
+        setDefaultNumPlayers();
     }
 
     @Override
@@ -66,6 +76,23 @@ public class AddGamePlay extends AppCompatActivity {
         setCreateButton();
         setCalculateButton();
         fillTotalScoreField();
+    }
+
+    private void setupNumPlayersOnFill() {
+        EditText et = findViewById(R.id.numPlayersTextEdit);
+        et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                numPlayers=getNumPlayers();
+                fillTotalScoreField();
+            }
+        });
     }
 
     private void setCreateButton() {
@@ -85,7 +112,7 @@ public class AddGamePlay extends AppCompatActivity {
 
     private void fillTotalScoreField(){
         int sum = 0;
-        for(int i = 0; i < scores.size(); i++) {
+        for(int i = 0; i < numPlayers && i < scores.size(); i++) {
             sum+=scores.get(i);
         }
         EditText et = findViewById(R.id.scoreTextEdit);
@@ -159,7 +186,7 @@ public class AddGamePlay extends AppCompatActivity {
             public void onClick(View view) {
                 if (getNumPlayers()>0) {
                     Intent intent = CalculatePlayerScore.makeIntent(AddGamePlay.this,
-                            getNumPlayers(), new ArrayList<>());
+                            getNumPlayers(), scores);
                     startActivity(intent);
                 }else{
                     Toast.makeText(AddGamePlay.this,
@@ -192,9 +219,22 @@ public class AddGamePlay extends AppCompatActivity {
         return num_players;
     }
 
+    private void setDefaultNumPlayers(){
+        EditText numPlayers = findViewById(R.id.numPlayersTextEdit);
+        numPlayers.setText(""+DEFAULT_NUM_PLAYERS);
+    }
+
     private void addGamePlay(){
         saveFirstpass();
-        int num_players;
+        ArrayList<Integer> scores_submit = new ArrayList<>();
+
+        for (int i=0; i<numPlayers;i++) {
+            if (i < scores.size()) {
+                scores_submit.add(scores.get(i));
+            } else {
+                scores_submit.add(0);
+            }
+        }
 
         if(configurationID >= GameConfiguration.getNumConfigurations()
                 || configurationID < 0){
@@ -203,15 +243,14 @@ public class AddGamePlay extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
             return;
         }
+        numPlayers=getNumPlayers();
 
-        num_players=getNumPlayers();
-
-        Game newGame = new Game(num_players, scores, difficulty);
+        Game newGame = new Game(numPlayers, scores_submit, difficulty);
         newGame.setTheme(theme);
         AchievementList achievementList = new AchievementList(
                 GameConfiguration.getConfigList().get(configurationID).getPoor_score(),
                 GameConfiguration.getConfigList().get(configurationID).getGreat_score(),
-                num_players,
+                numPlayers,
                 difficulty,
                 theme);
         newGame.setAchievementList(achievementList);
