@@ -19,9 +19,10 @@
 
     <ListView
         android:id="@+id/listGamesPlayed"
-        android:layout_width="412dp"
-        android:layout_height="642dp"
+        android:layout_width="410dp"
+        android:layout_height="584dp"
         android:layout_marginTop="88dp"
+        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
