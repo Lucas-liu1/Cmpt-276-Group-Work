@@ -1,9 +1,14 @@
 package ca.cmpt276.myapplication2;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,17 +17,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import ca.cmpt276.myapplication2.model.AchievementList;
 import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Game;
 import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
@@ -66,6 +72,8 @@ public class AddGamePlay extends AppCompatActivity {
         setCreateButton();
         setCalculateButton();
         fillTotalScoreField();
+        photoClickCallback();
+//        setPhotoButton();
     }
 
     private void setCreateButton() {
@@ -228,5 +236,17 @@ public class AddGamePlay extends AppCompatActivity {
                 themeID);
         dialog.show(manager,"MessageDialog");
     }
+
+    private void photoClickCallback() {
+        Button btn_addPhoto = findViewById(R.id.btn_addPhoto);
+        btn_addPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent jumpToPhoto = new Intent(AddGamePlay.this, Photo.class);
+                startActivity(jumpToPhoto);
+            }
+        });
+    }
+
 
 }
