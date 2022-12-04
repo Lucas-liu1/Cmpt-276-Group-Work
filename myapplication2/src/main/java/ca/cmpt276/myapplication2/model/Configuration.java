@@ -15,6 +15,8 @@ public class Configuration {
     private int poor_score;
     private int great_score;
     private ArrayList<Game> gamesList = new ArrayList<>(); // Store all the game under the configuration
+    private byte[] photo_byte;
+
     // All Constructors
     public Configuration() {
     }
@@ -47,6 +49,10 @@ public class Configuration {
         this.gamesList = gamesList;
     }
 
+    public void setPhoto_byte(byte[] photo){
+        photo_byte = photo;
+    }
+
     public void deleteGameById(int index){
         this.gamesList.remove(index);
     }
@@ -66,6 +72,10 @@ public class Configuration {
 
     public ArrayList<Game> getGamesList() {
         return gamesList;
+    }
+
+    public byte[] getPhoto_byte() {
+        return photo_byte;
     }
 
     public Game getGame(int index){
