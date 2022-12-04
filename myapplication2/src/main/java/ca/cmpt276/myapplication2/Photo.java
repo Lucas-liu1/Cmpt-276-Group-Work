@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import ca.cmpt276.myapplication2.model.ConfigManager;
+
 public class Photo extends AppCompatActivity {
     public final static int PERMISSION_CODE = 001;
     public final static int REQUEST_CODE = 002;
@@ -86,21 +88,22 @@ public class Photo extends AppCompatActivity {
                 // Bitmap -> byte
                 ByteArrayOutputStream output = new ByteArrayOutputStream();
                 picture.compress(Bitmap.CompressFormat.PNG, 100, output);
-                byte[] result = output.toByteArray();
+                byte[] photo_bytes = output.toByteArray();
 
-                //Check where should we back
-                int home = getIntent().getIntExtra("From", -1);
-                if(home == 0){
-                    Intent JumpBack = new Intent(Photo.this, AddGamePlay.class);
-                    JumpBack.putExtra("Photo", result);
-                    startActivity(JumpBack);
-                }
-                else if(home == 1){
-                    Intent JumpBack = new Intent(Photo.this, EditGamePlay.class);
-                    JumpBack.putExtra("Photo", result);
-                    startActivity(JumpBack);
-                }
-                return;
+//                //Check where should we back
+//                int home = getIntent().getIntExtra("From", -1);
+//                if(home == 0){
+//                    Intent JumpBack = new Intent(Photo.this, AddGamePlay.class);
+//                    JumpBack.putExtra("Photo", result);
+//                    finish();
+//                }
+//                else if(home == 1){
+//                    Intent JumpBack = new Intent(Photo.this, EditGamePlay.class);
+//                    JumpBack.putExtra("Photo", result);
+//                    finish();
+//                }
+                ConfigManager.setBufferPhoto(photo_bytes);
+                finish();
             }
         });
     }

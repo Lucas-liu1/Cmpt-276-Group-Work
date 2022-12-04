@@ -40,7 +40,8 @@ public class AddGamePlay extends AppCompatActivity {
     private int themeID;
     private String difficulty;
     private String theme;
-    private byte[] photo_byte;
+    private byte[] photo_byte = ConfigManager.getBufferPhoto();
+//    private Game newGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,6 @@ public class AddGamePlay extends AppCompatActivity {
         populateSpinner();
         populateDifficultySpinner();
         populateThemeSpinner();
-        showPhoto();
     }
 
     @Override
@@ -65,11 +65,12 @@ public class AddGamePlay extends AppCompatActivity {
         GameConfiguration = ConfigManager.getInstance();
         SharedPreferencesUtils.getConfigManagerToSharedPreferences(this);
         scores = ConfigManager.getBufferScore();
+        photo_byte = ConfigManager.getBufferPhoto();
         setCreateButton();
         setCalculateButton();
         fillTotalScoreField();
         photoClickCallback();
-
+        showPhoto();
     }
 
     private void setCreateButton() {
@@ -210,12 +211,17 @@ public class AddGamePlay extends AppCompatActivity {
 
         num_players=getNumPlayers();
 
-        //photo is a byte[] here, not bitmap
-        photo_byte = getIntent().getByteArrayExtra("Photo");
+
 
         Game newGame = new Game(num_players, scores, difficulty);
         newGame.setTheme(theme);
-        newGame.setPhoto(photo_byte);
+
+        //photo is a byte[] here, not bitmap
+        photo_byte = ConfigManager.getBufferPhoto();
+        if(photo_byte != null){
+            newGame.setPhoto(photo_byte);
+        }
+
         AchievementList achievementList = new AchievementList(
                 GameConfiguration.getConfigList().get(configurationID).getPoor_score(),
                 GameConfiguration.getConfigList().get(configurationID).getGreat_score(),
@@ -235,6 +241,7 @@ public class AddGamePlay extends AppCompatActivity {
                 GameConfiguration.getConfigList().get(configurationID).getGamesListSize()-1,
                 themeID);
         dialog.show(manager,"MessageDialog");
+        ConfigManager.clearBufferPhoto();
     }
 
     private void photoClickCallback() {
@@ -250,17 +257,14 @@ public class AddGamePlay extends AppCompatActivity {
     }
 
     private void showPhoto(){
-        photo_byte = getIntent().getByteArrayExtra("Photo");
         ImageView photo = findViewById(R.id.PPP);
         if(photo_byte == null){
             return;
         }
         else{
-//            Toast.makeText(AddGamePlay.this, "WHY", Toast.LENGTH_LONG);
             Bitmap photo_bm = BitmapFactory.decodeByteArray(photo_byte, 0, photo_byte.length);
             photo.setImageBitmap(photo_bm);
         }
-
     }
 
 }

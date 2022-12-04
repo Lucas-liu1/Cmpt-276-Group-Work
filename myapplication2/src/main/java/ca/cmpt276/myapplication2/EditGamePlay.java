@@ -51,7 +51,7 @@ public class EditGamePlay extends AppCompatActivity {
     private static int themeID; // the game theme index on spinner
     private String difficulty;
     private String theme;
-    private byte[] photo_byte;
+    private byte[] photo_byte = ConfigManager.getBufferPhoto();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +64,13 @@ public class EditGamePlay extends AppCompatActivity {
         GameConfiguration = ConfigManager.getInstance();
         extractIDFromIntent();
         updatedGame = GameConfiguration.getConfigList().get(configurationID).getGame(gameID);
-        showPhoto();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         scores = ConfigManager.getBufferScore();
+        photo_byte = ConfigManager.getBufferPhoto();
         if (scores.size()>0){
             fillTotalScoreField();
         }
@@ -288,7 +288,16 @@ public class EditGamePlay extends AppCompatActivity {
         totalScore.setText(String.format("%d",updatedGame.getScore()));
 
         ImageView photo = findViewById(R.id.PPP);
-        photo_byte = updatedGame.getPhoto();
+        if (photo_byte == null){
+            if(updatedGame.getPhoto() == null)
+            {
+                return;
+            }
+            photo_byte = updatedGame.getPhoto();
+        }
+        else{
+            photo_byte = ConfigManager.getBufferPhoto();
+        }
         Bitmap photo_bm = BitmapFactory.decodeByteArray(photo_byte, 0, photo_byte.length);
         photo.setImageBitmap(photo_bm);
     }
@@ -309,6 +318,13 @@ public class EditGamePlay extends AppCompatActivity {
         updatedGame.setDifficulty(difficulty);
         updatedGame.setTheme(theme);
         updatedGame.setNumPlayers(num_players);
+
+        //photo is a byte[] here, not bitmap
+        photo_byte = ConfigManager.getBufferPhoto();
+        if(photo_byte != null){
+            updatedGame.setPhoto(photo_byte);
+        }
+
         AchievementList achievementList = new AchievementList(
                 GameConfiguration.getConfigList().get(configurationID).getPoor_score(),
                 GameConfiguration.getConfigList().get(configurationID).getGreat_score(),
@@ -325,6 +341,7 @@ public class EditGamePlay extends AppCompatActivity {
         CongratulationsFragment dialog = new CongratulationsFragment();
         dialog.setCurrentGame(EditGamePlay.this, updatedGame, configurationID, gameID,themeID);
         dialog.show(manager,"MessageDialog");
+        ConfigManager.clearBufferPhoto();
     }
 
     private void photoClickCallback() {
@@ -339,18 +356,17 @@ public class EditGamePlay extends AppCompatActivity {
         });
     }
 
-    private void showPhoto(){
-        photo_byte = getIntent().getByteArrayExtra("Photo");
-        ImageView photo = findViewById(R.id.PPP);
-        if(photo_byte == null){
-            return;
-        }
-        else{
-//            Toast.makeText(AddGamePlay.this, "WHY", Toast.LENGTH_LONG);
-            Bitmap photo_bm = BitmapFactory.decodeByteArray(photo_byte, 0, photo_byte.length);
-            photo.setImageBitmap(photo_bm);
-        }
-
-    }
+//    private void showPhoto(){
+//        photo_byte = getIntent().getByteArrayExtra("Photo");
+//        ImageView photo = findViewById(R.id.PPP);
+//        if(photo_byte == null){
+//            return;
+//        }
+//        else{
+//            Bitmap photo_bm = BitmapFactory.decodeByteArray(photo_byte, 0, photo_byte.length);
+//            photo.setImageBitmap(photo_bm);
+//        }
+//
+//    }
 
 }

@@ -19,6 +19,7 @@ public class ConfigManager {
     private String[] difficultyLevels = {"easy", "medium", "hard"};
     public static String[] themes = {"Leagues", "Vehicles", "Animals"};
     public static ArrayList<Integer> bufferScore = new ArrayList<>();
+    public static byte[] bufferPhoto = null;
 
     private ConfigManager() {
         configList = new ArrayList<>();
@@ -55,6 +56,18 @@ public class ConfigManager {
 
     public static ArrayList<Integer> getBufferScore(){
         return bufferScore;
+    }
+
+    public static void clearBufferPhoto(){
+        bufferPhoto = null;
+    }
+
+    public static void setBufferPhoto(byte[] photo){
+        bufferPhoto = photo;
+    }
+
+    public static byte[] getBufferPhoto(){
+        return bufferPhoto;
     }
 
     public void addConfig(Configuration newConfig){
