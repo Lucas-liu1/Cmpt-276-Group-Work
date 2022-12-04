@@ -36,6 +36,7 @@ public class Game {
         this.score = score;
     }
 
+
     public void setAchievementList(AchievementList achievementList) {
         this.achievementList = achievementList;
     }
@@ -60,6 +61,8 @@ public class Game {
         this.photo = photo;
     }
 
+
+
     // All Getters
     public int getNumPlayers() {
         return numPlayers;
@@ -69,13 +72,17 @@ public class Game {
         return score;
     }
 
+
     public String getRecord(){
-        return String.format("NumPlayers: %d, Score: %d, Achievement: %s, Difficulty: %s Theme: %s",
+        return String.format(" NumPlayers: %d,\n Score: %d point(s),\n Achievement: %s,\n Difficulty: %s,\n Theme: %s,\n\n For reaching next level ' %s ',\n another %d point(s) needed.",
                 numPlayers,
                 score,
                 achievementList.findLevel(score),
                 difficulty,
-                theme);
+                theme,
+                achievementList.findLevel( achievementList.findNextLevel(score) ),
+                achievementList.findNextLevel(score)  - score
+                );
     }
 
     public String getLevel(){

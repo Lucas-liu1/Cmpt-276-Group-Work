@@ -11,10 +11,10 @@
 
     <TextView
         android:id="@+id/congratText"
-        android:layout_width="243dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="194dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
         android:text="@string/congratulations"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,9 +22,9 @@
 
     <TextView
         android:id="@+id/statisticsText"
-        android:layout_width="243dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="88dp"
+        android:layout_width="342dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="72dp"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,10 +32,10 @@
 
     <ImageView
         android:id="@+id/leftIcon"
-        android:layout_width="71dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="96dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ImageContrastCheck" />

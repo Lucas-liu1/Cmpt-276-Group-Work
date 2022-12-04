@@ -94,7 +94,7 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
 
     private int getResourceByLevel(){
         switch (currentGame.getLevel()){
-            //
+            //theme 1
             case "Iron":
                 return R.drawable.iron;
             case "Bronze":
@@ -111,6 +111,7 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
                 return R.drawable.master;
             case "Grandmaster":
                 return R.drawable.grandmaster;
+
           //theme 2
             case "Bike":
                 return R.drawable.bike;
@@ -128,6 +129,7 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
                 return R.drawable.helicopter;
             case "Plane":
                 return R.drawable.plane;
+                
             //theme 3
             case "Bird":
                 return R.drawable.bird;
