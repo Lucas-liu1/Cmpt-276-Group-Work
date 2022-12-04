@@ -43,8 +43,8 @@ public class EditGamePlay extends AppCompatActivity {
     private static final String EXTRA_GAME = "Game";
     private static final String EXTRA_CONFIG = "Configuration";
     private static final String EXTRA_THEME = "Theme";
-    Game updatedGame;
-    private ArrayList<Integer> scores = ConfigManager.getBufferScore();
+    private Game updatedGame;
+    private ArrayList<Integer> scores;
     private ConfigManager GameConfiguration;
     private int configurationID; // the game config ID
     private static int gameID; // the game ID
@@ -64,7 +64,13 @@ public class EditGamePlay extends AppCompatActivity {
         ab.setTitle("Edit Game Play");
         GameConfiguration = ConfigManager.getInstance();
         extractIDFromIntent();
+
         updatedGame = GameConfiguration.getConfigList().get(configurationID).getGame(gameID);
+        scores = updatedGame.getScoresList();
+        numPlayers = updatedGame.getNumPlayers();
+        ConfigManager.setBufferScore(scores);
+        setupNumPlayersOnFill();
+        fillTotalScoreField();
     }
 
     @Override
@@ -109,12 +115,14 @@ public class EditGamePlay extends AppCompatActivity {
         et.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
             @Override
             public void afterTextChanged(Editable s) {
-                updatedGame.setNumPlayers(getNumPlayers());
+                numPlayers=getNumPlayers();
+                fillTotalScoreField();
             }
         });
     }
@@ -165,7 +173,7 @@ public class EditGamePlay extends AppCompatActivity {
             public void onClick(View view) {
                 if (getNumPlayers()>0) {
                     Intent intent = CalculatePlayerScore.makeIntent(EditGamePlay.this,
-                            getNumPlayers(), updatedGame.getScoresList());
+                            getNumPlayers(), scores);
                     startActivity(intent);
                 }else{
                     Toast.makeText(EditGamePlay.this,
@@ -250,12 +258,11 @@ public class EditGamePlay extends AppCompatActivity {
 
     private void fillTotalScoreField(){
         int sum = 0;
-        for(int i = 0; i < scores.size(); i++) {
+        for(int i = 0; i < numPlayers && i < scores.size(); i++) {
             sum+=scores.get(i);
         }
         EditText et = findViewById(R.id.scoreTextEdit);
         et.setText(String.format("%d",sum));
-        updatedGame.setScoresList(scores);
     }
 
 
@@ -281,9 +288,17 @@ public class EditGamePlay extends AppCompatActivity {
         });
     }
 
+    private int getSum(ArrayList<Integer> array){
+        int sum = 0;
+        for(int i = 0; i<array.size();i++){
+            sum+=array.get(i);
+        }
+        return sum;
+    }
+
     private void populateFields(){
-        EditText numPlayers = findViewById(R.id.numPlayersTextEdit);
-        numPlayers.setText(String.format("%d",updatedGame.getNumPlayers()));
+        EditText numberPlayers = findViewById(R.id.numPlayersTextEdit);
+        numberPlayers.setText(String.format("%d",numPlayers));
 
         EditText totalScore = findViewById(R.id.scoreTextEdit);
         totalScore.setText(String.format("%d",getSum(scores)));
@@ -304,8 +319,6 @@ public class EditGamePlay extends AppCompatActivity {
     }
 
     private void updateGamePlay(){
-        int num_players;
-
         if(configurationID >= GameConfiguration.getNumConfigurations()
                 || configurationID < 0){
             Toast.makeText(EditGamePlay.this,
@@ -314,7 +327,17 @@ public class EditGamePlay extends AppCompatActivity {
             return;
         }
 
-        num_players = getNumPlayers();
+        ArrayList<Integer> scores_submit = new ArrayList<>();
+
+        for (int i=0; i<numPlayers;i++) {
+            if (i < scores.size()) {
+                scores_submit.add(scores.get(i));
+            } else {
+                scores_submit.add(0);
+            }
+        }
+
+        numPlayers = getNumPlayers();
 
         updatedGame.setDifficulty(difficulty);
         updatedGame.setTheme(theme);
@@ -330,7 +353,7 @@ public class EditGamePlay extends AppCompatActivity {
         AchievementList achievementList = new AchievementList(
                 GameConfiguration.getConfigList().get(configurationID).getPoor_score(),
                 GameConfiguration.getConfigList().get(configurationID).getGreat_score(),
-                num_players,
+                numPlayers,
                 difficulty,
                 theme);
         updatedGame.setAchievementList(achievementList);

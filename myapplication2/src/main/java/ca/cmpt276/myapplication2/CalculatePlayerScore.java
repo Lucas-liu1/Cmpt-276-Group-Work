@@ -51,13 +51,9 @@ public class CalculatePlayerScore extends AppCompatActivity {
         ab.setTitle("Compute Player Scores");
         extractIDFromIntent();
 
-        if (PlayerScores.size() < numPlayers){
+        if (PlayerScores.size() < numPlayers) {
             while (PlayerScores.size() < numPlayers) {
                 PlayerScores.add(0);
-            }
-        }else{
-            while(numPlayers<PlayerScores.size()){
-                PlayerScores.remove(-1);
             }
         }
     }
@@ -163,7 +159,7 @@ public class CalculatePlayerScore extends AppCompatActivity {
 
     private int sumPlayerScores(){
         int sum=0;
-        for(int i = 0; i < PlayerScores.size(); i++){
+        for(int i = 0; i < numPlayers; i++){
             sum+=PlayerScores.get(i);
         }
         return sum;
