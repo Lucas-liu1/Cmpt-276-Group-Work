@@ -41,7 +41,7 @@ public class AddGamePlay extends AppCompatActivity {
     private String difficulty;
     private String theme;
     private byte[] photo_byte = ConfigManager.getBufferPhoto();
-//    private Game newGame;
+    private int numPlayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -212,8 +212,7 @@ public class AddGamePlay extends AppCompatActivity {
         num_players=getNumPlayers();
 
 
-
-        Game newGame = new Game(num_players, scores, difficulty);
+        Game newGame = new Game(numPlayers, scores_submit, difficulty);
         newGame.setTheme(theme);
 
         //photo is a byte[] here, not bitmap

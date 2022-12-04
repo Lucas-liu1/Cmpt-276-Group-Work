@@ -52,6 +52,7 @@ public class EditGamePlay extends AppCompatActivity {
     private String difficulty;
     private String theme;
     private byte[] photo_byte = ConfigManager.getBufferPhoto();
+    private int numPlayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -285,7 +286,7 @@ public class EditGamePlay extends AppCompatActivity {
         numPlayers.setText(String.format("%d",updatedGame.getNumPlayers()));
 
         EditText totalScore = findViewById(R.id.scoreTextEdit);
-        totalScore.setText(String.format("%d",updatedGame.getScore()));
+        totalScore.setText(String.format("%d",getSum(scores)));
 
         ImageView photo = findViewById(R.id.PPP);
         if (photo_byte == null){
@@ -318,6 +319,7 @@ public class EditGamePlay extends AppCompatActivity {
         updatedGame.setDifficulty(difficulty);
         updatedGame.setTheme(theme);
         updatedGame.setNumPlayers(num_players);
+        updatedGame.setScoresList(scores_submit);
 
         //photo is a byte[] here, not bitmap
         photo_byte = ConfigManager.getBufferPhoto();
