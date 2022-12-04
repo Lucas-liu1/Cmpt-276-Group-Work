@@ -341,7 +341,7 @@ public class EditGamePlay extends AppCompatActivity {
 
         updatedGame.setDifficulty(difficulty);
         updatedGame.setTheme(theme);
-        updatedGame.setNumPlayers(num_players);
+        updatedGame.setNumPlayers(numPlayers);
         updatedGame.setScoresList(scores_submit);
 
         //photo is a byte[] here, not bitmap
