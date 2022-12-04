@@ -1,28 +1,22 @@
 package ca.cmpt276.myapplication2;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import ca.cmpt276.myapplication2.model.AchievementList;
@@ -46,6 +40,7 @@ public class AddGamePlay extends AppCompatActivity {
     private int themeID;
     private String difficulty;
     private String theme;
+    private byte[] photo_byte;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +56,7 @@ public class AddGamePlay extends AppCompatActivity {
         populateSpinner();
         populateDifficultySpinner();
         populateThemeSpinner();
+        showPhoto();
     }
 
     @Override
@@ -73,7 +69,7 @@ public class AddGamePlay extends AppCompatActivity {
         setCalculateButton();
         fillTotalScoreField();
         photoClickCallback();
-//        setPhotoButton();
+
     }
 
     private void setCreateButton() {
@@ -214,8 +210,12 @@ public class AddGamePlay extends AppCompatActivity {
 
         num_players=getNumPlayers();
 
+        //photo is a byte[] here, not bitmap
+        photo_byte = getIntent().getByteArrayExtra("Photo");
+
         Game newGame = new Game(num_players, scores, difficulty);
         newGame.setTheme(theme);
+        newGame.setPhoto(photo_byte);
         AchievementList achievementList = new AchievementList(
                 GameConfiguration.getConfigList().get(configurationID).getPoor_score(),
                 GameConfiguration.getConfigList().get(configurationID).getGreat_score(),
@@ -243,10 +243,24 @@ public class AddGamePlay extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent jumpToPhoto = new Intent(AddGamePlay.this, Photo.class);
+                jumpToPhoto.putExtra("From", 0);
                 startActivity(jumpToPhoto);
             }
         });
     }
 
+    private void showPhoto(){
+        photo_byte = getIntent().getByteArrayExtra("Photo");
+        ImageView photo = findViewById(R.id.PPP);
+        if(photo_byte == null){
+            return;
+        }
+        else{
+//            Toast.makeText(AddGamePlay.this, "WHY", Toast.LENGTH_LONG);
+            Bitmap photo_bm = BitmapFactory.decodeByteArray(photo_byte, 0, photo_byte.length);
+            photo.setImageBitmap(photo_bm);
+        }
+
+    }
 
 }

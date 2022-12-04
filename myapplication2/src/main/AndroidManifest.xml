@@ -14,7 +14,8 @@
         android:theme="@style/Theme.CoopAchievement">
         <activity
             android:name=".Photo"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".AddGamePlay">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
