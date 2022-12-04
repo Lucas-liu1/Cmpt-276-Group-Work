@@ -34,14 +34,19 @@ public class ConfigAdapter extends ArrayAdapter<ConfigDisplay> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         convertView = layoutInflater.inflate(resource, parent,false);
-        ImageView image = convertView.findViewById(R.id.image);
-        TextView name = convertView.findViewById(R.id.lv_configList_Config);
+        ImageView image = convertView.findViewById(R.id.image_Config);
+        TextView name = convertView.findViewById(R.id.name_Config);
 
-        byte[] Photo = getItem(position).getImage();
-        Bitmap photo_bm = BitmapFactory.decodeByteArray(Photo, 0, Photo.length);
-        image.setImageBitmap(photo_bm);
+        if(getItem(position).getImageDisplay() != null){
+            byte[] Photo = getItem(position).getImageDisplay();
+            Bitmap photo_bm = BitmapFactory.decodeByteArray(Photo, 0, Photo.length);
+            image.setImageBitmap(photo_bm);
+        }
+        else{
+            image.setImageResource(R.drawable.player);
+        }
 
-        name.setText(getItem(position).getName());
+        name.setText(getItem(position).getNameDisplay());
 
         return convertView;
     }

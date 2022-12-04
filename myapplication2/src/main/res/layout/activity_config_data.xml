@@ -23,9 +23,10 @@
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pt_poorScore" />
+        app:layout_constraintTop_toBottomOf="@+id/pt_poorScore"
+        app:layout_constraintVertical_bias="0.65999997" />
 
     <EditText
         android:id="@+id/pt_greatScore"
@@ -92,10 +93,10 @@
 
     <ImageView
         android:id="@+id/imv_Photo_Config"
-        android:layout_width="178dp"
-        android:layout_height="295dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="149dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:srcCompat="@tools:sample/avatars" />

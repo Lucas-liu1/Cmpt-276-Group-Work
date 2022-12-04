@@ -1,27 +1,32 @@
 package ca.cmpt276.myapplication2.model;
 
 public class ConfigDisplay {
-    byte[] image;
-    String name;
+    byte[] image_Display;
+    String name_Display;
+
+    public ConfigDisplay() {
+        image_Display = null;
+        name_Display = null;
+    }
 
     public ConfigDisplay(byte[] image, String name) {
-        this.image = image;
-        this.name = name;
+        this.image_Display = image;
+        this.name_Display = name;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setImageDisplay(byte[] image) {
+        this.image_Display = image;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameDisplay(String name) {
+        this.name_Display = name;
     }
 
-    public byte[] getImage() {
-        return image;
+    public byte[] getImageDisplay() {
+        return image_Display;
     }
 
-    public String getName() {
-        return name;
+    public String getNameDisplay() {
+        return name_Display;
     }
 }

@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -294,7 +292,7 @@ public class AddGamePlay extends AppCompatActivity {
     }
 
     private void showPhoto(){
-        ImageView photo = findViewById(R.id.PPP);
+        ImageView photo = findViewById(R.id.imw_photo_game);
         if(photo_byte == null){
             return;
         }

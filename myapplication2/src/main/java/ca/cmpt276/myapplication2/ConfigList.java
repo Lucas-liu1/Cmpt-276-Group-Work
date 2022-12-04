@@ -84,43 +84,22 @@ public class ConfigList extends AppCompatActivity {
     private void populateListView() {
         configManager = ConfigManager.getInstance();
 
-        ArrayList<String> displayed_Configlist = new ArrayList<>();
-
-        for(int i=0; i<configManager.getConfigList().size(); i++){
-            String tempName = configManager.getConfigList().get(i).getName();
-            displayed_Configlist.add(tempName);
-        }
-
         ArrayList<ConfigDisplay> AAAdisplayed_Configlist = new ArrayList<>();
         for(int i=0; i<configManager.getConfigList().size(); i++){
             byte[] tempPhoto = null;
             if(configManager.getConfigList().get(i).getPhoto_byte() != null){
                 tempPhoto = configManager.getConfigList().get(i).getPhoto_byte();
-            }else{
-                //Set default image
-                Drawable player_drawable= getResources().getDrawable(R.drawable.player);
-                Bitmap defaultPic = ((BitmapDrawable)player_drawable).getBitmap();
-                ByteArrayOutputStream output = new ByteArrayOutputStream();
-                defaultPic.compress(Bitmap.CompressFormat.JPEG, 100, output);
-                tempPhoto = output.toByteArray();
             }
             String tempName = configManager.getConfigList().get(i).getName();
             AAAdisplayed_Configlist.add(new ConfigDisplay(tempPhoto,tempName));
         }
 
         //build Adaptor
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-//                this,
-//                R.layout.configlist_config,
-//                displayed_Configlist);
-
-        ConfigAdapter configAdapter = new ConfigAdapter(this,R.layout.activity_config_list, AAAdisplayed_Configlist);
+        ConfigAdapter configAdapter = new ConfigAdapter(this,R.layout.configlist_config, AAAdisplayed_Configlist);
 
         //configure the list view
         lv_ConfigList.setAdapter(configAdapter);
         configAdapter.notifyDataSetChanged();
-//        lv_ConfigList.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
     }
 
     // When the user click the EDIT CONFIG button...
@@ -128,7 +107,6 @@ public class ConfigList extends AppCompatActivity {
         lv_ConfigList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewclick, int position, long id) {
-                TextView textView = (TextView) viewclick;
                 Intent jumpToData = new Intent(ConfigList.this, ConfigData.class);
                 jumpToData.putExtra("position", position);
                 startActivity(jumpToData);
@@ -141,7 +119,6 @@ public class ConfigList extends AppCompatActivity {
         lv_ConfigList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewclick, int position, long id) {
-                TextView textView = (TextView) viewclick;
                 configManager.deleteConfig(position);
                 SharedPreferencesUtils.storeConfigManagerToSharedPreferences(ConfigList.this);
                 finish();
