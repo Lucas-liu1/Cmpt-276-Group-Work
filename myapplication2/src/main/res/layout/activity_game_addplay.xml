@@ -11,7 +11,7 @@
         android:layout_width="238dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="92dp"
         app:layout_constraintStart_toEndOf="@+id/diffultyLevelText"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="108dp"
         android:layout_marginEnd="16dp"
         android:text="@string/difficulty"
         app:layout_constraintEnd_toStartOf="@+id/gameConfigSpinner"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="312dp"
+        android:layout_marginTop="292dp"
         android:layout_marginEnd="16dp"
         android:text="@string/score_of_all_players"
         app:layout_constraintEnd_toStartOf="@+id/scoreTextEdit"
@@ -46,7 +46,7 @@
         android:layout_width="152dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="280dp"
         android:autofillHints=""
         android:editable="false"
         android:ems="10"
@@ -60,7 +60,7 @@
         android:layout_width="213dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="220dp"
         android:autofillHints=""
         android:ems="10"
         android:inputType="number"
@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="252dp"
+        android:layout_marginTop="232dp"
         android:layout_marginEnd="16dp"
         android:text="@string/number_of_players"
         app:layout_constraintEnd_toStartOf="@+id/numPlayersTextEdit"
@@ -119,10 +119,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/create"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintEnd_toEndOf="@+id/btn_addPhoto"
+        app:layout_constraintStart_toStartOf="@+id/btn_addPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/btn_addPhoto" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -139,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="104dp"
-        android:layout_marginTop="384dp"
+        android:layout_marginTop="364dp"
         android:text="Theme"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -159,5 +158,26 @@
         app:layout_constraintStart_toEndOf="@+id/scoreTextEdit"
         app:layout_constraintTop_toBottomOf="@+id/numPlayersTextEdit"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/btn_addPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Change photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <ImageView
+        android:id="@+id/PPP"
+        android:layout_width="149dp"
+        android:layout_height="193dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
