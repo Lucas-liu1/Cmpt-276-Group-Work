@@ -249,8 +249,6 @@ public class AddGamePlay extends AppCompatActivity {
         }
         numPlayers=getNumPlayers();
 
-        num_players=getNumPlayers();
-
 
         Game newGame = new Game(numPlayers, scores_submit, difficulty);
         newGame.setTheme(theme);
