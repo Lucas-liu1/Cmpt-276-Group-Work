@@ -11,6 +11,9 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +36,9 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
     private int gameID;
     private int themeID;
 
+    Button replay;
+    Animation animation;
+
     public void setCurrentGame(Context context, Game newGame, int configurationID, int gameid,int themeid){
         passedContext=context;
         currentGame= newGame;
@@ -41,7 +47,7 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
         themeID=themeid;
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint({"UseCompatLoadingForDrawables", "MissingInflatedId"})
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -51,12 +57,26 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
         View v = LayoutInflater.from(getActivity())
                 .inflate(R.layout.congratulate_message_layout,null);
 
+        TextView congratulation = v.findViewById(R.id.congratText);
         TextView tv = v.findViewById(R.id.statisticsText);
         tv.setText(String.format("%s",currentGame.getRecord()));
 
         ImageView leftIcon = v.findViewById(R.id.leftIcon);
 
         leftIcon.setImageDrawable(getResources().getDrawable(getResourceByLevel(),null ));
+
+        //set replay animation
+        replay =  v.findViewById(R.id.btnReplay);
+        animation = AnimationUtils.loadAnimation(passedContext.getApplicationContext(),
+                R.anim.anim);
+        replay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                congratulation.startAnimation(animation);
+                leftIcon.startAnimation(animation);
+                tv.startAnimation(animation);
+            }
+        });
 
         // Create a button listener
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
@@ -71,7 +91,6 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
         MediaPlayer mediaPlayer = MediaPlayer.create(getActivity(),R.raw.win);
         mediaPlayer.start();
 
-
         // Create an edit button listener
         DialogInterface.OnClickListener edit_listener = new DialogInterface.OnClickListener() {
             @Override
@@ -81,7 +100,6 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
             }
         };
 
-
         // Build the alert dialog
         return new AlertDialog.Builder(getActivity())
                 .setTitle(String.format("Congratulations: %s",currentGame.getLevel()))
@@ -90,7 +108,6 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
                 .setNeutralButton("edit",edit_listener)
                 .create();
     }
-
 
     private int getResourceByLevel(){
         switch (currentGame.getLevel()){
@@ -129,7 +146,7 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
                 return R.drawable.helicopter;
             case "Plane":
                 return R.drawable.plane;
-                
+
             //theme 3
             case "Bird":
                 return R.drawable.bird;
