@@ -16,6 +16,7 @@ public class GameConfig extends AppCompatActivity {
     private Button Edit;
     private Button Delete;
     private Button View;
+    private Button Stats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class GameConfig extends AppCompatActivity {
         Edit = findViewById(R.id.btn_edit_config);
         Delete = findViewById(R.id.btn_delete_config);
         View = findViewById(R.id.btn_viewAchievement);
+        Stats = findViewById(R.id.btn_achieveStats);
 
         addClickCallback();
         editClickCallback();
@@ -84,6 +86,19 @@ public class GameConfig extends AppCompatActivity {
                 Intent jumpToAchievement = new Intent(GameConfig.this, ConfigList.class);
                 jumpToAchievement.putExtra("index", 2);
                 startActivity(jumpToAchievement);
+            }
+        });
+    }
+
+    // When the user click the VIEW ACHIEVEMENT button...
+    private void achievementStatsClickCallback() {
+        Stats = findViewById(R.id.btn_achieveStats);
+        Stats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent jumpToStats = new Intent(GameConfig.this, ConfigList.class);
+                jumpToStats.putExtra("index", 3);
+                startActivity(jumpToStats);
             }
         });
     }
