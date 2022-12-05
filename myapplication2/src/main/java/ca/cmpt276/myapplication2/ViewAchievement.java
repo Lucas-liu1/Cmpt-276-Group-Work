@@ -88,8 +88,8 @@ public class ViewAchievement extends AppCompatActivity {
 
                 levelL = new String[8];
                 AchievementList levelList = new AchievementList(poorScore, greatScore, playerNum, difficulty, theme);
-                int LowerBound = poorScore*playerNum;
-                int HigherBound = greatScore*playerNum;
+                int LowerBound = poorScore*playerNum +1;
+                int HigherBound = greatScore*playerNum +1;
                 if(difficulty == "easy"){
                     LowerBound *= 0.75;
                     HigherBound *= 0.75;
@@ -99,7 +99,7 @@ public class ViewAchievement extends AppCompatActivity {
                     HigherBound *= 1.25;
                 }
 
-                levelL[0] = "Level name: " + levelList.achievementsList.get(0).getName() + "\nRequire score: less than " + LowerBound +"\n" ;
+                levelL[0] = "Level name: " + levelList.achievementsList.get(0).getName() + "\nRequire score: less than " + poorScore * playerNum +"\n" ;
                 levelL[1] = "Level name: " + levelList.achievementsList.get(1).getName() + "\nRequire score: greater than " + LowerBound +"\n" ;
                 levelL[7] = "Level name: " + levelList.achievementsList.get(7).getName() + "\nRequire score: greater than " + HigherBound +"\n" ;
 
