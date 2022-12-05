@@ -131,7 +131,16 @@ public class AchievementList {
         }
     }
 
+    public int findLevelInt(int score) {
 
+        for (int i = 0; i < achievementsList.size(); i++) {
+            Achievement tempAchievement = achievementsList.get(i);
+            if ((score >= tempAchievement.getLowerBound()) && (score <= tempAchievement.getUpperBound())) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     public String findLevel(int score) {
 
