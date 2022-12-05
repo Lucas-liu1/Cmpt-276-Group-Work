@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConfigList"
-    android:background="@color/bluebg">
+    android:background="@color/bluebg"
+    tools:context=".ConfigList">
 
     <ListView
         android:id="@+id/lv_configList_Config"
-        android:layout_width="403dp"
-        android:layout_height="723dp"
-        tools:layout_editor_absoluteX="4dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

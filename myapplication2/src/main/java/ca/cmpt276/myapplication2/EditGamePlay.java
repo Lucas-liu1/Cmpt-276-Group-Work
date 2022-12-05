@@ -303,7 +303,7 @@ public class EditGamePlay extends AppCompatActivity {
         EditText totalScore = findViewById(R.id.scoreTextEdit);
         totalScore.setText(String.format("%d",getSum(scores)));
 
-        ImageView photo = findViewById(R.id.PPP);
+        ImageView photo = findViewById(R.id.imw_photo_game);
         if (photo_byte == null){
             if(updatedGame.getPhoto() == null)
             {
@@ -380,18 +380,4 @@ public class EditGamePlay extends AppCompatActivity {
             }
         });
     }
-
-//    private void showPhoto(){
-//        photo_byte = getIntent().getByteArrayExtra("Photo");
-//        ImageView photo = findViewById(R.id.PPP);
-//        if(photo_byte == null){
-//            return;
-//        }
-//        else{
-//            Bitmap photo_bm = BitmapFactory.decodeByteArray(photo_byte, 0, photo_byte.length);
-//            photo.setImageBitmap(photo_bm);
-//        }
-//
-//    }
-
 }

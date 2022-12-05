@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,10 +19,13 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.cmpt276.myapplication2.model.ConfigAdapter;
+import ca.cmpt276.myapplication2.model.ConfigDisplay;
 import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Configuration;
 import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
@@ -78,22 +84,22 @@ public class ConfigList extends AppCompatActivity {
     private void populateListView() {
         configManager = ConfigManager.getInstance();
 
-        ArrayList<String> displayed_Configlist = new ArrayList<>();
-
+        ArrayList<ConfigDisplay> AAAdisplayed_Configlist = new ArrayList<>();
         for(int i=0; i<configManager.getConfigList().size(); i++){
+            byte[] tempPhoto = null;
+            if(configManager.getConfigList().get(i).getPhoto_byte() != null){
+                tempPhoto = configManager.getConfigList().get(i).getPhoto_byte();
+            }
             String tempName = configManager.getConfigList().get(i).getName();
-            displayed_Configlist.add(tempName);
+            AAAdisplayed_Configlist.add(new ConfigDisplay(tempPhoto,tempName));
         }
 
         //build Adaptor
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this,
-                R.layout.configlist_config,
-                displayed_Configlist);
+        ConfigAdapter configAdapter = new ConfigAdapter(this,R.layout.configlist_config, AAAdisplayed_Configlist);
 
         //configure the list view
-        lv_ConfigList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        lv_ConfigList.setAdapter(configAdapter);
+        configAdapter.notifyDataSetChanged();
     }
 
     // When the user click the EDIT CONFIG button...
@@ -101,7 +107,6 @@ public class ConfigList extends AppCompatActivity {
         lv_ConfigList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewclick, int position, long id) {
-                TextView textView = (TextView) viewclick;
                 Intent jumpToData = new Intent(ConfigList.this, ConfigData.class);
                 jumpToData.putExtra("position", position);
                 startActivity(jumpToData);
@@ -114,7 +119,6 @@ public class ConfigList extends AppCompatActivity {
         lv_ConfigList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewclick, int position, long id) {
-                TextView textView = (TextView) viewclick;
                 configManager.deleteConfig(position);
                 SharedPreferencesUtils.storeConfigManagerToSharedPreferences(ConfigList.this);
                 finish();

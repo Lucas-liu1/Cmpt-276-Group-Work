@@ -89,19 +89,6 @@ public class Photo extends AppCompatActivity {
                 ByteArrayOutputStream output = new ByteArrayOutputStream();
                 picture.compress(Bitmap.CompressFormat.PNG, 100, output);
                 byte[] photo_bytes = output.toByteArray();
-
-//                //Check where should we back
-//                int home = getIntent().getIntExtra("From", -1);
-//                if(home == 0){
-//                    Intent JumpBack = new Intent(Photo.this, AddGamePlay.class);
-//                    JumpBack.putExtra("Photo", result);
-//                    finish();
-//                }
-//                else if(home == 1){
-//                    Intent JumpBack = new Intent(Photo.this, EditGamePlay.class);
-//                    JumpBack.putExtra("Photo", result);
-//                    finish();
-//                }
                 ConfigManager.setBufferPhoto(photo_bytes);
                 finish();
             }
@@ -144,45 +131,4 @@ public class Photo extends AppCompatActivity {
         picture = (Bitmap) data.getExtras().get("data");
         Photo.setImageBitmap(picture);
     }
-
-//    String currentPhotoPath;
-
-//    private File createImageFile() throws IOException {
-//        // Create an image file name
-//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//        String imageFileName = "JPEG_" + timeStamp + "_";
-//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-//        File image = File.createTempFile(
-//                imageFileName,  /* prefix */
-//                ".jpg",         /* suffix */
-//                storageDir      /* directory */
-//        );
-//
-//        // Save a file: path for use with ACTION_VIEW intents
-//        currentPhotoPath = image.getAbsolutePath();
-//        return image;
-//    }
-//
-//    private void dispatchTakePictureIntent() {
-//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        // Ensure that there's a camera activity to handle the intent
-//        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-//            // Create the File where the photo should go
-//            File photoFile = null;
-//            try {
-//                photoFile = createImageFile();
-//            } catch (IOException ex) {
-//                // Error occurred while creating the File
-//            ...
-//            }
-//            // Continue only if the File was successfully created
-//            if (photoFile != null) {
-//                Uri photoURI = FileProvider.getUriForFile(this,
-//                        "com.example.android.fileprovider",
-//                        photoFile);
-//                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-//                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//            }
-//        }
-//    }
 }
