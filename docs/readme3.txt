@@ -1,18 +1,30 @@
-This is the second iteration of the cooperative game record holder. It is able to store games and
-the played records, as well as give insight into what achievements that game earned.
+This is the third and final iteration of the cooperative game record holder. It is able to take and store
+photos, calculate all individual players, show achievement celebrations, and show statistics about games
+
+README:
+* For the achievement statistics for viewing how many times you earned each achievement level
+* we introduced a new library to have some extra UI elements. All the calculation was done outside
+* and the library was only used to showcase the data that we input into it.
+* The library we used was MPAndroidChart and we followed this tutorial "https://www.youtube.com/watch?v=dL8VyvLJ2d8"
+* The link to the library that was used in Android Studio is "com.github.PhilJay:MPAndroidChart:v3.1.0"
+* Again all the library does is that it takes in the x and y values and makes it into a bar graph for viewing pleasure
 
 Grade Breakdown:
+* [20] Each time I create a new game play, I want to be able to take a photo to remember the event.
 
-* [15] Each time I play a game, I want to be able to select a difficulty level for that specific game play.
-* [5] When a game is played and an achievement level is earned, I want an image, some animation effect, and a sound to be played to make it feel like a reward and a celebration.
-* [15] I want to select a theme for the achievements. I want at least 3 different themes to choose between.
-* [5] When viewing a previous game play, I'd like to be able to edit it to correct any errors, such as changing scores or difficulty so that I can correct any errors from previous game plays.
-* [15] Make the UI friendly and good looking so that it is more appealing to use.
-* [15] When recording a game play, change the screen to allow the user to enter each player's score individually so that I don't have to add it up in my head when I'm playing with multiple players.
+* [20] I want to be able to take a photo of a game's (physical) box and use that in the app so that I can quickly recognize my games rather than having to read names.
 
-* [5] Team must implement JUnit unit tests for at least one class in the model.
-* [5] Team must estimate the work required for 5-6 user stores. In a text file in the docs/ folder
-* Above is called "Work Required Meeting"
+* [2] When viewing the achievement celebration page, I want to see how close we were to the next higher achievement so that it may motivate us in future games.
+
+* [2] When viewing the achievement celebration page, I want to be able to change the theme so that if the game players don't like the current theme, I can quickly select a more appropriate one to show them.
+
+* [1] When viewing the achievement celebration page, I want to be able to replay the animation so that I can show the animation to one player, and then trigger it to play again as I show it to the next player.
+
+* [20] When I am viewing a game configuration, I want to see how many times I have earned each achievement level.
+
+* [15] In the app, I want to be able to view a screen which shows who wrote the app to give credit and recognition to the developers.
+
+* [20] When using the score calculator to add up player scores while recording a game play
 
 General Requirements
 * [10] Overall
