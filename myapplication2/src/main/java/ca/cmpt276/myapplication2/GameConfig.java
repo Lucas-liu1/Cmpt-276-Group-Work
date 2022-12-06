@@ -38,6 +38,7 @@ public class GameConfig extends AppCompatActivity {
         editClickCallback();
         deleteClickCallback();
         achievementClickCallback();
+        achievementStatsClickCallback();
     }
 
     // When the user click the ADD NEW CONFIG button...
@@ -90,7 +91,7 @@ public class GameConfig extends AppCompatActivity {
         });
     }
 
-    // When the user click the VIEW ACHIEVEMENT button...
+    // When the user click the ACHIEVEMENT STATS button...
     private void achievementStatsClickCallback() {
         Stats = findViewById(R.id.btn_achieveStats);
         Stats.setOnClickListener(new View.OnClickListener() {

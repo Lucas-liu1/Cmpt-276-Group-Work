@@ -134,7 +134,6 @@ public class ConfigList extends AppCompatActivity {
         lv_ConfigList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewclick, int position, long id) {
-                TextView textView = (TextView) viewclick;
                 Intent jumpToAchieve = new Intent(ConfigList.this, ViewAchievement.class);
                 jumpToAchieve.putExtra("position", position);
                 startActivity(jumpToAchieve);
@@ -146,7 +145,6 @@ public class ConfigList extends AppCompatActivity {
         lv_ConfigList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewclick, int position, long id) {
-                TextView textView = (TextView) viewclick;
                 Intent jumpToStats = new Intent(ConfigList.this, AchievementStats.class);
                 jumpToStats.putExtra("position", position);
                 startActivity(jumpToStats);

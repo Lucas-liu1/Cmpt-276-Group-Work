@@ -23,7 +23,7 @@
         <activity
             android:name=".ViewAchievement"
             android:exported="false"
-            android:parentActivityName=".ConfigList">
+            android:parentActivityName=".GameConfig">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -91,6 +91,12 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+        </activity>
+        <activity
+            android:name=".AchievementStats"
+            android:exported="false"
+            android:parentActivityName=".GameConfig">
+
         </activity>
         <activity
             android:name=".GameConfig"
