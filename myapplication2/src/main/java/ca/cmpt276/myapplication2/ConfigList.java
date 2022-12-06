@@ -68,8 +68,11 @@ public class ConfigList extends AppCompatActivity {
         else if (index == 1) {// Edit
             editButtonClickCallback();
         }
-        else {
+        else if (index == 2){
             achievementButtonClickCallback();
+        }
+        else if (index == 3){
+            achieveStatButtonClickCallback();
         }
     }
 
@@ -131,10 +134,20 @@ public class ConfigList extends AppCompatActivity {
         lv_ConfigList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewclick, int position, long id) {
-                TextView textView = (TextView) viewclick;
                 Intent jumpToAchieve = new Intent(ConfigList.this, ViewAchievement.class);
                 jumpToAchieve.putExtra("position", position);
                 startActivity(jumpToAchieve);
+            }
+        });
+    }
+    // When the user click the ACHIEVEMENT STATS button...
+    private void achieveStatButtonClickCallback() {
+        lv_ConfigList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewclick, int position, long id) {
+                Intent jumpToStats = new Intent(ConfigList.this, AchievementStats.class);
+                jumpToStats.putExtra("position", position);
+                startActivity(jumpToStats);
             }
         });
     }

@@ -1,8 +1,10 @@
 package ca.cmpt276.myapplication2.model;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import ca.cmpt276.myapplication2.EditGamePlay;
 
@@ -44,12 +46,21 @@ public class Configuration {
     public ArrayList<Integer> getConfigurationHistoryStats(){
         ArrayList<Integer> stats = new ArrayList<>();
         int count;
-        int scoreLevel;
         for(int i = 0; i< 8; i++) {
-            stats.set(i,0);
+            stats.add(0);
         }
+
         for(int j =0; j < getGamesListSize(); j++){
-            scoreLevel = stats.get(gamesList.get(j).getAchievementList().findLevelInt(gamesList.get(j).getScore()));
+            int scoreLevel = 0;
+            ArrayList<Achievement> tempList = gamesList.get(j).getAchievementList().getAchievementsList();
+            String level = gamesList.get(j).getLevel();
+            for(int i =0 ;i < 8; i++){
+                if (Objects.equals(level, tempList.get(i).getName())){
+                    scoreLevel = i;
+                    break;
+                }
+            }
+            Log.i("CONFIGURATION", ""+scoreLevel);
             count = stats.get(scoreLevel);
             count+=1;
             stats.set(scoreLevel,count);
