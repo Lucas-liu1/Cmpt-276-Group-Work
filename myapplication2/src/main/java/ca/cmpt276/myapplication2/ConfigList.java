@@ -145,6 +145,10 @@ public class ConfigList extends AppCompatActivity {
         lv_ConfigList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewclick, int position, long id) {
+                if(configManager.getConfigList().get(position).getGamesList().size() == 0){
+                    Toast.makeText(ConfigList.this, "No games have been played yet under this Game Configuration", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent jumpToStats = new Intent(ConfigList.this, AchievementStats.class);
                 jumpToStats.putExtra("position", position);
                 startActivity(jumpToStats);
