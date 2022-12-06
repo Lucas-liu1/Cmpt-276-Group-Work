@@ -41,6 +41,10 @@ public class ConfigData extends AppCompatActivity {
     private EditText editText_GreatScore;
     private Configuration targetConfig;
     private ImageView imv_photo;
+    private String oldName;
+    private int oldPoorScore;
+    private int oldGreatScore;
+    private byte[] oldPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,17 +117,17 @@ public class ConfigData extends AppCompatActivity {
     // Set the value of the Edit Text
     private void displayData(){
         Configuration oldConfig = configManager.getConfigList().get(targetPosition);
-        String oldName = oldConfig.getName();
-        int oldPoorScore = oldConfig.getPoor_score();
-        int oldGreatScore = oldConfig.getGreat_score();
+        oldName = oldConfig.getName();
+        oldPoorScore = oldConfig.getPoor_score();
+        oldGreatScore = oldConfig.getGreat_score();
 
         if(oldConfig.getPhoto_byte() != null && ConfigManager.getBufferPhoto() == null){
-            byte[] oldPhoto = oldConfig.getPhoto_byte();
+            oldPhoto = oldConfig.getPhoto_byte();
             Bitmap photo_bm = BitmapFactory.decodeByteArray(oldPhoto, 0, oldPhoto.length);
             imv_photo.setImageBitmap(photo_bm);
         }
         else if(ConfigManager.getBufferPhoto() != null){
-            byte[] oldPhoto = ConfigManager.getBufferPhoto();
+            oldPhoto = ConfigManager.getBufferPhoto();
             Bitmap photo_bm = BitmapFactory.decodeByteArray(oldPhoto, 0, oldPhoto.length);
             imv_photo.setImageBitmap(photo_bm);
         }
@@ -163,10 +167,32 @@ public class ConfigData extends AppCompatActivity {
                     return;
                 }
 
+
                 targetConfig = new Configuration(string_Name, num_PoorScore, num_GreatScore);
                 photo_byte = ConfigManager.getBufferPhoto();
+
+                if((num_PoorScore == oldPoorScore) && (num_GreatScore == oldGreatScore)){
+                    photo_byte = ConfigManager.getBufferPhoto();
+                    configManager = ConfigManager.getInstance();
+
+                    if(!string_Name.equals(oldName)){
+                        configManager.getConfigList().get(targetPosition).setName(string_Name);
+                    }
+
+                    if(photo_byte != null){
+                        configManager.getConfigList().get(targetPosition).setPhoto_byte(photo_byte);
+                    }
+
+                    SharedPreferencesUtils.storeConfigManagerToSharedPreferences(ConfigData.this);
+                    ConfigManager.clearBufferPhoto();
+                    finish();
+                    return;
+                }
+
                 if(photo_byte != null){
                     targetConfig.setPhoto_byte(photo_byte);
+                }else {
+                    targetConfig.setPhoto_byte(oldPhoto);
                 }
                 configManager = ConfigManager.getInstance();
                 configManager.editConfig(targetPosition, targetConfig);
