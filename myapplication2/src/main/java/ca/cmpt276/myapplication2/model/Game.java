@@ -1,11 +1,6 @@
 package ca.cmpt276.myapplication2.model;
 
-import android.content.Intent;
-
 import java.util.ArrayList;
-
-import ca.cmpt276.myapplication2.AddGamePlay;
-import ca.cmpt276.myapplication2.ViewAchievement;
 
 /**
  * This class is for a single game.
@@ -17,7 +12,8 @@ public class Game {
     private AchievementList achievementList; //Single Game's Achievement List
     private ArrayList<Integer> scoresList;
     private String difficulty;
-    private String theme ;
+    private String theme;
+    private byte[] photo;
 
     public Game(int numPlayers, ArrayList<Integer> scoresList, String difficulty) {
         this.numPlayers = numPlayers;
@@ -40,6 +36,7 @@ public class Game {
         this.score = score;
     }
 
+
     public void setAchievementList(AchievementList achievementList) {
         this.achievementList = achievementList;
     }
@@ -60,6 +57,12 @@ public class Game {
         this.theme = theme;
     }
 
+    public void setPhoto(byte[] photo){
+        this.photo = photo;
+    }
+
+
+
     // All Getters
     public int getNumPlayers() {
         return numPlayers;
@@ -69,13 +72,17 @@ public class Game {
         return score;
     }
 
+
     public String getRecord(){
-        return String.format("NumPlayers: %d, Score: %d, Achievement: %s, Difficulty: %s Theme: %s",
+        return String.format(" NumPlayers: %d,\n Score: %d point(s),\n Achievement: %s,\n Difficulty: %s,\n Theme: %s,\n\n For reaching next level ' %s ',\n another %d point(s) needed.",
                 numPlayers,
                 score,
                 achievementList.findLevel(score),
                 difficulty,
-                theme);
+                theme,
+                achievementList.findLevel( achievementList.findNextLevel(score) ),
+                achievementList.findNextLevel(score)  - score
+                );
     }
 
     public String getLevel(){
@@ -90,6 +97,9 @@ public class Game {
         return theme;
     }
 
+    public byte[] getPhoto(){
+        return photo;
+    }
 
     public ArrayList<Integer> getScoresList() {
         return scoresList;

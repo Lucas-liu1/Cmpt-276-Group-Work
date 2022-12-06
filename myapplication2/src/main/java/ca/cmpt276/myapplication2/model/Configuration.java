@@ -15,9 +15,13 @@ public class Configuration {
     private int poor_score;
     private int great_score;
     private ArrayList<Game> gamesList = new ArrayList<>(); // Store all the game under the configuration
+    private byte[] photo_byte;
+
     // All Constructors
     public Configuration() {
     }
+
+
 
     public Configuration(String name, int poor_score, int great_score){
         this.name = name;
@@ -35,6 +39,24 @@ public class Configuration {
         this.name = name;
     }
 
+    // Returns the number of times this game has achieved each level
+    // index 0 is the lowest achievement and index 7 is the top achievement
+    public ArrayList<Integer> getConfigurationHistoryStats(){
+        ArrayList<Integer> stats = new ArrayList<>();
+        int count;
+        int scoreLevel;
+        for(int i = 0; i< 8; i++) {
+            stats.set(i,0);
+        }
+        for(int j =0; j < getGamesListSize(); j++){
+            scoreLevel = stats.get(gamesList.get(j).getAchievementList().findLevelInt(gamesList.get(j).getScore()));
+            count = stats.get(scoreLevel);
+            count+=1;
+            stats.set(scoreLevel,count);
+        }
+        return stats;
+    }
+
     public void setPoor_score(int poor_score) {
         this.poor_score = poor_score;
     }
@@ -45,6 +67,10 @@ public class Configuration {
 
     public void setGamesList(ArrayList<Game> gamesList) {
         this.gamesList = gamesList;
+    }
+
+    public void setPhoto_byte(byte[] photo){
+        photo_byte = photo;
     }
 
     public void deleteGameById(int index){
@@ -66,6 +92,10 @@ public class Configuration {
 
     public ArrayList<Game> getGamesList() {
         return gamesList;
+    }
+
+    public byte[] getPhoto_byte() {
+        return photo_byte;
     }
 
     public Game getGame(int index){

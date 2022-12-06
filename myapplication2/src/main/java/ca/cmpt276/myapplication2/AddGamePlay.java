@@ -3,17 +3,18 @@ package ca.cmpt276.myapplication2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -24,9 +25,6 @@ import ca.cmpt276.myapplication2.model.AchievementList;
 import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Game;
 import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
@@ -45,6 +43,7 @@ public class AddGamePlay extends AppCompatActivity {
     private int themeID;
     private String difficulty;
     private String theme;
+    private byte[] photo_byte = ConfigManager.getBufferPhoto();
     private int numPlayers;
 
     @Override
@@ -73,9 +72,12 @@ public class AddGamePlay extends AppCompatActivity {
         GameConfiguration = ConfigManager.getInstance();
         SharedPreferencesUtils.getConfigManagerToSharedPreferences(this);
         scores = ConfigManager.getBufferScore();
+        photo_byte = ConfigManager.getBufferPhoto();
         setCreateButton();
         setCalculateButton();
         fillTotalScoreField();
+        photoClickCallback();
+        showPhoto();
     }
 
     private void setupNumPlayersOnFill() {
@@ -245,8 +247,16 @@ public class AddGamePlay extends AppCompatActivity {
         }
         numPlayers=getNumPlayers();
 
+
         Game newGame = new Game(numPlayers, scores_submit, difficulty);
         newGame.setTheme(theme);
+
+        //photo is a byte[] here, not bitmap
+        photo_byte = ConfigManager.getBufferPhoto();
+        if(photo_byte != null){
+            newGame.setPhoto(photo_byte);
+        }
+
         AchievementList achievementList = new AchievementList(
                 GameConfiguration.getConfigList().get(configurationID).getPoor_score(),
                 GameConfiguration.getConfigList().get(configurationID).getGreat_score(),
@@ -266,6 +276,30 @@ public class AddGamePlay extends AppCompatActivity {
                 GameConfiguration.getConfigList().get(configurationID).getGamesListSize()-1,
                 themeID);
         dialog.show(manager,"MessageDialog");
+        ConfigManager.clearBufferPhoto();
+    }
+
+    private void photoClickCallback() {
+        Button btn_addPhoto = findViewById(R.id.btn_addPhoto);
+        btn_addPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent jumpToPhoto = new Intent(AddGamePlay.this, Photo.class);
+                jumpToPhoto.putExtra("From", 0);
+                startActivity(jumpToPhoto);
+            }
+        });
+    }
+
+    private void showPhoto(){
+        ImageView photo = findViewById(R.id.imw_photo_game);
+        if(photo_byte == null){
+            return;
+        }
+        else{
+            Bitmap photo_bm = BitmapFactory.decodeByteArray(photo_byte, 0, photo_byte.length);
+            photo.setImageBitmap(photo_bm);
+        }
     }
 
 }

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -30,12 +33,14 @@ import ca.cmpt276.myapplication2.model.SharedPreferencesUtils;
 
 public class ConfigData extends AppCompatActivity {
     private ConfigManager configManager;
+    private byte[] photo_byte = ConfigManager.getBufferPhoto();
     private int targetPosition;
     private Button btn_Save;
     private EditText editText_Name;
     private EditText editText_PoorScore;
     private EditText editText_GreatScore;
     private Configuration targetConfig;
+    private ImageView imv_photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +58,16 @@ public class ConfigData extends AppCompatActivity {
         editText_Name = findViewById(R.id.pt_name);
         editText_PoorScore = findViewById(R.id.pt_poorScore);
         editText_GreatScore = findViewById(R.id.pt_greatScore);
+        imv_photo = findViewById(R.id.imv_Photo_Config);
+        photo_byte = ConfigManager.getBufferPhoto();
+        photoClickCallback();
 
         Intent intent = getIntent();
         targetPosition = intent.getIntExtra("position", -1);
 
         if (targetPosition == -1) {// Add
             addClickCallback();
+            displayPhoto();
         } else {// Edit
             displayData();
             editClickCallback();
@@ -88,9 +97,14 @@ public class ConfigData extends AppCompatActivity {
                 }
 
                 targetConfig = new Configuration(string_Name, num_PoorScore, num_GreatScore);
+                photo_byte = ConfigManager.getBufferPhoto();
+                if(photo_byte != null){
+                    targetConfig.setPhoto_byte(photo_byte);
+                }
                 ConfigManager configList = ConfigManager.getInstance();
                 configList.addConfig(targetConfig);
                 SharedPreferencesUtils.storeConfigManagerToSharedPreferences(ConfigData.this);
+                ConfigManager.clearBufferPhoto();
                 finish();
             }
         });
@@ -103,9 +117,28 @@ public class ConfigData extends AppCompatActivity {
         int oldPoorScore = oldConfig.getPoor_score();
         int oldGreatScore = oldConfig.getGreat_score();
 
+        if(oldConfig.getPhoto_byte() != null && ConfigManager.getBufferPhoto() == null){
+            byte[] oldPhoto = oldConfig.getPhoto_byte();
+            Bitmap photo_bm = BitmapFactory.decodeByteArray(oldPhoto, 0, oldPhoto.length);
+            imv_photo.setImageBitmap(photo_bm);
+        }
+        else if(ConfigManager.getBufferPhoto() != null){
+            byte[] oldPhoto = ConfigManager.getBufferPhoto();
+            Bitmap photo_bm = BitmapFactory.decodeByteArray(oldPhoto, 0, oldPhoto.length);
+            imv_photo.setImageBitmap(photo_bm);
+        }
+
         editText_Name.setText(oldName);
         editText_PoorScore.setText(String.valueOf(oldPoorScore));
         editText_GreatScore.setText(String.valueOf(oldGreatScore));
+    }
+
+    private void displayPhoto(){
+        if(ConfigManager.getBufferPhoto() != null){
+            byte[] Photo = ConfigManager.getBufferPhoto();
+            Bitmap photo_bm = BitmapFactory.decodeByteArray(Photo, 0, Photo.length);
+            imv_photo.setImageBitmap(photo_bm);
+        }
     }
 
     // When the user click the EDIT CONFIG button...
@@ -131,10 +164,26 @@ public class ConfigData extends AppCompatActivity {
                 }
 
                 targetConfig = new Configuration(string_Name, num_PoorScore, num_GreatScore);
+                photo_byte = ConfigManager.getBufferPhoto();
+                if(photo_byte != null){
+                    targetConfig.setPhoto_byte(photo_byte);
+                }
                 configManager = ConfigManager.getInstance();
                 configManager.editConfig(targetPosition, targetConfig);
                 SharedPreferencesUtils.storeConfigManagerToSharedPreferences(ConfigData.this);
+                ConfigManager.clearBufferPhoto();
                 finish();
+            }
+        });
+    }
+
+    private void photoClickCallback() {
+        Button btn_addPhoto = findViewById(R.id.btn_Photo_Config);
+        btn_addPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent jumpToPhoto = new Intent(ConfigData.this, Photo.class);
+                startActivity(jumpToPhoto);
             }
         });
     }

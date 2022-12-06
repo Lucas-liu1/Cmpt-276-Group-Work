@@ -23,8 +23,10 @@
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pt_poorScore" />
+        app:layout_constraintTop_toBottomOf="@+id/pt_poorScore"
+        app:layout_constraintVertical_bias="0.65999997" />
 
     <EditText
         android:id="@+id/pt_greatScore"
@@ -78,4 +80,24 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_poorScore"
         app:layout_constraintStart_toEndOf="@+id/tv_poorScore"
         app:layout_constraintTop_toTopOf="@+id/tv_poorScore" />
+
+    <Button
+        android:id="@+id/btn_Photo_Config"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Change Photo"
+        app:layout_constraintBottom_toTopOf="@+id/btn_save"
+        app:layout_constraintEnd_toEndOf="@+id/btn_save"
+        app:layout_constraintStart_toStartOf="@+id/btn_save" />
+
+    <ImageView
+        android:id="@+id/imv_Photo_Config"
+        android:layout_width="149dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
