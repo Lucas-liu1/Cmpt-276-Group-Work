@@ -4,6 +4,8 @@ package ca.cmpt276.myapplication2;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
+import ca.cmpt276.myapplication2.model.Achievement;
 import ca.cmpt276.myapplication2.model.AchievementList;
 import ca.cmpt276.myapplication2.model.ConfigManager;
 import ca.cmpt276.myapplication2.model.Configuration;
@@ -24,6 +27,8 @@ import ca.cmpt276.myapplication2.model.Configuration;
 public class AchievementStats extends AppCompatActivity{
     private static ConfigManager configManager; // = ConfigManager.getInstance();
     private static int curConfigurationIndex;
+    ArrayList<Achievement> tempList;
+    ArrayList<String> xLabels = new ArrayList<>();
     ArrayList barList;
 
 
@@ -36,6 +41,12 @@ public class AchievementStats extends AppCompatActivity{
         ActionBar back = getSupportActionBar();
         assert back != null;
         back.setDisplayHomeAsUpEnabled(true);
+        extractIDFromIntent();
+        tempList = configManager.getConfigList().get(curConfigurationIndex).
+                getGamesList().get(0).getAchievementList().getAchievementsList();
+        for (int i = 0; i< tempList.size();i++){
+            xLabels.add(tempList.get(i).getName());
+        }
     }
 
     @Override
@@ -44,15 +55,15 @@ public class AchievementStats extends AppCompatActivity{
         configManager = ConfigManager.getInstance();
         BarChart barChart = findViewById(R.id.barChart);
         retrieveData();
-        BarDataSet barDataSet = new BarDataSet(barList, "TEMP");
+        BarDataSet barDataSet = new BarDataSet(barList, "SCORE LEVEL");
         BarData barData = new BarData(barDataSet);
         barChart.setData(barData);
         barDataSet.setColors(ColorTemplate.PASTEL_COLORS);
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(16f);
-        barChart.getDescription().setEnabled(true);
-    }
+        barChart.getDescription().setEnabled(false);
 
+    }
 
     private void extractIDFromIntent() {
         Intent intent = getIntent();
@@ -60,12 +71,16 @@ public class AchievementStats extends AppCompatActivity{
     }
 
     private void retrieveData() {
-        extractIDFromIntent();
         barList = new ArrayList();
+        String toDisplay = "Historical Achievements:\n";
         ArrayList data = configManager.getConfigList().get(curConfigurationIndex).getConfigurationHistoryStats();
         for(int i = 0; i < 8; i++) {
             int value = (int) data.get(i);
-            barList.add(new BarEntry(2f, value));
+            Log.i("RETRIEVEDATA",""+value);
+            toDisplay = toDisplay + tempList.get(i).getName() + ": " + value +"\n";
+            barList.add(new BarEntry(2f+i*2f, value));
         }
+        TextView tv = findViewById(R.id.historicalAchievementText);
+        tv.setText(toDisplay);
     }
 }

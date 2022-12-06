@@ -131,6 +131,10 @@ public class AchievementList {
         }
     }
 
+    public ArrayList<Achievement> getAchievementsList(){
+        return achievementsList;
+    }
+
     public int findLevelInt(int score) {
 
         for (int i = 0; i < achievementsList.size(); i++) {
