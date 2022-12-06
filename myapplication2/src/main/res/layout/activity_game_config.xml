@@ -11,9 +11,10 @@
         android:id="@+id/btn_edit_config"
         android:layout_width="186dp"
         android:layout_height="50dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="44dp"
         android:text="Edit Config"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_add_config" />
 
@@ -21,9 +22,10 @@
         android:id="@+id/btn_delete_config"
         android:layout_width="186dp"
         android:layout_height="50dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="40dp"
         android:text="Delete Config"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_edit_config" />
 
@@ -31,9 +33,10 @@
         android:id="@+id/btn_viewAchievement"
         android:layout_width="186dp"
         android:layout_height="50dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="44dp"
         android:text="View Achievement"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_delete_config" />
 
@@ -52,7 +55,7 @@
         android:id="@+id/btn_achieveStats"
         android:layout_width="186dp"
         android:layout_height="50dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="40dp"
         android:text="@string/achieveStats"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
