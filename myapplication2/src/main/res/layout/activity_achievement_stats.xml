@@ -18,11 +18,12 @@
 
     <TextView
         android:id="@+id/historicalAchievementText"
-        android:layout_width="398dp"
-        android:layout_height="263dp"
+        android:layout_width="407dp"
+        android:layout_height="181dp"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/barChart"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
