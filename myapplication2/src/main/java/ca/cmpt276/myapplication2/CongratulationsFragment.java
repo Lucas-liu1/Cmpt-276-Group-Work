@@ -65,6 +65,11 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
 
         leftIcon.setImageDrawable(getResources().getDrawable(getResourceByLevel(),null ));
 
+        //add sound
+        MediaPlayer mediaPlayer = MediaPlayer.create(getActivity(),R.raw.win);
+        mediaPlayer.start();
+
+
         //set replay animation
         replay =  v.findViewById(R.id.btnReplay);
         animation = AnimationUtils.loadAnimation(passedContext.getApplicationContext(),
@@ -75,6 +80,7 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
                 congratulation.startAnimation(animation);
                 leftIcon.startAnimation(animation);
                 tv.startAnimation(animation);
+                mediaPlayer.start();
             }
         });
 
@@ -87,9 +93,7 @@ public class CongratulationsFragment extends AppCompatDialogFragment {
                 }
             }
         };
-        //add sound
-        MediaPlayer mediaPlayer = MediaPlayer.create(getActivity(),R.raw.win);
-        mediaPlayer.start();
+
 
         // Create an edit button listener
         DialogInterface.OnClickListener edit_listener = new DialogInterface.OnClickListener() {
